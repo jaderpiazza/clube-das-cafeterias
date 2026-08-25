@@ -1,0 +1,1670 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>☕ Clube das Cafeterias</title>
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Clube das Cafeterias">
+<meta name="theme-color" content="#3A2A1D">
+<link rel="apple-touch-icon" href="data:image/png;base64,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">
+<link rel="icon" href="data:image/png;base64,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">
+<style>
+:root{
+  --cream:#FAF3E7;
+  --cream-2:#FFFDF8;
+  --paper:#FFFBF3;
+  --espresso:#3A2A1D;
+  --coffee:#6F4A32;
+  --coffee-light:#8B6449;
+  --caramel:#C68B4A;
+  --caramel-dark:#A8703A;
+  --latte:#EEDFC3;
+  --latte-2:#F3E6CC;
+  --border:#E3D3B4;
+  --gold:#C79A3F;
+  --success:#748156;
+  --danger:#B15A3E;
+  --shadow:0 6px 24px rgba(58,42,29,0.10);
+  --shadow-sm:0 2px 10px rgba(58,42,29,0.08);
+  --radius:18px;
+  --radius-sm:10px;
+  --font-display:Georgia,'Iowan Old Style','Palatino Linotype',serif;
+  --font-body:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;
+  --font-mono:'SF Mono',Consolas,'Courier New',monospace;
+}
+*{box-sizing:border-box;}
+html,body{margin:0;padding:0;height:100%;}
+body{
+  font-family:var(--font-body);
+  background:
+    radial-gradient(circle at 100% 0%, rgba(198,139,74,0.08), transparent 40%),
+    radial-gradient(circle at 0% 100%, rgba(111,74,50,0.06), transparent 40%),
+    var(--cream);
+  color:var(--espresso);
+  min-height:100vh;
+}
+::-webkit-scrollbar{width:10px;height:10px;}
+::-webkit-scrollbar-thumb{background:var(--latte);border-radius:8px;}
+::-webkit-scrollbar-track{background:transparent;}
+a{color:inherit;}
+button{font-family:inherit;cursor:pointer;}
+input,select,textarea{font-family:inherit;}
+h1,h2,h3,h4{font-family:var(--font-display);margin:0 0 4px 0;color:var(--espresso);font-weight:600;}
+p{margin:0;}
+
+#shell{display:flex;min-height:100vh;}
+@media (display-mode: standalone){
+  #sidebar{padding-top:calc(22px + env(safe-area-inset-top));}
+  #main{padding-bottom:calc(60px + env(safe-area-inset-bottom));}
+}
+
+/* banner iOS "adicionar à tela de início" */
+#ios-banner{
+  position:fixed;left:0;right:0;bottom:0;z-index:997;
+  background:var(--espresso);color:var(--cream-2);
+  padding:14px 18px calc(14px + env(safe-area-inset-bottom)) 18px;
+  display:flex;align-items:center;gap:12px;box-shadow:0 -4px 18px rgba(0,0,0,.25);
+  font-size:13.5px;
+}
+#ios-banner .ic{font-size:20px;flex-shrink:0;}
+#ios-banner .close{background:none;border:none;color:var(--cream-2);opacity:.7;font-size:18px;padding:4px 8px;flex-shrink:0;}
+
+/* ---------- SIDEBAR ---------- */
+#sidebar{
+  width:230px;flex-shrink:0;
+  background:linear-gradient(180deg,var(--espresso),#2A1D13 85%);
+  color:var(--latte-2);
+  display:flex;flex-direction:column;
+  padding:22px 14px;
+  position:sticky;top:0;height:100vh;
+}
+.brand{padding:6px 10px 22px 10px;border-bottom:1px solid rgba(238,223,195,0.14);margin-bottom:14px;}
+.brand-title{font-family:var(--font-display);font-size:20px;font-weight:700;color:var(--cream-2);line-height:1.2;}
+.brand-sub{font-size:11px;color:var(--caramel);opacity:0.9;margin-top:5px;font-style:italic;line-height:1.3;}
+.nav-item{
+  display:flex;align-items:center;gap:10px;
+  padding:11px 12px;border-radius:12px;margin-bottom:3px;
+  font-size:14.5px;color:var(--latte-2);text-decoration:none;
+  border:1px solid transparent;
+  transition:background .15s ease;
+}
+.nav-item .ic{font-size:17px;width:22px;text-align:center;}
+.nav-item:hover{background:rgba(238,223,195,0.08);}
+.nav-item.active{background:var(--caramel);color:#2A1D13;font-weight:700;box-shadow:var(--shadow-sm);}
+#sidebar-footer{margin-top:auto;padding:10px;font-size:11px;color:rgba(238,223,195,0.45);}
+
+/* ---------- MAIN ---------- */
+#main{flex:1;min-width:0;padding:30px 38px 60px 38px;}
+.page-header{margin-bottom:22px;display:flex;align-items:flex-end;justify-content:space-between;gap:14px;flex-wrap:wrap;}
+.page-header h1{font-size:27px;}
+.page-header .sub{color:var(--coffee-light);font-size:14px;margin-top:4px;}
+.btn{
+  border:none;border-radius:12px;padding:11px 18px;font-size:14px;font-weight:700;
+  background:var(--caramel);color:#fff;box-shadow:var(--shadow-sm);
+  display:inline-flex;align-items:center;gap:8px;transition:transform .1s ease, background .15s ease;
+}
+.btn:hover{background:var(--caramel-dark);}
+.btn:active{transform:scale(0.97);}
+.btn.ghost{background:transparent;color:var(--coffee);border:1.5px solid var(--border);box-shadow:none;}
+.btn.ghost:hover{background:var(--latte-2);}
+.btn.danger{background:var(--danger);}
+.btn.danger:hover{background:#933F29;}
+.btn.small{padding:7px 12px;font-size:12.5px;border-radius:9px;}
+.btn:disabled{opacity:.45;cursor:not-allowed;}
+.btn.block{width:100%;justify-content:center;}
+
+/* ---------- CARDS / GRID ---------- */
+.grid{display:grid;gap:18px;}
+.grid.cols-4{grid-template-columns:repeat(4,1fr);}
+.grid.cols-3{grid-template-columns:repeat(3,1fr);}
+.grid.cols-2{grid-template-columns:repeat(2,1fr);}
+@media(max-width:1150px){.grid.cols-4{grid-template-columns:repeat(2,1fr);}.grid.cols-3{grid-template-columns:repeat(2,1fr);}}
+@media(max-width:720px){.grid.cols-4,.grid.cols-3,.grid.cols-2{grid-template-columns:1fr;}}
+
+.card{
+  background:var(--paper);border:1px solid var(--border);border-radius:var(--radius);
+  padding:20px;box-shadow:var(--shadow-sm);
+}
+.stat-card{display:flex;flex-direction:column;gap:6px;}
+.stat-card .stat-ic{font-size:22px;}
+.stat-card .stat-num{font-family:var(--font-display);font-size:30px;font-weight:700;color:var(--coffee);}
+.stat-card .stat-label{font-size:12.5px;color:var(--coffee-light);text-transform:uppercase;letter-spacing:.05em;}
+
+/* stamp — signature element */
+.stamp{
+  --ink:var(--coffee);
+  width:64px;height:64px;border-radius:50%;
+  border:2.5px dashed var(--ink);
+  display:flex;align-items:center;justify-content:center;flex-direction:column;
+  color:var(--ink);transform:rotate(-8deg);
+  font-family:var(--font-display);font-weight:800;
+  background:rgba(255,253,248,0.5);
+  flex-shrink:0;
+}
+.stamp.gold{--ink:var(--gold);}
+.stamp .stamp-num{font-size:20px;line-height:1;}
+.stamp .stamp-txt{font-size:8px;letter-spacing:.08em;text-transform:uppercase;margin-top:1px;}
+.stamp.small{width:44px;height:44px;}
+.stamp.small .stamp-num{font-size:14px;}
+
+.photo{background:var(--latte);border-radius:12px;overflow:hidden;display:flex;align-items:center;justify-content:center;color:var(--coffee);}
+.photo img{width:100%;height:100%;object-fit:cover;display:block;}
+.polaroid{background:#fff;padding:8px 8px 26px 8px;border-radius:4px;box-shadow:0 6px 16px rgba(58,42,29,.18);transform:rotate(-2deg);}
+.polaroid img{width:100%;display:block;border-radius:2px;object-fit:cover;}
+
+/* top3 */
+.top3-card{display:flex;gap:14px;align-items:center;padding:16px;}
+.top3-card .photo{width:58px;height:58px;flex-shrink:0;}
+.top3-medal{font-size:24px;}
+.top3-name{font-weight:700;font-size:15px;}
+.top3-city{font-size:12px;color:var(--coffee-light);}
+.top3-score{margin-left:auto;font-family:var(--font-mono);font-weight:700;color:var(--gold);font-size:17px;}
+
+/* last visit */
+.last-visit{display:flex;gap:20px;align-items:stretch;}
+.last-visit .photo{width:190px;min-height:150px;flex-shrink:0;}
+.last-visit-body{flex:1;display:flex;flex-direction:column;gap:8px;justify-content:center;}
+.badge{display:inline-flex;align-items:center;gap:5px;background:var(--latte-2);color:var(--coffee);padding:4px 10px;border-radius:20px;font-size:11.5px;font-weight:700;letter-spacing:.02em;}
+.badge.gold{background:#F6E8C6;color:#8A6512;}
+.badge.green{background:#E4E8D8;color:var(--success);}
+.badge.red{background:#F3DAD1;color:var(--danger);}
+
+.goal-banner{
+  background:linear-gradient(120deg,var(--coffee),#563820);
+  color:var(--cream-2);border-radius:var(--radius);padding:18px 22px;
+  display:flex;align-items:center;gap:14px;box-shadow:var(--shadow);
+}
+.goal-banner .ic{font-size:26px;}
+.goal-banner b{font-family:var(--font-display);}
+
+.section-title{display:flex;align-items:center;gap:10px;margin:34px 0 14px 0;}
+.section-title h2{font-size:19px;}
+.section-title .line{flex:1;height:1px;background:var(--border);}
+
+/* ---------- FORMS ---------- */
+.field{margin-bottom:16px;}
+.field label{display:block;font-size:12.5px;font-weight:700;color:var(--coffee);margin-bottom:6px;text-transform:uppercase;letter-spacing:.03em;}
+.field input[type=text],.field input[type=number],.field input[type=date],.field select,.field textarea{
+  width:100%;padding:11px 13px;border:1.5px solid var(--border);border-radius:10px;
+  background:var(--cream-2);font-size:14.5px;color:var(--espresso);
+}
+.field textarea{resize:vertical;min-height:70px;font-family:var(--font-body);}
+.field input:focus,.field select:focus,.field textarea:focus{outline:2px solid var(--caramel);outline-offset:1px;}
+.field .hint{font-size:11.5px;color:var(--coffee-light);margin-top:4px;}
+.row{display:flex;gap:14px;}
+.row > .field{flex:1;}
+.chip-select{display:flex;flex-wrap:wrap;gap:8px;}
+.chip{
+  padding:9px 14px;border-radius:20px;border:1.5px solid var(--border);background:var(--cream-2);
+  font-size:13px;font-weight:600;color:var(--coffee);transition:all .12s ease;
+}
+.chip.active{background:var(--caramel);border-color:var(--caramel);color:#fff;}
+
+/* stepper */
+.steps-bar{display:flex;gap:6px;margin-bottom:26px;}
+.steps-bar .dot{flex:1;height:5px;border-radius:4px;background:var(--border);}
+.steps-bar .dot.done{background:var(--caramel);}
+.steps-bar .dot.current{background:var(--coffee);}
+.step-nav-labels{display:flex;justify-content:space-between;font-size:11px;color:var(--coffee-light);margin-bottom:6px;}
+
+.person-block{border:1.5px solid var(--border);border-radius:var(--radius-sm);padding:16px;background:var(--cream-2);}
+.person-block h4{font-size:15px;margin-bottom:12px;color:var(--coffee);}
+.item-row{display:flex;gap:8px;margin-bottom:8px;align-items:center;}
+.item-row input{flex:1;}
+.item-row input.money{max-width:100px;}
+.remove-x{background:none;border:none;color:var(--danger);font-size:16px;padding:4px 8px;}
+
+.rating-row{display:flex;align-items:center;gap:14px;margin-bottom:12px;padding-bottom:12px;border-bottom:1px dashed var(--border);}
+.rating-row:last-child{border-bottom:none;}
+.rating-row .rl{width:150px;font-size:13.5px;font-weight:600;flex-shrink:0;}
+.rating-row input[type=range]{flex:1;accent-color:var(--caramel);}
+.rating-row .rv{width:44px;text-align:center;font-family:var(--font-mono);font-weight:700;color:var(--coffee);}
+
+.reveal-wait{display:flex;flex-direction:column;align-items:center;justify-content:center;padding:60px 20px;text-align:center;gap:14px;}
+.reveal-wait .big-ic{font-size:52px;}
+.reveal-cards{display:flex;gap:20px;justify-content:center;flex-wrap:wrap;margin:20px 0;}
+.reveal-card{background:var(--cream-2);border:2px solid var(--border);border-radius:var(--radius);padding:24px 30px;text-align:center;min-width:160px;}
+.reveal-card .rn{font-family:var(--font-mono);font-size:34px;font-weight:800;color:var(--coffee);}
+.reveal-card.animate{animation:popin .5s ease;}
+@keyframes popin{0%{transform:scale(.6);opacity:0;}70%{transform:scale(1.08);}100%{transform:scale(1);opacity:1;}}
+
+/* diary ticket */
+.ticket{
+  background:var(--paper);border:1px solid var(--border);border-radius:14px;padding:22px 24px;
+  position:relative;box-shadow:var(--shadow-sm);margin-bottom:22px;
+}
+.ticket::before{
+  content:"";position:absolute;left:-10px;top:50%;transform:translateY(-50%);
+  width:20px;height:20px;border-radius:50%;background:var(--cream);border:1px solid var(--border);
+}
+.ticket::after{
+  content:"";position:absolute;right:-10px;top:50%;transform:translateY(-50%);
+  width:20px;height:20px;border-radius:50%;background:var(--cream);border:1px solid var(--border);
+}
+.ticket-top{display:flex;justify-content:space-between;align-items:center;border-bottom:1px dashed var(--border);padding-bottom:10px;margin-bottom:12px;}
+.ticket-num{font-family:var(--font-mono);font-weight:800;color:var(--caramel-dark);font-size:14px;}
+.ticket-date{font-family:var(--font-mono);font-size:12.5px;color:var(--coffee-light);}
+.ticket-body{display:flex;gap:16px;}
+.ticket-body .photo{width:100px;height:100px;flex-shrink:0;}
+.ticket-quote{font-style:italic;color:var(--espresso);margin-top:8px;font-size:14px;}
+
+/* ranking */
+.rank-row{display:flex;align-items:center;gap:16px;padding:14px 16px;border-radius:14px;background:var(--paper);border:1px solid var(--border);margin-bottom:10px;}
+.rank-row:hover{border-color:var(--caramel);cursor:pointer;}
+.rank-row .photo{width:52px;height:52px;flex-shrink:0;}
+.rank-pos{width:34px;text-align:center;font-family:var(--font-display);font-weight:800;font-size:18px;color:var(--coffee-light);}
+.rank-row.p1 .rank-pos{color:#C79A3F;font-size:22px;}
+.rank-row.p2 .rank-pos{color:#9AA0A6;font-size:20px;}
+.rank-row.p3 .rank-pos{color:#B0764A;font-size:20px;}
+.rank-name{font-weight:700;font-size:14.5px;}
+.rank-city{font-size:12px;color:var(--coffee-light);}
+.rank-score{margin-left:auto;font-family:var(--font-mono);font-weight:800;color:var(--coffee);font-size:17px;}
+
+.filters-bar{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:20px;align-items:center;}
+.filters-bar select,.filters-bar input{padding:9px 12px;border-radius:10px;border:1.5px solid var(--border);background:var(--cream-2);font-size:13px;}
+.tabs{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:18px;}
+.tab{padding:8px 14px;border-radius:10px;border:1.5px solid var(--border);background:var(--cream-2);font-size:12.5px;font-weight:700;color:var(--coffee);}
+.tab.active{background:var(--coffee);color:#fff;border-color:var(--coffee);}
+
+/* cafeteria grid card */
+.cafe-card{overflow:hidden;padding:0;cursor:pointer;}
+.cafe-card .photo{width:100%;height:130px;border-radius:0;}
+.cafe-card .body{padding:14px 16px;}
+.cafe-card .body .name{font-weight:700;font-size:15px;}
+.cafe-card .body .city{font-size:12px;color:var(--coffee-light);margin-top:2px;}
+.cafe-card .body .foot{display:flex;justify-content:space-between;align-items:center;margin-top:10px;}
+.score-pill{font-family:var(--font-mono);font-weight:800;color:#fff;background:var(--coffee);padding:3px 10px;border-radius:20px;font-size:13px;}
+
+/* achievements */
+.ach-card{display:flex;gap:14px;align-items:flex-start;opacity:1;}
+.ach-card.locked{opacity:0.45;filter:grayscale(1);}
+.ach-ic{font-size:30px;flex-shrink:0;}
+.ach-title{font-weight:700;font-size:14.5px;}
+.ach-desc{font-size:12.5px;color:var(--coffee-light);margin-top:2px;}
+.progress-bar{height:8px;border-radius:6px;background:var(--latte);margin-top:8px;overflow:hidden;}
+.progress-bar > div{height:100%;background:var(--caramel);}
+.progress-txt{font-size:11px;color:var(--coffee-light);margin-top:4px;font-family:var(--font-mono);}
+
+/* detail page */
+.detail-hero{display:flex;gap:24px;margin-bottom:20px;}
+.detail-hero .photo{width:280px;height:220px;flex-shrink:0;}
+.detail-gallery{display:flex;gap:8px;margin-top:10px;flex-wrap:wrap;}
+.detail-gallery .photo{width:64px;height:64px;}
+.compare-bar{display:flex;align-items:center;gap:10px;margin-bottom:10px;}
+.compare-bar .lbl{width:150px;font-size:13px;font-weight:600;}
+.compare-track{flex:1;height:10px;background:var(--latte);border-radius:6px;position:relative;overflow:hidden;}
+.compare-track .fill1{position:absolute;left:0;top:0;bottom:0;background:var(--coffee);}
+.compare-track .fill2{position:absolute;left:0;top:0;bottom:0;background:var(--caramel);opacity:.55;}
+.legend{display:flex;gap:16px;font-size:12px;margin-bottom:14px;}
+.legend span{display:inline-flex;align-items:center;gap:6px;}
+.legend i{width:10px;height:10px;border-radius:3px;display:inline-block;}
+
+.empty-state{text-align:center;padding:60px 20px;color:var(--coffee-light);}
+.empty-state .ic{font-size:44px;margin-bottom:10px;}
+
+.toast{
+  position:fixed;bottom:26px;right:26px;background:var(--espresso);color:var(--cream-2);
+  padding:14px 20px;border-radius:12px;box-shadow:var(--shadow);font-size:14px;font-weight:600;
+  z-index:999;animation:toastin .3s ease;display:flex;align-items:center;gap:8px;
+}
+@keyframes toastin{from{transform:translateY(20px);opacity:0;}to{transform:translateY(0);opacity:1;}}
+
+.modal-bg{position:fixed;inset:0;background:rgba(58,42,29,0.45);display:flex;align-items:center;justify-content:center;z-index:998;padding:20px;}
+.modal{background:var(--paper);border-radius:var(--radius);padding:26px;max-width:440px;width:100%;box-shadow:var(--shadow);}
+.modal h3{margin-bottom:10px;}
+.modal .actions{display:flex;gap:10px;justify-content:flex-end;margin-top:18px;}
+
+.photo-input-row{display:flex;gap:10px;flex-wrap:wrap;align-items:center;}
+.photo-thumb{position:relative;width:78px;height:78px;border-radius:10px;overflow:hidden;}
+.photo-thumb img{width:100%;height:100%;object-fit:cover;}
+.photo-thumb .rm{position:absolute;top:2px;right:2px;background:rgba(0,0,0,0.55);color:#fff;border:none;border-radius:50%;width:20px;height:20px;font-size:12px;line-height:1;}
+.upload-box{width:78px;height:78px;border:2px dashed var(--border);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:22px;color:var(--coffee-light);flex-shrink:0;}
+
+.settings-card{margin-bottom:18px;}
+.settings-card h3{margin-bottom:4px;}
+.settings-card .desc{font-size:13px;color:var(--coffee-light);margin-bottom:14px;}
+.toggle{display:inline-flex;align-items:center;gap:10px;cursor:pointer;}
+.switch{width:42px;height:24px;background:var(--border);border-radius:20px;position:relative;transition:background .15s;flex-shrink:0;}
+.switch.on{background:var(--caramel);}
+.switch .knob{position:absolute;top:2px;left:2px;width:20px;height:20px;background:#fff;border-radius:50%;transition:left .15s;box-shadow:0 1px 3px rgba(0,0,0,.3);}
+.switch.on .knob{left:20px;}
+
+@media(max-width:900px){
+  #shell{flex-direction:column;}
+  #sidebar{width:100%;height:auto;position:relative;flex-direction:row;flex-wrap:wrap;padding:14px;}
+  .brand{border:none;padding:6px;margin:0;width:100%;}
+  #sidebar-footer{display:none;}
+  #main{padding:20px;}
+  .nav-item{font-size:13px;padding:8px 10px;}
+  .last-visit{flex-direction:column;}
+  .last-visit .photo{width:100%;height:160px;}
+  .detail-hero{flex-direction:column;}
+  .detail-hero .photo{width:100%;}
+}
+
+/* ================= REDESIGN 2026 ================= */
+:root{
+  --content-max:1180px;
+  --content-wide:1320px;
+  --text-strong:#2A1D13;
+  --text-muted:#725F50;
+  --p1:#3A2A1D;
+  --p2:#A8703A;
+}
+body{font-size:16px;line-height:1.45;-webkit-text-size-adjust:100%;text-size-adjust:100%;}
+#main{
+  padding:34px 42px 72px;
+}
+#main > *{
+  width:100%;
+  max-width:var(--content-max);
+  margin-left:auto;
+  margin-right:auto;
+}
+.page-header{margin-bottom:28px;}
+.page-header h1{font-size:32px;letter-spacing:-.02em;}
+.page-header .sub{font-size:15px;color:var(--text-muted);}
+h1,h2,h3,h4{font-family:var(--font-body);letter-spacing:-.015em;}
+.section-title{margin:38px auto 16px;}
+.section-title h2{font-size:20px;font-weight:800;}
+.card{padding:22px;border-radius:16px;}
+.stat-card .stat-num{font-family:var(--font-body);font-size:34px;line-height:1.05;}
+.stat-card .stat-label{font-size:11px;font-weight:800;}
+.detail-hero{align-items:stretch;}
+.detail-hero .photo{border-radius:16px;}
+.score-summary{
+  display:flex;flex-direction:column;justify-content:center;gap:14px;
+  min-width:0;
+}
+.overall-score{
+  display:flex;align-items:baseline;gap:8px;
+}
+.overall-score .value{
+  font-family:var(--font-body);font-size:48px;line-height:1;font-weight:850;
+  color:var(--coffee);letter-spacing:-.04em;
+}
+.overall-score .label{font-size:13px;color:var(--text-muted);font-weight:700;}
+.participants-summary{
+  display:grid;grid-template-columns:1fr 1fr;gap:10px;
+}
+.participant-mini{
+  padding:12px 14px;border:1px solid var(--border);border-radius:12px;background:var(--cream-2);
+}
+.participant-mini .name{font-size:12px;font-weight:800;color:var(--text-muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.participant-mini .score{font-size:24px;font-weight:850;line-height:1.1;margin-top:3px;font-variant-numeric:tabular-nums;}
+.participant-mini.p1 .score{color:var(--p1);}
+.participant-mini.p2 .score{color:var(--p2);}
+
+/* Comparação direta: nunca sobreposta */
+.ratings-comparison{
+  display:grid;gap:12px;
+}
+.rating-compare-card{
+  border:1px solid var(--border);border-radius:15px;background:var(--cream-2);
+  padding:16px;
+}
+.rating-compare-head{
+  display:flex;align-items:center;justify-content:space-between;gap:12px;
+  margin-bottom:14px;
+}
+.rating-compare-title{font-size:15px;font-weight:850;color:var(--text-strong);}
+.rating-compare-result{
+  font-size:12px;font-weight:850;padding:5px 9px;border-radius:999px;
+  background:var(--latte-2);color:var(--coffee);white-space:nowrap;
+}
+.rating-compare-grid{
+  display:grid;grid-template-columns:minmax(0,1fr) minmax(120px,180px) minmax(0,1fr);
+  align-items:center;gap:14px;
+}
+.rating-person{
+  min-width:0;
+}
+.rating-person.p1{text-align:left;}
+.rating-person.p2{text-align:right;}
+.rating-person-name{
+  font-size:12px;font-weight:800;color:var(--text-muted);
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+}
+.rating-person-score{
+  font-size:32px;font-weight:900;line-height:1;margin-top:4px;
+  font-variant-numeric:tabular-nums;letter-spacing:-.04em;
+}
+.rating-person.p1 .rating-person-score{color:var(--p1);}
+.rating-person.p2 .rating-person-score{color:var(--p2);}
+.rating-meter{
+  height:8px;background:var(--latte);border-radius:999px;overflow:hidden;margin-top:10px;
+}
+.rating-person.p1 .rating-meter-fill{height:100%;background:var(--p1);border-radius:inherit;}
+.rating-person.p2 .rating-meter-fill{height:100%;background:var(--p2);border-radius:inherit;}
+.rating-verdict{
+  text-align:center;border-left:1px solid var(--border);border-right:1px solid var(--border);
+  padding:6px 12px;min-width:0;
+}
+.rating-verdict strong{
+  display:block;font-size:13px;font-weight:900;color:var(--text-strong);
+}
+.rating-verdict span{
+  display:block;font-size:11px;color:var(--text-muted);margin-top:3px;font-weight:700;
+}
+.rating-verdict.tie strong{color:var(--coffee);}
+.rating-verdict.win-p1 strong{color:var(--p1);}
+.rating-verdict.win-p2 strong{color:var(--p2);}
+
+@media(min-width:1500px){
+  #main{padding-left:64px;padding-right:64px;}
+}
+@media(max-width:900px){
+  #main{padding:22px 16px 42px;}
+  #main > *{max-width:none;}
+  .page-header h1{font-size:27px;}
+  .detail-hero{gap:16px;}
+  .detail-hero .photo{height:220px;}
+  .overall-score .value{font-size:42px;}
+  .card{padding:16px;}
+}
+@media(max-width:620px){
+  html,body{width:100%;overflow-x:hidden;}
+  #shell{min-height:100dvh;}
+  #sidebar{
+    position:sticky;top:0;z-index:20;
+    padding:10px 12px 8px;
+    overflow-x:auto;flex-wrap:nowrap;
+    -webkit-overflow-scrolling:touch;
+    scrollbar-width:none;
+  }
+  #sidebar::-webkit-scrollbar{display:none;}
+  .brand{display:none;}
+  .nav-item{
+    flex:0 0 auto;margin:0;padding:9px 10px;font-size:12px;white-space:nowrap;
+    border-radius:10px;
+  }
+  .nav-item .ic{font-size:16px;width:auto;}
+  #main{padding:18px 12px calc(36px + env(safe-area-inset-bottom));}
+  .page-header{align-items:flex-start;gap:12px;margin-bottom:22px;}
+  .page-header h1{font-size:25px;line-height:1.12;}
+  .page-header .sub{font-size:13px;}
+  .page-header > div:last-child{width:100%;}
+  .page-header .btn{flex:1;justify-content:center;}
+  .section-title{margin-top:30px;margin-bottom:12px;}
+  .section-title h2{font-size:18px;}
+  .detail-hero .photo{width:100%!important;height:200px!important;min-height:200px;}
+  .participants-summary{gap:8px;}
+  .participant-mini{padding:10px;}
+  .participant-mini .score{font-size:22px;}
+  .rating-compare-card{padding:14px 12px;}
+  .rating-compare-head{align-items:flex-start;gap:8px;margin-bottom:12px;}
+  .rating-compare-title{font-size:14px;line-height:1.25;}
+  .rating-compare-result{font-size:10px;padding:4px 7px;}
+  .rating-compare-grid{
+    grid-template-columns:1fr;
+    gap:10px;
+  }
+  .rating-person.p1,.rating-person.p2{text-align:left;}
+  .rating-person-score{font-size:30px;}
+  .rating-verdict{
+    order:2;border:0;border-top:1px solid var(--border);border-bottom:1px solid var(--border);
+    padding:9px 6px;margin:1px 0;
+  }
+  .rating-person.p2{order:3;}
+  .rating-person.p1{order:1;}
+  .rating-person-name{font-size:11px;}
+  .rating-meter{margin-top:7px;height:7px;}
+  .rating-row{align-items:flex-start;flex-wrap:wrap;}
+  .rating-row .rl{width:100%;}
+  .rating-row input[type=range]{min-width:0;}
+  .toast{left:12px;right:12px;bottom:calc(12px + env(safe-area-inset-bottom));}
+  .modal-bg{padding:12px;}
+  .modal{padding:20px;}
+  .ticket{padding:18px 16px;}
+  .ticket::before,.ticket::after{display:none;}
+  .ticket-body{flex-direction:column;}
+  .ticket-body .photo{width:100%;height:180px;}
+  .rank-row{gap:10px;padding:12px;}
+  .rank-row .photo{width:44px;height:44px;}
+}
+
+
+
+/* ================= VISUALIZADOR DE FOTOS ================= */
+.photo.photo-zoomable{position:relative;cursor:zoom-in;touch-action:manipulation;}
+.photo.photo-zoomable::after{
+  content:"⌕";position:absolute;right:7px;bottom:7px;width:28px;height:28px;
+  display:flex;align-items:center;justify-content:center;border-radius:50%;
+  background:rgba(31,22,15,.72);color:#fff;font-size:18px;font-weight:700;
+  opacity:0;transform:scale(.86);transition:opacity .18s ease,transform .18s ease;
+  pointer-events:none;box-shadow:0 3px 12px rgba(0,0,0,.18);
+}
+.photo.photo-zoomable:hover::after,.photo.photo-zoomable:focus-visible::after{opacity:1;transform:scale(1);}
+.photo.photo-zoomable:focus-visible{outline:3px solid rgba(168,112,58,.55);outline-offset:2px;}
+.photo-thumb img.zoomable-img{cursor:zoom-in;touch-action:manipulation;}
+#photo-lightbox{
+  position:fixed;inset:0;z-index:5000;background:rgba(19,13,9,.92);
+  display:flex;align-items:center;justify-content:center;padding:18px;
+  padding-top:max(18px,env(safe-area-inset-top));
+  padding-right:max(18px,env(safe-area-inset-right));
+  padding-bottom:max(18px,env(safe-area-inset-bottom));
+  padding-left:max(18px,env(safe-area-inset-left));
+  opacity:0;transition:opacity .18s ease;
+}
+#photo-lightbox.show{opacity:1;}
+#photo-lightbox .lightbox-stage{
+  width:100%;height:100%;display:flex;align-items:center;justify-content:center;
+  position:relative;
+}
+#photo-lightbox img{
+  max-width:100%;max-height:100%;width:auto;height:auto;object-fit:contain;
+  border-radius:12px;box-shadow:0 18px 70px rgba(0,0,0,.48);display:block;
+}
+#photo-lightbox .lightbox-close{
+  position:absolute;top:8px;right:8px;z-index:2;width:48px;height:48px;
+  border:1px solid rgba(255,255,255,.2);border-radius:50%;
+  background:rgba(35,25,18,.76);color:#fff;font-size:30px;line-height:1;
+  display:flex;align-items:center;justify-content:center;cursor:pointer;
+  -webkit-tap-highlight-color:transparent;
+}
+#photo-lightbox .lightbox-close:active{transform:scale(.94);}
+#photo-lightbox .lightbox-hint{
+  position:absolute;left:50%;bottom:8px;transform:translateX(-50%);
+  color:rgba(255,255,255,.82);font-size:12px;white-space:nowrap;
+  background:rgba(0,0,0,.3);padding:6px 10px;border-radius:999px;pointer-events:none;
+}
+body.photo-lightbox-open{overflow:hidden;}
+@media(max-width:620px){
+  .photo.photo-zoomable::after{opacity:1;transform:scale(1);width:25px;height:25px;right:5px;bottom:5px;font-size:16px;}
+  #photo-lightbox{padding:10px;padding-top:max(10px,env(safe-area-inset-top));padding-bottom:max(10px,env(safe-area-inset-bottom));}
+  #photo-lightbox .lightbox-close{top:6px;right:6px;width:46px;height:46px;font-size:28px;}
+  #photo-lightbox .lightbox-hint{bottom:4px;font-size:11px;}
+}
+
+
+/* APP FOOTER VERSION START */
+.app-version-footer{
+  width:100%;
+  max-width:var(--content-max,1180px);
+  margin:34px auto 4px;
+  padding:14px 18px;
+  border-top:1px solid var(--border);
+  text-align:center;
+  color:var(--text-muted, var(--coffee-light));
+  font-size:12px;
+  line-height:1.4;
+  letter-spacing:.01em;
+}
+.app-version-footer strong{
+  color:var(--text-strong, var(--coffee));
+  font-weight:850;
+}
+@media(max-width:620px){
+  .app-version-footer{
+    margin-top:26px;
+    padding:12px 8px 6px;
+    font-size:11px;
+  }
+}
+/* APP FOOTER VERSION END */
+
+</style>
+
+<link rel="manifest" href="manifest.webmanifest">
+<meta name="application-name" content="Clube das Cafeterias">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="theme-color" content="#3A2A1D">
+<link rel="apple-touch-icon" sizes="192x192" href="icon-192.png">
+<link rel="apple-touch-icon" sizes="512x512" href="icon-512.png">
+
+</head>
+<body>
+<div id="shell">
+  <nav id="sidebar"></nav>
+  <main id="main"></main>
+
+<!-- APP FOOTER VERSION START -->
+<footer class="app-version-footer">
+  <strong>Versão 0.1.1</strong> · Feito por Jader Piazza
+</footer>
+<!-- APP FOOTER VERSION END -->
+
+</div>
+<script>
+/* =========================================================
+   CLUBE DAS CAFETERIAS — app local, sem servidor, sem login
+   Dados salvos no navegador (IndexedDB) + backup em arquivo
+   ========================================================= */
+
+/* ---------------- Armazenamento local ----------------
+   Usa localStorage (funciona de forma confiável ao abrir o arquivo
+   direto no navegador, via duplo clique / file://). Se por algum
+   motivo localStorage não estiver disponível, cai para um estado
+   apenas em memória (a sessão funciona, mas não persiste ao fechar). */
+const STORAGE_KEY='clube-das-cafeterias-estado';
+let MEMORY_FALLBACK=null;
+let STORAGE_OK=true;
+try{
+  const t='__teste_clube__';
+  localStorage.setItem(t,'1'); localStorage.removeItem(t);
+}catch(e){ STORAGE_OK=false; }
+
+async function dbGet(key){
+  if(!STORAGE_OK) return MEMORY_FALLBACK;
+  try{
+    const raw=localStorage.getItem(key);
+    return raw? JSON.parse(raw) : undefined;
+  }catch(e){ console.error('Erro ao ler dados salvos:',e); return undefined; }
+}
+async function dbSet(key,val){
+  if(!STORAGE_OK){ MEMORY_FALLBACK=val; return true; }
+  try{
+    localStorage.setItem(key,JSON.stringify(val));
+    return true;
+  }catch(e){
+    console.error('Erro ao salvar dados:',e);
+    MEMORY_FALLBACK=val;
+    toast('Não foi possível salvar no navegador (armazenamento cheio ou bloqueado). As alterações podem se perder ao fechar — exporte um backup!','⚠️');
+    return false;
+  }
+}
+
+/* ---------------- Estado global ---------------- */
+let STATE=null;
+let ROUTE='#/inicio';
+let DRAFT=null; // rascunho de visita em edição
+
+function uid(){ return 'v'+Date.now().toString(36)+Math.random().toString(36).slice(2,7); }
+function todayISO(){ return new Date().toISOString().slice(0,10); }
+
+function criteriaKeys(){ return ['cafe','comida','ambiente','atendimento','custoBeneficio','geral']; }
+function criteriaLabels(){ return {cafe:'☕ Café/Bebidas',comida:'🍰 Comidas',ambiente:'🏠 Ambiente',atendimento:'👨‍🍳 Atendimento',custoBeneficio:'💰 Custo-benefício',geral:'✨ Experiência geral'}; }
+
+function blankNotas(){ const o={}; criteriaKeys().forEach(k=>o[k]=7); return o; }
+
+function newDraft(existing){
+  if(existing) return JSON.parse(JSON.stringify(existing));
+  const num = (STATE && STATE.visits) ? (STATE.visits.length+1) : 1;
+  return {
+    id:uid(), numero:num, cafeteria:'', cidade:'', uf:'', data:todayISO(), distanciaKm:'',
+    descoberta:'Indicação',
+    fotoPrincipal:null, fotosAdicionais:[],
+    pedidos:{ pessoa1:[{bebida:'',comida:'',obs:'',valor:''}], pessoa2:[{bebida:'',comida:'',obs:'',valor:''}] },
+    notas:{ pessoa1:blankNotas(), pessoa2:blankNotas() },
+    frases:{ pessoa1:'', pessoa2:'' },
+    momento:'',
+    veredito:{ valeViagem:'se_perto', voltaria:'sim_certeza' },
+    _reveal:{ ativo:false, etapa:'pessoa1' } // pessoa1 -> pessoa2 -> revelar -> feito
+  };
+}
+
+/* ---------------- Cálculos ---------------- */
+function notaPessoa(v,p){
+  const n=v.notas && v.notas[p]; if(!n) return null;
+  const vals=criteriaKeys().map(k=>Number(n[k])||0);
+  return vals.reduce((a,b)=>a+b,0)/vals.length;
+}
+function mediaDupla(v){
+  const a=notaPessoa(v,'pessoa1'), b=notaPessoa(v,'pessoa2');
+  if(a==null||b==null) return null;
+  return (a+b)/2;
+}
+function diffPessoas(v){
+  const a=notaPessoa(v,'pessoa1'), b=notaPessoa(v,'pessoa2');
+  if(a==null||b==null) return null;
+  return Math.abs(a-b);
+}
+function fmt1(n){ return (Math.round(n*10)/10).toFixed(1).replace('.',','); }
+function fmtBR(dateStr){
+  if(!dateStr) return '';
+  const d=new Date(dateStr+'T12:00:00');
+  return d.toLocaleDateString('pt-BR',{day:'2-digit',month:'long',year:'numeric'});
+}
+function sortedVisitsByDate(asc=true){
+  return [...STATE.visits].sort((a,b)=> asc ? new Date(a.data)-new Date(b.data) : new Date(b.data)-new Date(a.data));
+}
+function rankedVisits(criterion){
+  // criterion: null = média dupla geral, or one of criteriaKeys()
+  let list=STATE.visits.filter(v=>mediaDupla(v)!=null).map(v=>{
+    let score;
+    if(!criterion){ score=mediaDupla(v); }
+    else{
+      const a=Number(v.notas.pessoa1[criterion])||0, b=Number(v.notas.pessoa2[criterion])||0;
+      score=(a+b)/2;
+    }
+    return {v,score};
+  });
+  list.sort((a,b)=>b.score-a.score);
+  return list;
+}
+function cidadesUnicas(){
+  return [...new Set(STATE.visits.map(v=>v.cidade.trim()).filter(Boolean))];
+}
+function totalKm(){
+  return STATE.visits.reduce((s,v)=>s+(Number(v.distanciaKm)||0),0);
+}
+function mediaGeral(){
+  const meds=STATE.visits.map(mediaDupla).filter(x=>x!=null);
+  if(!meds.length) return null;
+  return meds.reduce((a,b)=>a+b,0)/meds.length;
+}
+function bestByCriterion(criterion){
+  const list=rankedVisits(criterion);
+  return list.length?list[0]:null;
+}
+
+/* ---------------- Conquistas ---------------- */
+function ACHIEVEMENTS_DEF(){
+  const visits=STATE.visits;
+  const cidades=cidadesUnicas();
+  const first=sortedVisitsByDate(true)[0];
+  const ranking=rankedVisits(null);
+  const leaderChanged = first && ranking.length && ranking[0].v.id!==first.id;
+  const nameCounts={};
+  visits.forEach(v=>{ const k=v.cafeteria.trim().toLowerCase(); if(k) nameCounts[k]=(nameCounts[k]||0)+1; });
+  const reincidencia=Object.values(nameCounts).some(c=>c>1);
+  const anyNota10=visits.some(v=>criteriaKeys().some(k=>Number(v.notas.pessoa1[k])===10||Number(v.notas.pessoa2[k])===10));
+  const decepcao=visits.some(v=>{ const m=mediaDupla(v); return m!=null && m<5; });
+  const valeEstrada=visits.filter(v=>v.veredito && v.veredito.valeViagem==='vale_viagem').length;
+  const viajante = first && visits.some(v=>v.id!==first.id && v.cidade.trim().toLowerCase()!==first.cidade.trim().toLowerCase());
+  return [
+    {id:'primeiro',icon:'☕',title:'Primeiro Café',desc:'Registrar a primeira visita.',unlocked:visits.length>=1,cur:Math.min(visits.length,1),max:1},
+    {id:'top10',icon:'🔟',title:'Top 10',desc:'Visitar 10 cafeterias.',unlocked:visits.length>=10,cur:Math.min(visits.length,10),max:10},
+    {id:'viajante',icon:'🛣️',title:'Café Viajante',desc:'Registrar uma cafeteria em outra cidade.',unlocked:!!viajante,cur:viajante?1:0,max:1},
+    {id:'cacadores',icon:'🗺️',title:'Caçadores de Café',desc:'Conhecer cafeterias em 5 cidades diferentes.',unlocked:cidades.length>=5,cur:Math.min(cidades.length,5),max:5},
+    {id:'nota10',icon:'⭐',title:'Nota 10',desc:'Registrar uma experiência com nota máxima em algum critério.',unlocked:anyNota10,cur:anyNota10?1:0,max:1},
+    {id:'decepcao',icon:'💔',title:'Grande Decepção',desc:'Registrar uma experiência com nota abaixo de 5.',unlocked:decepcao,cur:decepcao?1:0,max:1},
+    {id:'legenda',icon:'👑',title:'Nova Lenda',desc:'Uma cafeteria diferente da primeira assumir o topo do ranking.',unlocked:!!leaderChanged,cur:leaderChanged?1:0,max:1},
+    {id:'reincidencia',icon:'🔁',title:'Reincidência',desc:'Visitar novamente uma cafeteria já conhecida.',unlocked:reincidencia,cur:reincidencia?1:0,max:1},
+    {id:'estrada',icon:'🚙',title:'Vale a Estrada',desc:'Registrar 5 cafeterias como "Vale a viagem".',unlocked:valeEstrada>=5,cur:Math.min(valeEstrada,5),max:5},
+  ];
+}
+
+/* ---------------- Dados de exemplo ---------------- */
+function placeholderPhoto(seed,emoji){
+  const colors=['#C68B4A','#8B6449','#A8703A','#6F4A32','#D4A24C'];
+  const c=colors[seed%colors.length];
+  const svg=`<svg xmlns='http://www.w3.org/2000/svg' width='400' height='300'><rect width='400' height='300' fill='${c}'/><text x='200' y='170' font-size='90' text-anchor='middle'>${emoji}</text></svg>`;
+  return 'data:image/svg+xml;base64,'+btoa(unescape(encodeURIComponent(svg)));
+}
+function sampleState(){
+  const s={
+    settings:{ pessoa1:'Jader Matheus', pessoa2:'Maria Clara', modoSurpresa:true, sampleLoaded:true },
+    visits:[]
+  };
+  const sample=[
+    {cafeteria:'Casa do Café',cidade:'Itajubá',uf:'MG',data:'2026-06-14',km:2,n1:[9,8.5,9.5,9,8,9],n2:[9.5,9,9,9,8.5,9.5],f1:'Perfeito pra começar o Clube.',f2:'Cheirinho de café bom já na porta.',mem:'A gente ficou tanto tempo conversando que o café esfriou duas vezes.',vv:'vale_desvio',vo:'sim_certeza'},
+    {cafeteria:'Grão Mineiro',cidade:'Belo Horizonte',uf:'MG',data:'2026-07-02',km:280,n1:[8,9,8.5,8,7.5,8.5],n2:[8.5,9.5,8,8.5,7,8.5],f1:'Comida surpreendeu mais que o café.',f2:'Ambiente lindo, valeu a viagem.',mem:'Pedimos o bolo errado sem querer e amamos mesmo assim.',vv:'vale_viagem',vo:'sim_certeza'},
+    {cafeteria:'Café Aurora',cidade:'São Paulo',uf:'SP',data:'2026-07-20',km:410,n1:[9.6,9,10,9.5,8,9.5],n2:[7.2,8,8.5,8,7,7.5],f1:'Eu atravessaria a cidade por esse cappuccino.',f2:'Bom, mas achei bem exagerado o hype.',mem:'Discutimos educadamente por 20 minutos sobre se valia o preço.',vv:'vale_viagem',vo:'sim_certeza'},
+    {cafeteria:'Torrefação da Serra',cidade:'Pouso Alegre',uf:'MG',data:'2026-08-05',km:60,n1:[8.5,7,9,8.5,9,8.5],n2:[8,7.5,9,8.5,9,8.5],f1:'Custo-benefício surreal.',f2:'Ambiente perfeito, mas a sobremesa roubou a cena.',mem:'O gato da cafeteria decidiu sentar no colo da Pessoa 2 a visita inteira.',vv:'vale_desvio',vo:'sim_certeza'},
+    {cafeteria:'Empório do Grão',cidade:'Itajubá',uf:'MG',data:'2026-08-18',km:5,n1:[6,6.5,7,6,5.5,6],n2:[6.5,6,7.5,6.5,6,6.5],f1:'Café mediano, mas simpático.',f2:'Nada memorável, mas nada ruim também.',mem:'Choveu tanto que ficamos presos lá por uma hora extra.',vv:'se_perto',vo:'talvez'},
+  ];
+  sample.forEach((sVisit,idx)=>{
+    const v=newDraft(null);
+    v.id=uid(); v.numero=idx+1;
+    v.cafeteria=sVisit.cafeteria; v.cidade=sVisit.cidade; v.uf=sVisit.uf; v.data=sVisit.data; v.distanciaKm=sVisit.km;
+    v.descoberta=['Indicação','Viagem','Instagram','Acaso','Pesquisa'][idx%5];
+    v.fotoPrincipal=placeholderPhoto(idx,'☕');
+    v.fotosAdicionais=[placeholderPhoto(idx+9,'🍰')];
+    const keys=criteriaKeys();
+    keys.forEach((k,i)=>{ v.notas.pessoa1[k]=sVisit.n1[i]; v.notas.pessoa2[k]=sVisit.n2[i]; });
+    v.pedidos.pessoa1=[{bebida:'Cappuccino',comida:'Cheesecake',obs:'',valor:'14'}];
+    v.pedidos.pessoa2=[{bebida:'Café coado',comida:'Bolo de fubá',obs:'',valor:'12'}];
+    v.frases.pessoa1=sVisit.f1; v.frases.pessoa2=sVisit.f2;
+    v.momento=sVisit.mem;
+    v.veredito={valeViagem:sVisit.vv,voltaria:sVisit.vo};
+    v._reveal.ativo=false; v._reveal.etapa='feito';
+    s.visits.push(v);
+  });
+  return s;
+}
+
+/* ---------------- Persistência ---------------- */
+async function loadState(){
+  let s=await dbGet(STORAGE_KEY);
+  if(!s){ s=sampleState(); await dbSet(STORAGE_KEY,s); }
+  STATE=s;
+}
+async function saveState(){ await dbSet(STORAGE_KEY,STATE); }
+function toast(msg,icon){
+  const el=document.createElement('div');
+  el.className='toast'; el.innerHTML=`<span>${icon||'☕'}</span><span>${msg}</span>`;
+  document.body.appendChild(el);
+  setTimeout(()=>el.remove(),3200);
+}
+
+/* ---------------- Roteamento ---------------- */
+const NAV=[
+  {r:'#/inicio',ic:'🏠',label:'Início'},
+  {r:'#/nova-visita',ic:'➕',label:'Nova Visita'},
+  {r:'#/ranking',ic:'🏆',label:'Ranking'},
+  {r:'#/cafeterias',ic:'☕',label:'Cafeterias'},
+  {r:'#/diario',ic:'📖',label:'Diário'},
+  {r:'#/estatisticas',ic:'📊',label:'Estatísticas'},
+  {r:'#/conquistas',ic:'🏅',label:'Conquistas'},
+  {r:'#/config',ic:'⚙️',label:'Configurações'},
+];
+
+function renderSidebar(){
+  const sb=document.getElementById('sidebar');
+  const base=ROUTE.split('/').slice(0,2).join('/');
+  sb.innerHTML=`
+    <div class="brand">
+      <div class="brand-title">☕ Clube das<br>Cafeterias</div>
+      <div class="brand-sub">Uma cafeteria por vez.<br>Uma coleção de histórias para sempre.</div>
+    </div>
+    ${NAV.map(n=>`<a href="${n.r}" class="nav-item ${base===n.r?'active':''}"><span class="ic">${n.ic}</span>${n.label}</a>`).join('')}
+    <div id="sidebar-footer">Clube das Cafeterias · dados salvos localmente neste navegador.</div>
+  `;
+}
+
+function router(){
+  ROUTE=location.hash||'#/inicio';
+  renderSidebar();
+  const main=document.getElementById('main');
+  const [_,section,...rest]=ROUTE.split('/');
+  if(ROUTE.startsWith('#/nova-visita')) return renderNovaVisita(main, rest[0]==='editar'?rest[1]:null);
+  if(ROUTE.startsWith('#/cafeteria/')) return renderDetalheCafeteria(main, rest[0]);
+  switch('#/'+section){
+    case '#/inicio': return renderInicio(main);
+    case '#/ranking': return renderRanking(main);
+    case '#/cafeterias': return renderCafeterias(main);
+    case '#/diario': return renderDiario(main);
+    case '#/estatisticas': return renderEstatisticas(main);
+    case '#/conquistas': return renderConquistas(main);
+    case '#/config': return renderConfig(main);
+    default: return renderInicio(main);
+  }
+}
+window.addEventListener('hashchange',router);
+
+
+
+/* ---------------- Visualizador de fotos ---------------- */
+function openPhotoLightbox(src){
+  if(!src) return;
+  const old=document.getElementById('photo-lightbox');
+  if(old) old.remove();
+
+  const lb=document.createElement('div');
+  lb.id='photo-lightbox';
+  lb.setAttribute('role','dialog');
+  lb.setAttribute('aria-modal','true');
+  lb.setAttribute('aria-label','Visualização ampliada da foto');
+  lb.innerHTML=`<div class="lightbox-stage"><button class="lightbox-close" type="button" aria-label="Fechar foto">×</button><img alt="Foto ampliada"><div class="lightbox-hint">Toque fora da foto para fechar</div></div>`;
+  lb.querySelector('img').src=src;
+
+  const close=()=>{
+    lb.classList.remove('show');
+    document.body.classList.remove('photo-lightbox-open');
+    setTimeout(()=>lb.remove(),180);
+  };
+  lb.querySelector('.lightbox-close').onclick=close;
+  lb.addEventListener('click',e=>{ if(e.target===lb || e.target.classList.contains('lightbox-stage')) close(); });
+  document.body.appendChild(lb);
+  document.body.classList.add('photo-lightbox-open');
+  requestAnimationFrame(()=>lb.classList.add('show'));
+  lb.querySelector('.lightbox-close').focus();
+}
+
+document.addEventListener('click',e=>{
+  const zoom=e.target.closest('[data-lightbox-src]');
+  if(!zoom) return;
+  e.preventDefault();
+  e.stopPropagation();
+  openPhotoLightbox(zoom.dataset.lightboxSrc);
+},true);
+
+document.addEventListener('keydown',e=>{
+  if(e.key==='Escape'){
+    const lb=document.getElementById('photo-lightbox');
+    if(lb) lb.querySelector('.lightbox-close').click();
+    return;
+  }
+  if((e.key==='Enter' || e.key===' ') && document.activeElement?.dataset?.lightboxSrc){
+    e.preventDefault();
+    openPhotoLightbox(document.activeElement.dataset.lightboxSrc);
+  }
+});
+
+/* ---------------- Componentes reutilizáveis ---------------- */
+function photoBox(src,style,emojiFallback){
+  if(src) return `<div class="photo photo-zoomable" data-lightbox-src="${src}" role="button" tabindex="0" aria-label="Ampliar foto" style="${style||''}"><img src="${src}" alt="Foto da visita"><span class="photo-zoom-indicator" aria-hidden="true"></span></div>`;
+  return `<div class="photo" style="${style||''};font-size:26px;">${emojiFallback||'☕'}</div>`;
+}
+function stampHTML(num,label,gold){
+  return `<div class="stamp ${gold?'gold':''}"><div class="stamp-num">${num}</div><div class="stamp-txt">${label}</div></div>`;
+}
+function veredictoLabel(v){
+  return {vale_viagem:'🗺️ Vale a viagem',vale_desvio:'🚗 Vale o desvio',se_perto:'📍 Se estiver por perto',conheci:'☕ Conheci e pronto'}[v]||v;
+}
+function voltariaLabel(v){
+  return {sim_certeza:'Sim, com certeza',sim_sem_questao:'Sim, mas não faria questão',talvez:'Talvez',nao:'Não voltaria'}[v]||v;
+}
+
+/* ================= INÍCIO / DASHBOARD ================= */
+function renderInicio(main){
+  const p1=STATE.settings.pessoa1, p2=STATE.settings.pessoa2;
+  const cidades=cidadesUnicas();
+  const km=totalKm();
+  const media=mediaGeral();
+  const ranking=rankedVisits(null);
+  const lider=ranking[0];
+  const top3=ranking.slice(0,3);
+  const ultima=sortedVisitsByDate(false)[0];
+
+  let goalHTML='';
+  if(STATE.visits.length===0){
+    goalHTML=`<div class="goal-banner"><span class="ic">☕</span><div><b>Comecem a jornada!</b><br>Registrem a primeira visita para abrir o Clube das Cafeterias.</div></div>`;
+  } else if(STATE.visits.length<10){
+    const falta=10-STATE.visits.length;
+    goalHTML=`<div class="goal-banner"><span class="ic">☕</span><div>Faltam <b>${falta}</b> cafeteria${falta>1?'s':''} para a conquista <b>"Top 10"</b>.</div></div>`;
+  } else if(cidades.length<5){
+    goalHTML=`<div class="goal-banner"><span class="ic">🗺️</span><div>Visitem uma cafeteria em uma nova cidade para avançar na conquista <b>"Caçadores de Café"</b>.</div></div>`;
+  } else {
+    goalHTML=`<div class="goal-banner"><span class="ic">🏆</span><div>Continuem explorando — o ranking está sempre esperando por uma nova campeã!</div></div>`;
+  }
+
+  main.innerHTML=`
+    <div class="page-header">
+      <div><h1>Olá, ${p1} & ${p2} ☕</h1><div class="sub">A jornada de vocês pelas cafeterias, em um só lugar.</div></div>
+      <a href="#/nova-visita" class="btn">➕ Nova Visita</a>
+    </div>
+
+    <div class="grid cols-4">
+      <div class="card stat-card"><div class="stat-ic">☕</div><div class="stat-num">${STATE.visits.length}</div><div class="stat-label">Cafeterias visitadas</div></div>
+      <div class="card stat-card"><div class="stat-ic">🗺️</div><div class="stat-num">${cidades.length}</div><div class="stat-label">Cidades exploradas</div></div>
+      <div class="card stat-card"><div class="stat-ic">🚗</div><div class="stat-num">${km.toLocaleString('pt-BR')}</div><div class="stat-label">Quilômetros registrados</div></div>
+      <div class="card stat-card"><div class="stat-ic">⭐</div><div class="stat-num">${media!=null?fmt1(media):'—'}</div><div class="stat-label">Média geral</div></div>
+    </div>
+
+    <div class="section-title"><h2>🥇 Top 3 atual</h2><div class="line"></div></div>
+    ${top3.length? `<div class="grid cols-3">${top3.map((t,i)=>`
+      <div class="card top3-card" onclick="location.hash='#/cafeteria/${t.v.id}'" style="cursor:pointer">
+        <span class="top3-medal">${['🥇','🥈','🥉'][i]}</span>
+        ${photoBox(t.v.fotoPrincipal,'width:58px;height:58px;')}
+        <div><div class="top3-name">${t.v.cafeteria}</div><div class="top3-city">📍 ${t.v.cidade}</div></div>
+        <span class="top3-score">${fmt1(t.score)}</span>
+      </div>`).join('')}</div>` : `<div class="empty-state"><div class="ic">☕</div>Nenhuma cafeteria ainda. Que tal registrar a primeira?</div>`}
+
+    ${ultima?`
+    <div class="section-title"><h2>Última visita</h2><div class="line"></div></div>
+    <div class="card last-visit">
+      ${photoBox(ultima.fotoPrincipal,'width:190px;min-height:150px;')}
+      <div class="last-visit-body">
+        <div class="badge">📍 ${ultima.cidade}</div>
+        <h3>${ultima.cafeteria}</h3>
+        <div class="sub" style="font-size:13px;color:var(--coffee-light)">📅 ${fmtBR(ultima.data)} · ⭐ ${mediaDupla(ultima)!=null?fmt1(mediaDupla(ultima)):'—'}</div>
+        <p style="font-style:italic;font-size:13.5px;">${ultima.frases.pessoa1?('"'+ultima.frases.pessoa1+'"'):''}</p>
+        <div><a href="#/cafeteria/${ultima.id}" class="btn small ghost">Ver experiência completa</a></div>
+      </div>
+    </div>`:''}
+
+    <div class="section-title"><h2>Próxima meta</h2><div class="line"></div></div>
+    ${goalHTML}
+  `;
+}
+
+/* ================= NOVA VISITA ================= */
+const STEP_LABELS=['Informações','Fotos','Pedidos','Avaliação','Memórias','Veredito','Resumo'];
+let stepIndex=0;
+
+function renderNovaVisita(main, editId){
+  if(!DRAFT || (editId && DRAFT.id!==editId) || (!editId && DRAFT._justSaved)){
+    const existing = editId ? STATE.visits.find(v=>v.id===editId) : null;
+    DRAFT = newDraft(existing);
+    DRAFT._reveal.ativo = STATE.settings.modoSurpresa && !existing;
+    DRAFT._reveal.etapa = DRAFT._reveal.ativo ? 'pessoa1' : 'feito';
+    stepIndex=0;
+  }
+  paintNovaVisita(main);
+}
+
+function paintNovaVisita(main){
+  const dots=STEP_LABELS.map((l,i)=>`<div class="dot ${i<stepIndex?'done':i===stepIndex?'current':''}"></div>`).join('');
+  main.innerHTML=`
+    <div class="page-header"><div><h1>${DRAFT.numero?('Visita #'+String(DRAFT.numero).padStart(2,'0')):'Nova Visita'}</h1><div class="sub">${STEP_LABELS[stepIndex]}</div></div></div>
+    <div class="step-nav-labels"><span>Passo ${stepIndex+1} de ${STEP_LABELS.length}</span><span>${STEP_LABELS[stepIndex]}</span></div>
+    <div class="steps-bar">${dots}</div>
+    <div class="card" id="step-content" style="max-width:760px;"></div>
+    <div style="display:flex;justify-content:space-between;max-width:760px;margin-top:18px;">
+      <button class="btn ghost" id="btn-back" ${stepIndex===0?'style="visibility:hidden"':''}>← Voltar</button>
+      <div style="display:flex;gap:10px;">
+        <a href="#/inicio" class="btn ghost" onclick="DRAFT=null;">Cancelar</a>
+        <button class="btn" id="btn-next">${stepIndex===STEP_LABELS.length-1?'☕ Registrar no Clube':'Avançar →'}</button>
+      </div>
+    </div>
+  `;
+  const content=document.getElementById('step-content');
+  [paintStepInfo,paintStepFotos,paintStepPedidos,paintStepAvaliacao,paintStepMemorias,paintStepVeredito,paintStepResumo][stepIndex](content);
+  document.getElementById('btn-back').onclick=()=>{ stepIndex=Math.max(0,stepIndex-1); paintNovaVisita(main); };
+  document.getElementById('btn-next').onclick=()=>handleNext(main);
+}
+
+function handleNext(main){
+  if(stepIndex===0){
+    if(!DRAFT.cafeteria.trim()||!DRAFT.cidade.trim()){ toast('Preencha ao menos o nome e a cidade da cafeteria.','⚠️'); return; }
+  }
+  if(stepIndex===3 && DRAFT._reveal.ativo && DRAFT._reveal.etapa!=='feito'){
+    toast('Concluam a revelação das notas antes de avançar.','🙈'); return;
+  }
+  if(stepIndex===STEP_LABELS.length-1){ return finalizarVisita(); }
+  stepIndex++; paintNovaVisita(main);
+}
+
+function paintStepInfo(el){
+  el.innerHTML=`
+    <div class="row"><div class="field"><label>Nº da visita</label><input type="text" value="#${String(DRAFT.numero).padStart(2,'0')}" disabled></div>
+    <div class="field"><label>Data da visita</label><input type="date" id="f-data" value="${DRAFT.data}"></div></div>
+    <div class="field"><label>Nome da cafeteria</label><input type="text" id="f-nome" value="${DRAFT.cafeteria}" placeholder="Ex: Café Aurora"></div>
+    <div class="row"><div class="field"><label>Cidade</label><input type="text" id="f-cidade" value="${DRAFT.cidade}" placeholder="Ex: Itajubá"></div>
+    <div class="field"><label>UF (opcional)</label><input type="text" id="f-uf" value="${DRAFT.uf}" maxlength="2" placeholder="MG"></div></div>
+    <div class="field"><label>Distância aproximada percorrida (km)</label><input type="number" id="f-km" value="${DRAFT.distanciaKm}" placeholder="0"></div>
+    <div class="field"><label>Como descobriram a cafeteria?</label>
+      <div class="chip-select" id="f-descoberta">
+        ${['Instagram','Indicação','Acaso','Viagem','Pesquisa','Outro'].map(o=>`<div class="chip ${DRAFT.descoberta===o?'active':''}" data-v="${o}">${o}</div>`).join('')}
+      </div>
+    </div>
+  `;
+  el.querySelector('#f-data').oninput=e=>DRAFT.data=e.target.value;
+  el.querySelector('#f-nome').oninput=e=>DRAFT.cafeteria=e.target.value;
+  el.querySelector('#f-cidade').oninput=e=>DRAFT.cidade=e.target.value;
+  el.querySelector('#f-uf').oninput=e=>DRAFT.uf=e.target.value;
+  el.querySelector('#f-km').oninput=e=>DRAFT.distanciaKm=e.target.value;
+  el.querySelectorAll('#f-descoberta .chip').forEach(c=>c.onclick=()=>{ DRAFT.descoberta=c.dataset.v; paintStepInfo(el); });
+}
+
+function fileToDataURL(file,maxDim=1000,quality=0.78){
+  return new Promise((resolve)=>{
+    const reader=new FileReader();
+    reader.onload=()=>{
+      const img=new Image();
+      img.onload=()=>{
+        let w=img.width,h=img.height;
+        if(w>maxDim||h>maxDim){ const ratio=Math.min(maxDim/w,maxDim/h); w=Math.round(w*ratio); h=Math.round(h*ratio); }
+        const cv=document.createElement('canvas'); cv.width=w; cv.height=h;
+        cv.getContext('2d').drawImage(img,0,0,w,h);
+        resolve(cv.toDataURL('image/jpeg',quality));
+      };
+      img.src=reader.result;
+    };
+    reader.readAsDataURL(file);
+  });
+}
+
+function paintStepFotos(el){
+  el.innerHTML=`
+    <div class="field"><label>📸 Foto principal</label>
+      <div class="photo-input-row" id="fp-main">
+        ${DRAFT.fotoPrincipal?`<div class="photo-thumb"><img class="zoomable-img" data-lightbox-src="${DRAFT.fotoPrincipal}" src="${DRAFT.fotoPrincipal}" alt="Foto principal"><button class="rm" id="rm-main">✕</button></div>`:`<label class="upload-box">＋<input type="file" accept="image/*" id="in-main" style="display:none"></label>`}
+      </div>
+      <div class="hint">Usada no ranking, na página da cafeteria, no diário e no início.</div>
+    </div>
+    <div class="field"><label>📸 Fotos adicionais</label>
+      <div class="photo-input-row" id="fp-extra">
+        ${DRAFT.fotosAdicionais.map((f,i)=>`<div class="photo-thumb"><img class="zoomable-img" data-lightbox-src="${f}" src="${f}" alt="Foto adicional"><button class="rm" data-i="${i}">✕</button></div>`).join('')}
+        <label class="upload-box">＋<input type="file" accept="image/*" id="in-extra" style="display:none"></label>
+      </div>
+    </div>
+  `;
+  const inMain=el.querySelector('#in-main');
+  if(inMain) inMain.onchange=async e=>{ if(e.target.files[0]){ DRAFT.fotoPrincipal=await fileToDataURL(e.target.files[0]); paintStepFotos(el); } };
+  const rmMain=el.querySelector('#rm-main');
+  if(rmMain) rmMain.onclick=()=>{ DRAFT.fotoPrincipal=null; paintStepFotos(el); };
+  el.querySelector('#in-extra').onchange=async e=>{ if(e.target.files[0]){ DRAFT.fotosAdicionais.push(await fileToDataURL(e.target.files[0])); paintStepFotos(el); } };
+  el.querySelectorAll('#fp-extra .rm').forEach(b=>b.onclick=()=>{ DRAFT.fotosAdicionais.splice(Number(b.dataset.i),1); paintStepFotos(el); });
+}
+
+function paintStepPedidos(el){
+  function personHTML(pKey,label){
+    const items=DRAFT.pedidos[pKey];
+    return `<div class="person-block">
+      <h4>${label}</h4>
+      ${items.map((it,i)=>`
+        <div class="item-row">
+          <input type="text" placeholder="Bebida" value="${it.bebida}" data-p="${pKey}" data-i="${i}" data-f="bebida">
+          <input type="text" placeholder="Comida" value="${it.comida}" data-p="${pKey}" data-i="${i}" data-f="comida">
+          <input type="text" class="money" placeholder="R$" value="${it.valor}" data-p="${pKey}" data-i="${i}" data-f="valor">
+          ${items.length>1?`<button class="remove-x" data-p="${pKey}" data-i="${i}" data-rm="1">✕</button>`:'<span style="width:26px"></span>'}
+        </div>
+        <input type="text" placeholder="Observação (opcional)" value="${it.obs}" data-p="${pKey}" data-i="${i}" data-f="obs" style="width:100%;margin-bottom:10px;padding:8px 10px;border:1.5px solid var(--border);border-radius:8px;background:var(--cream-2);">
+      `).join('')}
+      <button class="btn small ghost" data-add="${pKey}">＋ Adicionar item</button>
+    </div>`;
+  }
+  el.innerHTML=`<div class="grid cols-2">${personHTML('pessoa1',STATE.settings.pessoa1)}${personHTML('pessoa2',STATE.settings.pessoa2)}</div>`;
+  el.querySelectorAll('input[data-f]').forEach(inp=>{
+    inp.oninput=()=>{ DRAFT.pedidos[inp.dataset.p][inp.dataset.i][inp.dataset.f]=inp.value; };
+  });
+  el.querySelectorAll('[data-rm]').forEach(b=>b.onclick=()=>{ DRAFT.pedidos[b.dataset.p].splice(Number(b.dataset.i),1); paintStepPedidos(el); });
+  el.querySelectorAll('[data-add]').forEach(b=>b.onclick=()=>{ DRAFT.pedidos[b.dataset.add].push({bebida:'',comida:'',obs:'',valor:''}); paintStepPedidos(el); });
+}
+
+function ratingRowsHTML(pKey,readonly){
+  const labels=criteriaLabels();
+  return criteriaKeys().map(k=>`
+    <div class="rating-row">
+      <div class="rl">${labels[k]}</div>
+      <input type="range" min="0" max="10" step="0.5" value="${DRAFT.notas[pKey][k]}" data-p="${pKey}" data-k="${k}" ${readonly?'disabled':''}>
+      <div class="rv">${fmt1(Number(DRAFT.notas[pKey][k]))}</div>
+    </div>`).join('');
+}
+
+function paintStepAvaliacao(el){
+  const p1=STATE.settings.pessoa1, p2=STATE.settings.pessoa2;
+  if(!DRAFT._reveal.ativo){
+    el.innerHTML=`
+      <div class="grid cols-2">
+        <div class="person-block"><h4>${p1}</h4>${ratingRowsHTML('pessoa1',false)}</div>
+        <div class="person-block"><h4>${p2}</h4>${ratingRowsHTML('pessoa2',false)}</div>
+      </div>`;
+    bindRatingInputs(el);
+    return;
+  }
+  const etapa=DRAFT._reveal.etapa;
+  if(etapa==='pessoa1'){
+    el.innerHTML=`<div class="hint" style="margin-bottom:14px;">🙈 Modo Revelação ativo — as notas de <b>${p2}</b> ficarão escondidas até a revelação.</div>
+      <div class="person-block"><h4>${p1}, avaliem:</h4>${ratingRowsHTML('pessoa1',false)}</div>
+      <button class="btn block" style="margin-top:16px;" id="btn-reveal-next">Concluir avaliação de ${p1} →</button>`;
+    bindRatingInputs(el);
+    el.querySelector('#btn-reveal-next').onclick=()=>{ DRAFT._reveal.etapa='pessoa2'; paintStepAvaliacao(el); };
+  } else if(etapa==='pessoa2'){
+    el.innerHTML=`<div class="hint" style="margin-bottom:14px;">🙈 Agora é a vez de <b>${p2}</b> — as notas de ${p1} estão escondidas.</div>
+      <div class="person-block"><h4>${p2}, avaliem:</h4>${ratingRowsHTML('pessoa2',false)}</div>
+      <button class="btn block" style="margin-top:16px;" id="btn-reveal-go">Concluir avaliação 🙈➡️🙉</button>`;
+    bindRatingInputs(el);
+    el.querySelector('#btn-reveal-go').onclick=()=>{ DRAFT._reveal.etapa='revelar'; paintStepAvaliacao(el); };
+  } else if(etapa==='revelar'){
+    el.innerHTML=`<div class="reveal-wait"><div class="big-ic">🙈</div><h3>Prontos para a Revelação das Notas?</h3>
+      <p class="hint">Cliquem para descobrir se vocês concordaram... ou não!</p>
+      <button class="btn" id="btn-reveal-show">👀 Revelar notas!</button></div>`;
+    el.querySelector('#btn-reveal-show').onclick=()=>{ DRAFT._reveal.etapa='feito'; paintStepAvaliacao(el); };
+  } else {
+    const a=notaPessoa(DRAFT,'pessoa1'), b=notaPessoa(DRAFT,'pessoa2');
+    const diff=Math.abs(a-b);
+    const media=(a+b)/2;
+    let msg = diff<1 ? '☕ Vocês concordaram bastante!' : (diff<2 ? '🙂 Opiniões parecidas, com uns detalhes diferentes.' : '😳 Opiniões completamente diferentes!');
+    el.innerHTML=`
+      <div class="reveal-cards">
+        <div class="reveal-card animate"><div class="hint">${p1}</div><div class="rn">${fmt1(a)}</div></div>
+        <div class="reveal-card animate"><div class="hint">${p2}</div><div class="rn">${fmt1(b)}</div></div>
+      </div>
+      <div style="text-align:center;">
+        <div style="font-family:var(--font-display);font-size:22px;color:var(--coffee);">Média da dupla: ${fmt1(media)} ⭐</div>
+        <div style="margin-top:8px;font-weight:700;">${msg}</div>
+      </div>
+      <div class="grid cols-2" style="margin-top:24px;">
+        <div class="person-block"><h4>${p1}</h4>${ratingRowsHTML('pessoa1',true)}</div>
+        <div class="person-block"><h4>${p2}</h4>${ratingRowsHTML('pessoa2',true)}</div>
+      </div>
+    `;
+  }
+}
+function bindRatingInputs(el){
+  el.querySelectorAll('input[type=range]').forEach(inp=>{
+    inp.oninput=()=>{ DRAFT.notas[inp.dataset.p][inp.dataset.k]=Number(inp.value); inp.parentElement.querySelector('.rv').textContent=fmt1(Number(inp.value)); };
+  });
+}
+
+function paintStepMemorias(el){
+  const p1=STATE.settings.pessoa1, p2=STATE.settings.pessoa2;
+  el.innerHTML=`
+    <div class="field"><label>💬 Defina essa cafeteria em uma frase — ${p1}</label><textarea id="fr1" placeholder="Ex: Eu atravessaria a cidade por esse cappuccino.">${DRAFT.frases.pessoa1}</textarea></div>
+    <div class="field"><label>💬 Defina essa cafeteria em uma frase — ${p2}</label><textarea id="fr2" placeholder="Ex: Ambiente perfeito, mas a sobremesa roubou a cena.">${DRAFT.frases.pessoa2}</textarea></div>
+    <div class="field"><label>😂 Momento memorável</label><textarea id="mem" style="min-height:110px;" placeholder="Algo engraçado, curioso ou inesperado que aconteceu nessa visita...">${DRAFT.momento}</textarea></div>
+  `;
+  el.querySelector('#fr1').oninput=e=>DRAFT.frases.pessoa1=e.target.value;
+  el.querySelector('#fr2').oninput=e=>DRAFT.frases.pessoa2=e.target.value;
+  el.querySelector('#mem').oninput=e=>DRAFT.momento=e.target.value;
+}
+
+function paintStepVeredito(el){
+  const vv=[['vale_viagem','🗺️ Vale a viagem','Eu viajaria especificamente para conhecer ou voltar.'],['vale_desvio','🚗 Vale o desvio','Mudaria minha rota para passar lá.'],['se_perto','📍 Se estiver por perto','É boa, mas não viajaria especificamente.'],['conheci','☕ Conheci e pronto','Foi interessante conhecer, mas não voltaria por ela.']];
+  const vo=[['sim_certeza','Sim, com certeza'],['sim_sem_questao','Sim, mas não faria questão'],['talvez','Talvez'],['nao','Não voltaria']];
+  el.innerHTML=`
+    <div class="field"><label>🚗 Vale viajar por ela?</label>
+      <div class="chip-select" id="cs-vv">${vv.map(([v,l,d])=>`<div class="chip ${DRAFT.veredito.valeViagem===v?'active':''}" data-v="${v}" title="${d}">${l}</div>`).join('')}</div>
+    </div>
+    <div class="field"><label>🔁 Voltaria?</label>
+      <div class="chip-select" id="cs-vo">${vo.map(([v,l])=>`<div class="chip ${DRAFT.veredito.voltaria===v?'active':''}" data-v="${v}">${l}</div>`).join('')}</div>
+    </div>
+  `;
+  el.querySelectorAll('#cs-vv .chip').forEach(c=>c.onclick=()=>{ DRAFT.veredito.valeViagem=c.dataset.v; paintStepVeredito(el); });
+  el.querySelectorAll('#cs-vo .chip').forEach(c=>c.onclick=()=>{ DRAFT.veredito.voltaria=c.dataset.v; paintStepVeredito(el); });
+}
+
+function paintStepResumo(el){
+  const a=notaPessoa(DRAFT,'pessoa1'), b=notaPessoa(DRAFT,'pessoa2'), m=(a+b)/2;
+  el.innerHTML=`
+    <div style="text-align:center;">
+      ${photoBox(DRAFT.fotoPrincipal,'width:100%;height:200px;margin-bottom:16px;')}
+      <h2>${DRAFT.cafeteria||'(sem nome)'}</h2>
+      <div class="sub" style="color:var(--coffee-light);margin-bottom:14px;">📍 ${DRAFT.cidade} · 📅 ${fmtBR(DRAFT.data)}</div>
+      <div style="font-family:var(--font-mono);font-size:32px;color:var(--coffee);font-weight:800;">${fmt1(m)} ⭐</div>
+      <div class="sub" style="margin-top:6px;">${STATE.settings.pessoa1}: ${fmt1(a)} · ${STATE.settings.pessoa2}: ${fmt1(b)}</div>
+      <p class="hint" style="margin-top:16px;">Revisem tudo e cliquem em <b>"☕ Registrar no Clube"</b> para salvar essa experiência.</p>
+    </div>
+  `;
+}
+
+function finalizarVisita(){
+  const isEdit = STATE.visits.some(v=>v.id===DRAFT.id);
+  const draftCopy=JSON.parse(JSON.stringify(DRAFT));
+  delete draftCopy._justSaved;
+  if(isEdit){
+    const idx=STATE.visits.findIndex(v=>v.id===DRAFT.id);
+    STATE.visits[idx]=draftCopy;
+  } else {
+    STATE.visits.push(draftCopy);
+  }
+  saveState().then(()=>{
+    const ranking=rankedVisits(null);
+    const pos=ranking.findIndex(r=>r.v.id===draftCopy.id)+1;
+    const isLeader = pos===1;
+    DRAFT._justSaved=true;
+    const main=document.getElementById('main');
+    const m=mediaDupla(draftCopy);
+    main.innerHTML=`
+      <div style="max-width:520px;margin:40px auto;text-align:center;" class="card">
+        ${isLeader?`<h1 style="color:var(--gold)">👑 NOVA LÍDER DO CLUBE!</h1>`:`<h2>🥳 ${isEdit?'Visita atualizada!':'Nova cafeteria registrada!'}</h2>`}
+        ${photoBox(draftCopy.fotoPrincipal,'width:100%;height:180px;margin:14px 0;')}
+        <h3>${draftCopy.cafeteria}</h3>
+        <div style="font-family:var(--font-mono);font-size:28px;color:var(--coffee);font-weight:800;margin-top:8px;">${fmt1(m)} ⭐</div>
+        <div class="sub" style="margin:8px 0 18px 0;">${STATE.settings.pessoa1}: ${fmt1(notaPessoa(draftCopy,'pessoa1'))} · ${STATE.settings.pessoa2}: ${fmt1(notaPessoa(draftCopy,'pessoa2'))}</div>
+        <div class="badge gold">🏆 ${pos}ª posição no ranking</div>
+        <div style="margin-top:22px;display:flex;gap:10px;justify-content:center;">
+          <a href="#/cafeteria/${draftCopy.id}" class="btn">Ver experiência completa</a>
+          <a href="#/inicio" class="btn ghost" onclick="DRAFT=null;">Ir para o início</a>
+        </div>
+      </div>
+    `;
+    toast('Salvo com sucesso!','☕');
+  });
+}
+
+/* ================= RANKING ================= */
+let rankFilters={cidade:'',notaMin:0,voltaria:'',valeViagem:'',criterio:''};
+function renderRanking(main){
+  const criterioOpts=[['','🏆 Ranking geral'],['cafe','☕ Melhor café/bebidas'],['comida','🍰 Melhor comida'],['ambiente','🏠 Melhor ambiente'],['atendimento','👨‍🍳 Melhor atendimento'],['custoBeneficio','💰 Melhor custo-benefício']];
+  main.innerHTML=`
+    <div class="page-header"><div><h1>🏆 Ranking</h1><div class="sub">Todas as cafeterias, ordenadas pela média da dupla.</div></div></div>
+    <div class="tabs" id="rank-tabs">${criterioOpts.map(([v,l])=>`<div class="tab ${rankFilters.criterio===v?'active':''}" data-v="${v}">${l}</div>`).join('')}</div>
+    <div class="filters-bar">
+      <select id="fl-cidade"><option value="">Todas as cidades</option>${cidadesUnicas().map(c=>`<option ${rankFilters.cidade===c?'selected':''}>${c}</option>`).join('')}</select>
+      <select id="fl-nota"><option value="0">Nota mínima</option>${[5,6,7,8,9].map(n=>`<option value="${n}" ${rankFilters.notaMin==n?'selected':''}>${n}+</option>`).join('')}</select>
+      <select id="fl-vv"><option value="">Vale viajar? (todos)</option>${[['vale_viagem','🗺️ Vale a viagem'],['vale_desvio','🚗 Vale o desvio'],['se_perto','📍 Se estiver por perto'],['conheci','☕ Conheci e pronto']].map(([v,l])=>`<option value="${v}" ${rankFilters.valeViagem===v?'selected':''}>${l}</option>`).join('')}</select>
+      <select id="fl-vo"><option value="">Voltaria? (todos)</option>${[['sim_certeza','Sim, com certeza'],['sim_sem_questao','Sim, sem questão'],['talvez','Talvez'],['nao','Não voltaria']].map(([v,l])=>`<option value="${v}" ${rankFilters.voltaria===v?'selected':''}>${l}</option>`).join('')}</select>
+    </div>
+    <div id="rank-list"></div>
+  `;
+  document.querySelectorAll('#rank-tabs .tab').forEach(t=>t.onclick=()=>{ rankFilters.criterio=t.dataset.v; renderRanking(main); });
+  document.getElementById('fl-cidade').onchange=e=>{ rankFilters.cidade=e.target.value; paintRankList(); };
+  document.getElementById('fl-nota').onchange=e=>{ rankFilters.notaMin=Number(e.target.value); paintRankList(); };
+  document.getElementById('fl-vv').onchange=e=>{ rankFilters.valeViagem=e.target.value; paintRankList(); };
+  document.getElementById('fl-vo').onchange=e=>{ rankFilters.voltaria=e.target.value; paintRankList(); };
+  paintRankList();
+}
+function paintRankList(){
+  let list=rankedVisits(rankFilters.criterio||null);
+  list=list.filter(({v,score})=>{
+    if(rankFilters.cidade && v.cidade!==rankFilters.cidade) return false;
+    if(score<rankFilters.notaMin) return false;
+    if(rankFilters.valeViagem && v.veredito.valeViagem!==rankFilters.valeViagem) return false;
+    if(rankFilters.voltaria && v.veredito.voltaria!==rankFilters.voltaria) return false;
+    return true;
+  });
+  const box=document.getElementById('rank-list');
+  if(!list.length){ box.innerHTML=`<div class="empty-state"><div class="ic">☕</div>Nenhuma cafeteria encontrada com esses filtros.</div>`; return; }
+  box.innerHTML=list.map(({v,score},i)=>`
+    <div class="rank-row ${i===0?'p1':i===1?'p2':i===2?'p3':''}" onclick="location.hash='#/cafeteria/${v.id}'">
+      <div class="rank-pos">${i<3?['🥇','🥈','🥉'][i]:('#'+(i+1))}</div>
+      ${photoBox(v.fotoPrincipal,'width:52px;height:52px;')}
+      <div><div class="rank-name">${v.cafeteria}</div><div class="rank-city">📍 ${v.cidade} · 📅 ${fmtBR(v.data)}</div></div>
+      <div class="rank-score">${fmt1(score)}</div>
+    </div>`).join('');
+}
+
+/* ================= CAFETERIAS ================= */
+let cafeSearch='';
+function renderCafeterias(main){
+  main.innerHTML=`
+    <div class="page-header"><div><h1>☕ Cafeterias</h1><div class="sub">Todas as cafeterias já visitadas pelo Clube.</div></div>
+      <input type="text" id="cafe-search" placeholder="🔎 Buscar por nome..." value="${cafeSearch}" style="padding:10px 14px;border-radius:10px;border:1.5px solid var(--border);min-width:220px;">
+    </div>
+    <div class="grid cols-4" id="cafe-grid"></div>
+  `;
+  document.getElementById('cafe-search').oninput=e=>{ cafeSearch=e.target.value; paintCafeGrid(); };
+  paintCafeGrid();
+}
+function paintCafeGrid(){
+  const grid=document.getElementById('cafe-grid');
+  let list=[...STATE.visits];
+  if(cafeSearch.trim()) list=list.filter(v=>v.cafeteria.toLowerCase().includes(cafeSearch.toLowerCase()));
+  list.sort((a,b)=>(mediaDupla(b)||0)-(mediaDupla(a)||0));
+  if(!list.length){ grid.innerHTML=`<div class="empty-state" style="grid-column:1/-1;"><div class="ic">☕</div>Nenhuma cafeteria encontrada.</div>`; return; }
+  grid.innerHTML=list.map(v=>`
+    <div class="card cafe-card" onclick="location.hash='#/cafeteria/${v.id}'">
+      ${photoBox(v.fotoPrincipal,'height:130px;')}
+      <div class="body">
+        <div class="name">${v.cafeteria}</div>
+        <div class="city">📍 ${v.cidade}</div>
+        <div class="foot"><span class="hint" style="font-size:11.5px;">${fmtBR(v.data)}</span><span class="score-pill">${mediaDupla(v)!=null?fmt1(mediaDupla(v)):'—'}</span></div>
+      </div>
+    </div>`).join('');
+}
+
+/* ================= DETALHE CAFETERIA ================= */
+function renderDetalheCafeteria(main, id){
+  const v=STATE.visits.find(x=>x.id===id);
+  if(!v){ main.innerHTML=`<div class="empty-state">Visita não encontrada.</div>`; return; }
+  const p1=STATE.settings.pessoa1, p2=STATE.settings.pessoa2;
+  const ranking=rankedVisits(null);
+  const pos=ranking.findIndex(r=>r.v.id===id)+1;
+  const a=notaPessoa(v,'pessoa1'), b=notaPessoa(v,'pessoa2');
+  const labels=criteriaLabels();
+  main.innerHTML=`
+    <div class="page-header">
+      <div><h1>${v.cafeteria}</h1><div class="sub">📍 ${v.cidade}${v.uf?(', '+v.uf):''} · 📅 ${fmtBR(v.data)} · Visita #${String(v.numero).padStart(2,'0')}</div></div>
+      <div style="display:flex;gap:8px;">
+        <a href="#/nova-visita/editar/${v.id}" class="btn ghost small">✏️ Editar</a>
+        <button class="btn danger small" id="btn-del">🗑️ Excluir</button>
+      </div>
+    </div>
+    <div class="detail-hero">
+      ${photoBox(v.fotoPrincipal,'width:280px;height:220px;')}
+      <div style="flex:1;">
+        <div class="badge gold" style="margin-bottom:10px;">🏆 ${pos}ª posição no ranking geral</div>
+        <div class="overall-score"><div class="value">${mediaDupla(v)!=null?fmt1(mediaDupla(v)):'—'}</div><div class="label">Média geral ⭐</div></div>
+        <div class="participants-summary">
+          <div class="participant-mini p1"><div class="name">${p1}</div><div class="score">${fmt1(a)}</div></div>
+          <div class="participant-mini p2"><div class="name">${p2}</div><div class="score">${fmt1(b)}</div></div>
+        </div>
+        <div style="display:flex;gap:8px;flex-wrap:wrap;">
+          <span class="badge">${veredictoLabel(v.veredito.valeViagem)}</span>
+          <span class="badge">🔁 ${voltariaLabel(v.veredito.voltaria)}</span>
+          <span class="badge">🚗 ${v.distanciaKm||0} km</span>
+        </div>
+        ${v.fotosAdicionais.length?`<div class="detail-gallery">${v.fotosAdicionais.map(f=>photoBox(f,'width:64px;height:64px;')).join('')}</div>`:''}
+      </div>
+    </div>
+
+    <div class="section-title"><h2>O que cada pessoa pediu</h2><div class="line"></div></div>
+    <div class="grid cols-2">
+      ${['pessoa1','pessoa2'].map((pk,idx)=>`<div class="card"><h4>${idx===0?p1:p2}</h4>${(v.pedidos[pk]||[]).map(it=>`<p style="margin-bottom:6px;">☕ ${it.bebida||'—'} ${it.comida?(' · 🍰 '+it.comida):''} ${it.valor?(' · R$ '+it.valor):''}</p>${it.obs?`<p class="hint">${it.obs}</p>`:''}`).join('')||'<p class="hint">Nada registrado.</p>'}</div>`).join('')}
+    </div>
+
+    <div class="section-title"><h2>Avaliações detalhadas</h2><div class="line"></div></div>
+    <div class="card">
+      <div class="ratings-comparison">
+      ${criteriaKeys().map(k=>{
+        const v1=Number(v.notas.pessoa1[k])||0, v2=Number(v.notas.pessoa2[k])||0;
+        const diff=Math.abs(v1-v2);
+        const tie=Math.abs(v1-v2)<0.0001;
+        const winner=tie?'':(v1>v2?p1:p2);
+        const winnerClass=tie?'tie':(v1>v2?'win-p1':'win-p2');
+        const result=tie
+          ? `Empate — ${fmt1(v1)} x ${fmt1(v2)}`
+          : `${winner} venceu por +${fmt1(diff)}`;
+        return `<article class="rating-compare-card">
+          <div class="rating-compare-head">
+            <div class="rating-compare-title">${labels[k]}</div>
+            <div class="rating-compare-result">${tie?'Empate':`Diferença +${fmt1(diff)}`}</div>
+          </div>
+          <div class="rating-compare-grid">
+            <div class="rating-person p1">
+              <div class="rating-person-name">${p1}</div>
+              <div class="rating-person-score">${fmt1(v1)}</div>
+              <div class="rating-meter" aria-label="${p1}: ${fmt1(v1)}"><div class="rating-meter-fill" style="width:${Math.max(0,Math.min(100,v1*10))}%"></div></div>
+            </div>
+            <div class="rating-verdict ${winnerClass}">
+              <strong>${tie?'Empate':winner+' venceu'}</strong>
+              <span>${tie?`${fmt1(v1)} x ${fmt1(v2)}`:`+${fmt1(diff)} de diferença`}</span>
+            </div>
+            <div class="rating-person p2">
+              <div class="rating-person-name">${p2}</div>
+              <div class="rating-person-score">${fmt1(v2)}</div>
+              <div class="rating-meter" aria-label="${p2}: ${fmt1(v2)}"><div class="rating-meter-fill" style="width:${Math.max(0,Math.min(100,v2*10))}%"></div></div>
+            </div>
+          </div>
+        </article>`;
+      }).join('')}
+      </div>
+    </div>
+
+    <div class="section-title"><h2>Frases da visita</h2><div class="line"></div></div>
+    <div class="grid cols-2">
+      <div class="card"><p class="ticket-quote">"${v.frases.pessoa1||'—'}"</p><div class="hint" style="margin-top:8px;">— ${p1}</div></div>
+      <div class="card"><p class="ticket-quote">"${v.frases.pessoa2||'—'}"</p><div class="hint" style="margin-top:8px;">— ${p2}</div></div>
+    </div>
+
+    <div class="section-title"><h2>😂 Momento memorável</h2><div class="line"></div></div>
+    <div class="card">${v.momento?`<p>${v.momento}</p>`:'<p class="hint">Nada registrado.</p>'}</div>
+  `;
+  document.getElementById('btn-del').onclick=()=>confirmModal(`Excluir a visita a "${v.cafeteria}"? Essa ação não pode ser desfeita.`,()=>{
+    STATE.visits=STATE.visits.filter(x=>x.id!==id); saveState().then(()=>{ toast('Visita excluída.','🗑️'); location.hash='#/cafeterias'; });
+  });
+}
+
+/* ================= DIÁRIO ================= */
+function renderDiario(main){
+  const list=sortedVisitsByDate(false);
+  main.innerHTML=`
+    <div class="page-header"><div><h1>📖 Diário</h1><div class="sub">O álbum de memórias da jornada de vocês.</div></div></div>
+    ${list.length? list.map(v=>`
+      <div class="ticket">
+        <div class="ticket-top"><span class="ticket-num">☕ VISITA #${String(v.numero).padStart(2,'0')}</span><span class="ticket-date">📅 ${fmtBR(v.data)}</span></div>
+        <div class="ticket-body">
+          ${photoBox(v.fotoPrincipal,'width:100px;height:100px;')}
+          <div style="flex:1;">
+            <h3>${v.cafeteria}</h3>
+            <div class="hint">📍 ${v.cidade} · ⭐ Média: ${mediaDupla(v)!=null?fmt1(mediaDupla(v)):'—'}</div>
+            <p class="ticket-quote">"${v.frases.pessoa1||v.frases.pessoa2||v.momento||'Uma nova página na coleção do Clube.'}"</p>
+            <a href="#/cafeteria/${v.id}" class="btn small ghost" style="margin-top:10px;">Ler experiência completa</a>
+          </div>
+        </div>
+      </div>
+    `).join('') : `<div class="empty-state"><div class="ic">📖</div>O diário está vazio. Registrem a primeira visita!</div>`}
+  `;
+}
+
+/* ================= ESTATÍSTICAS ================= */
+function renderEstatisticas(main){
+  const p1=STATE.settings.pessoa1, p2=STATE.settings.pessoa2;
+  const cidades=cidadesUnicas();
+  const km=totalKm(); const media=mediaGeral();
+  const ranking=rankedVisits(null);
+  const melhor=ranking[0];
+  const labels=criteriaLabels();
+  const bestPerCriterion=criteriaKeys().map(k=>({k,best:bestByCriterion(k)}));
+
+  let maiorDiv=null, menorDiv=null;
+  STATE.visits.forEach(v=>{ const d=diffPessoas(v); if(d==null) return;
+    if(!maiorDiv||d>maiorDiv.d) maiorDiv={v,d};
+    if(!menorDiv||d<menorDiv.d) menorDiv={v,d};
+  });
+
+  const notas1=[], notas2=[];
+  STATE.visits.forEach(v=>{ criteriaKeys().forEach(k=>{ notas1.push(Number(v.notas.pessoa1[k])); notas2.push(Number(v.notas.pessoa2[k])); }); });
+  const avg1 = notas1.length? notas1.reduce((a,b)=>a+b,0)/notas1.length : 0;
+  const avg2 = notas2.length? notas2.reduce((a,b)=>a+b,0)/notas2.length : 0;
+  let criticoMsg='—';
+  if(notas1.length){
+    if(avg1<avg2){ const pct=(((avg2-avg1)/avg2)*100).toFixed(0); criticoMsg=`☕ ${p1} é ${pct}% mais crítico(a) nas avaliações.`; }
+    else if(avg2<avg1){ const pct=(((avg1-avg2)/avg1)*100).toFixed(0); criticoMsg=`☕ ${p2} é ${pct}% mais crítico(a) nas avaliações.`; }
+    else criticoMsg='⭐ Vocês dão notas igualmente generosas (ou rígidas)!';
+  }
+
+  main.innerHTML=`
+    <div class="page-header"><div><h1>📊 Estatísticas</h1><div class="sub">Números e curiosidades da jornada.</div></div></div>
+    <div class="grid cols-4">
+      <div class="card stat-card"><div class="stat-ic">☕</div><div class="stat-num">${STATE.visits.length}</div><div class="stat-label">Cafeterias visitadas</div></div>
+      <div class="card stat-card"><div class="stat-ic">🗺️</div><div class="stat-num">${cidades.length}</div><div class="stat-label">Cidades exploradas</div></div>
+      <div class="card stat-card"><div class="stat-ic">🚗</div><div class="stat-num">${km.toLocaleString('pt-BR')}</div><div class="stat-label">Km registrados</div></div>
+      <div class="card stat-card"><div class="stat-ic">⭐</div><div class="stat-num">${media!=null?fmt1(media):'—'}</div><div class="stat-label">Média geral</div></div>
+    </div>
+
+    <div class="section-title"><h2>🥇 Melhores por categoria</h2><div class="line"></div></div>
+    <div class="grid cols-3">
+      <div class="card"><div class="hint">🏆 Melhor cafeteria</div><h3>${melhor?melhor.v.cafeteria:'—'}</h3></div>
+      ${bestPerCriterion.map(({k,best})=>`<div class="card"><div class="hint">${labels[k]}</div><h3>${best?best.v.cafeteria:'—'}</h3></div>`).join('')}
+    </div>
+
+    <div class="section-title"><h2>😳 Onde mais discordamos?</h2><div class="line"></div></div>
+    <div class="card">
+      ${maiorDiv?`<h3>${maiorDiv.v.cafeteria}</h3><p class="hint">${p1}: ${fmt1(notaPessoa(maiorDiv.v,'pessoa1'))} · ${p2}: ${fmt1(notaPessoa(maiorDiv.v,'pessoa2'))}</p><p style="margin-top:6px;font-weight:700;">Diferença: ${fmt1(maiorDiv.d)} pontos</p>`:'<p class="hint">Ainda não há dados suficientes.</p>'}
+    </div>
+
+    <div class="section-title"><h2>Maior concordância</h2><div class="line"></div></div>
+    <div class="card">
+      ${menorDiv?`<h3>${menorDiv.v.cafeteria}</h3><p class="hint">${p1}: ${fmt1(notaPessoa(menorDiv.v,'pessoa1'))} · ${p2}: ${fmt1(notaPessoa(menorDiv.v,'pessoa2'))}</p><p style="margin-top:6px;font-weight:700;">Diferença: ${fmt1(menorDiv.d)} pontos</p>`:'<p class="hint">Ainda não há dados suficientes.</p>'}
+    </div>
+
+    <div class="section-title"><h2>Quem é mais crítico?</h2><div class="line"></div></div>
+    <div class="card">${criticoMsg}</div>
+  `;
+}
+
+/* ================= CONQUISTAS ================= */
+function renderConquistas(main){
+  const list=ACHIEVEMENTS_DEF();
+  main.innerHTML=`
+    <div class="page-header"><div><h1>🏅 Conquistas</h1><div class="sub">Marcos da jornada do Clube das Cafeterias.</div></div></div>
+    <div class="grid cols-3">
+      ${list.map(a=>`
+        <div class="card ach-card ${a.unlocked?'':'locked'}">
+          <div class="ach-ic">${a.icon}</div>
+          <div style="flex:1;">
+            <div class="ach-title">${a.title}</div>
+            <div class="ach-desc">${a.desc}</div>
+            <div class="progress-bar"><div style="width:${(a.cur/a.max)*100}%"></div></div>
+            <div class="progress-txt">${a.cur}/${a.max}</div>
+          </div>
+        </div>
+      `).join('')}
+    </div>
+  `;
+}
+
+/* ================= CONFIGURAÇÕES ================= */
+function renderConfig(main){
+  main.innerHTML=`
+    <div class="page-header"><div><h1>⚙️ Configurações</h1><div class="sub">Personalize o Clube e cuide do backup dos dados.</div></div></div>
+
+    <div class="card settings-card">
+      <h3>Participantes</h3><div class="desc">Nomes usados em todo o aplicativo.</div>
+      <div class="row"><div class="field"><label>Pessoa 1</label><input type="text" id="cfg-p1" value="${STATE.settings.pessoa1}"></div>
+      <div class="field"><label>Pessoa 2</label><input type="text" id="cfg-p2" value="${STATE.settings.pessoa2}"></div></div>
+      <button class="btn small" id="btn-save-names">Salvar nomes</button>
+    </div>
+
+    <div class="card settings-card">
+      <h3>🙈 Revelação das Notas</h3><div class="desc">Quando ativo, cada um avalia sem ver a nota do outro até a revelação.</div>
+      <div class="toggle" id="toggle-surpresa"><div class="switch ${STATE.settings.modoSurpresa?'on':''}"><div class="knob"></div></div><span>Modo surpresa ${STATE.settings.modoSurpresa?'ativado':'desativado'}</span></div>
+    </div>
+
+    <div class="card settings-card">
+      <h3>💾 Backup</h3><div class="desc">Exporte todos os dados (visitas, notas, fotos e configurações) para um arquivo, ou restaure a partir de um backup existente.</div>
+      <div style="display:flex;gap:10px;flex-wrap:wrap;">
+        <button class="btn" id="btn-export">⬇️ Exportar Backup</button>
+        <label class="btn ghost">⬆️ Importar Backup<input type="file" accept="application/json" id="btn-import" style="display:none"></label>
+      </div>
+    </div>
+
+    <div class="card settings-card">
+      <h3>Dados de exemplo</h3><div class="desc">O Clube começou com algumas cafeterias de demonstração. Apague-as quando quiserem começar do zero.</div>
+      <button class="btn danger" id="btn-clear">🗑️ Apagar todas as visitas</button>
+    </div>
+  `;
+  document.getElementById('btn-save-names').onclick=()=>{
+    STATE.settings.pessoa1=document.getElementById('cfg-p1').value.trim()||'Pessoa 1';
+    STATE.settings.pessoa2=document.getElementById('cfg-p2').value.trim()||'Pessoa 2';
+    saveState().then(()=>toast('Nomes atualizados!','✅'));
+  };
+  document.getElementById('toggle-surpresa').onclick=()=>{
+    STATE.settings.modoSurpresa=!STATE.settings.modoSurpresa;
+    saveState().then(()=>renderConfig(main));
+  };
+  document.getElementById('btn-export').onclick=()=>{
+    const blob=new Blob([JSON.stringify(STATE,null,2)],{type:'application/json'});
+    const url=URL.createObjectURL(blob);
+    const a=document.createElement('a');
+    const d=new Date().toISOString().slice(0,10);
+    a.href=url; a.download=`clube-das-cafeterias-backup-${d}.json`;
+    document.body.appendChild(a); a.click(); a.remove();
+    URL.revokeObjectURL(url);
+    toast('Backup exportado!','💾');
+  };
+  document.getElementById('btn-import').onchange=e=>{
+    const file=e.target.files[0]; if(!file) return;
+    const reader=new FileReader();
+    reader.onload=()=>{
+      try{
+        const data=JSON.parse(reader.result);
+        if(!data.settings||!Array.isArray(data.visits)) throw new Error('formato inválido');
+        confirmModal('Importar este backup vai substituir todos os dados atuais. Continuar?',()=>{
+          STATE=data; saveState().then(()=>{ toast('Backup importado com sucesso!','✅'); router(); });
+        });
+      }catch(err){ toast('Arquivo de backup inválido.','⚠️'); }
+    };
+    reader.readAsText(file);
+  };
+  document.getElementById('btn-clear').onclick=()=>{
+    confirmModal('Apagar TODAS as visitas registradas? Essa ação não pode ser desfeita (exporte um backup antes, se quiser guardar).',()=>{
+      STATE.visits=[]; STATE.settings.sampleLoaded=false;
+      saveState().then(()=>{ toast('Dados apagados. Bora começar do zero! ☕','🗑️'); router(); });
+    });
+  };
+}
+
+/* ---------------- Modal de confirmação ---------------- */
+function confirmModal(msg,onConfirm){
+  const bg=document.createElement('div'); bg.className='modal-bg';
+  bg.innerHTML=`<div class="modal"><h3>Confirmar ação</h3><p>${msg}</p><div class="actions"><button class="btn ghost" id="m-cancel">Cancelar</button><button class="btn danger" id="m-ok">Confirmar</button></div></div>`;
+  document.body.appendChild(bg);
+  bg.querySelector('#m-cancel').onclick=()=>bg.remove();
+  bg.onclick=e=>{ if(e.target===bg) bg.remove(); };
+  bg.querySelector('#m-ok').onclick=()=>{ bg.remove(); onConfirm(); };
+}
+
+/* ---------------- Dica de instalação no iPhone/iPad ---------------- */
+function maybeShowIOSBanner(){
+  const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+  const isStandalone = window.navigator.standalone === true;
+  const dismissed = localStorage.getItem('clube-ios-banner-dismissed')==='1';
+  if(!isIOS || isStandalone || dismissed) return;
+  const b=document.createElement('div');
+  b.id='ios-banner';
+  b.innerHTML=`<span class="ic">📲</span><span>Dica: toque em <b>Compartilhar</b> e depois em <b>"Adicionar à Tela de Início"</b> para abrir o Clube como um app, em tela cheia.</span><button class="close" id="ios-banner-close">✕</button>`;
+  document.body.appendChild(b);
+  document.getElementById('ios-banner-close').onclick=()=>{ b.remove(); try{ localStorage.setItem('clube-ios-banner-dismissed','1'); }catch(e){} };
+}
+
+/* ---------------- Boot ---------------- */
+(async function boot(){
+  try{
+    await loadState();
+    router();
+    maybeShowIOSBanner();
+  }catch(err){
+    console.error('Falha ao iniciar o Clube das Cafeterias:',err);
+    document.getElementById('main').innerHTML=`
+      <div style="max-width:520px;margin:60px auto;text-align:center;padding:30px;">
+        <div style="font-size:44px;">☕⚠️</div>
+        <h2>Não foi possível abrir o Clube das Cafeterias</h2>
+        <p style="color:var(--coffee-light);margin-top:8px;">Tente recarregar a página. Se o problema continuar, abra o arquivo em outro navegador (Chrome, Edge ou Firefox costumam funcionar melhor com arquivos locais).</p>
+        <p style="font-family:var(--font-mono);font-size:12px;color:var(--danger);margin-top:14px;">${(err&&err.message)||err}</p>
+      </div>`;
+  }
+})();
+</script>
+
+<script>
+if ('serviceWorker' in navigator && (location.protocol === 'https:' || location.hostname === 'localhost')) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('./sw.js').catch(err => {
+      console.warn('Service Worker não registrado:', err);
+    });
+  });
+}
+</script>
+
+</body>
+</html>
