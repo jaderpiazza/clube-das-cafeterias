@@ -626,14 +626,7 @@ body.photo-lightbox-open{overflow:hidden;}
   flex-direction:column;
   gap:8px;
 }
-.sidebar-version{
-  padding:10px 10px 0;
-  border-top:1px solid rgba(255,255,255,.12);
-  color:rgba(238,223,195,.78);
-  font-size:11px;
-  line-height:1.35;
-}
-.sidebar-version strong{color:#fff;font-weight:800;}
+
 
 .rating-difference{
   display:inline-flex;
@@ -1020,7 +1013,7 @@ function renderSidebar(){
       <div class="brand-sub">Uma cafeteria por vez.<br>Uma coleção de histórias para sempre.</div>
     </div>
     ${NAV.map(n=>`<a href="${n.r}" class="nav-item ${base===n.r?'active':''}"><span class="ic">${n.ic}</span>${n.label}</a>`).join('')}
-    <div id="sidebar-footer"><div class="sidebar-version"><strong>Versão 0.1.8</strong> · Feito por Jader Piazza</div><div>Clube das Cafeterias · dados salvos localmente neste navegador.</div></div>
+    <div id="sidebar-footer">Clube das Cafeterias · dados salvos localmente neste navegador.</div>
   `;
 }
 
@@ -1051,7 +1044,7 @@ function ensureMobileVersionFooter(){
   if(!main || main.querySelectorAll('.app-mobile-version').length) return;
   const footer=document.createElement('div');
   footer.className='app-mobile-version';
-  footer.innerHTML='<strong>Versão 0.1.8</strong> · Feito por Jader Piazza';
+  footer.innerHTML='<strong>Versão 0.1.9</strong> · Feito por Jader Piazza';
   main.appendChild(footer);
 }
 const __mobileVersionObserver=new MutationObserver(()=>{
