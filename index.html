@@ -860,7 +860,7 @@ body.photo-lightbox-open{overflow:hidden;}
 
 
 /* =========================================================
-   0.1.8 — AVALIAÇÕES MOBILE: COMPARAÇÃO LADO A LADO
+   0.1.9 — AVALIAÇÕES MOBILE: COMPARAÇÃO LADO A LADO
    ========================================================= */
 @media (max-width: 620px){
   .rating-compare-grid{
@@ -940,6 +940,41 @@ body.photo-lightbox-open{overflow:hidden;}
 
   .rating-verdict span{
     font-size:10px !important;
+  }
+}
+
+
+/* 0.1.9 — Diferença abaixo da nota para manter alinhamento */
+@media (max-width:620px){
+  .rating-compare-grid .rating-person{
+    display:flex !important;
+    flex-direction:column !important;
+  }
+
+  .rating-compare-grid .rating-person.p1{
+    align-items:flex-start !important;
+  }
+
+  .rating-compare-grid .rating-person.p2{
+    align-items:flex-end !important;
+  }
+
+  .rating-compare-grid .rating-person .rating-difference{
+    order:4 !important;
+    margin-top:7px !important;
+    margin-bottom:0 !important;
+  }
+
+  .rating-compare-grid .rating-person .rating-person-name{
+    order:1 !important;
+  }
+
+  .rating-compare-grid .rating-person .rating-person-score{
+    order:2 !important;
+  }
+
+  .rating-compare-grid .rating-person .rating-meter{
+    display:none !important;
   }
 }
 
@@ -1213,7 +1248,7 @@ function ensureMobileVersionFooter(){
   if(!main || main.querySelectorAll('.app-mobile-version').length) return;
   const footer=document.createElement('div');
   footer.className='app-mobile-version';
-  footer.innerHTML='<strong>Versão 0.1.8</strong> · Feito por Jader Piazza';
+  footer.innerHTML='<strong>Versão 0.1.9</strong> · Feito por Jader Piazza';
   main.appendChild(footer);
 }
 const __mobileVersionObserver=new MutationObserver(()=>{
@@ -1930,7 +1965,7 @@ function renderConfig(main){
           <div class="creator-name">Jader Piazza</div>
         </div>
       </div>
-      <div class="creator-version">✨ Clube das Cafeterias · Versão 0.1.8</div>
+      <div class="creator-version">✨ Clube das Cafeterias · Versão 0.1.9</div>
       <p class="creator-text">Aplicativo criado para compartilhar e recordar bons momentos com uma pessoa especial — MC ❤️</p>
       <div class="creator-signature">É franga na academia mas gosta de bons cafés 🐓</div>
     </div>
