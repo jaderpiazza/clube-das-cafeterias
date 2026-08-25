@@ -2268,15 +2268,35 @@ function renderEstatisticas(main){
     if(!menorDiv||d<menorDiv.d) menorDiv={v,d};
   });
 
+  // Quem é mais crítico: compara a média geral de TODAS as notas válidas,
+  // usando exatamente os mesmos critérios para as duas pessoas.
   const notas1=[], notas2=[];
-  STATE.visits.forEach(v=>{ criteriaKeys().forEach(k=>{ notas1.push(Number(v.notas.pessoa1[k])); notas2.push(Number(v.notas.pessoa2[k])); }); });
-  const avg1 = notas1.length? notas1.reduce((a,b)=>a+b,0)/notas1.length : 0;
-  const avg2 = notas2.length? notas2.reduce((a,b)=>a+b,0)/notas2.length : 0;
+  STATE.visits.forEach(v=>{
+    criteriaKeys().forEach(k=>{
+      const n1=Number(v?.notas?.pessoa1?.[k]);
+      const n2=Number(v?.notas?.pessoa2?.[k]);
+      // Só entra no cálculo quando as duas notas daquela categoria existem.
+      if(Number.isFinite(n1) && Number.isFinite(n2)){
+        notas1.push(n1);
+        notas2.push(n2);
+      }
+    });
+  });
+  const avg1 = notas1.length ? notas1.reduce((a,b)=>a+b,0)/notas1.length : null;
+  const avg2 = notas2.length ? notas2.reduce((a,b)=>a+b,0)/notas2.length : null;
   let criticoMsg='—';
-  if(notas1.length){
-    if(avg1<avg2){ const pct=(((avg2-avg1)/avg2)*100).toFixed(0); criticoMsg=`☕ ${p1} é ${pct}% mais crítico(a) nas avaliações.`; }
-    else if(avg2<avg1){ const pct=(((avg1-avg2)/avg1)*100).toFixed(0); criticoMsg=`☕ ${p2} é ${pct}% mais crítico(a) nas avaliações.`; }
-    else criticoMsg='⭐ Vocês dão notas igualmente generosas (ou rígidas)!';
+  if(avg1!=null && avg2!=null){
+    const diff=Math.abs(avg1-avg2);
+    if(diff < 0.000001){
+      criticoMsg='⭐ Vocês têm exatamente a mesma média geral de avaliações!';
+    } else {
+      const critico=avg1<avg2 ? p1 : p2;
+      const maiorMedia=Math.max(avg1,avg2);
+      const pct=(diff/maiorMedia)*100;
+      // Não arredonda uma diferença real para 0%. Mostra 1 casa quando necessário.
+      const pctTxt=pct<1 ? pct.toFixed(1).replace('.',',') : pct.toFixed(0);
+      criticoMsg=`☕ ${critico} é ${pctTxt}% mais crítico(a) nas avaliações.`;
+    }
   }
 
   main.innerHTML=`
