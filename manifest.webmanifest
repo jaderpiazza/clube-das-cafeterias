@@ -1,7 +1,7 @@
 {
   "name": "Clube das Cafeterias",
   "short_name": "Cafeterias",
-  "description": "Clube das Cafeterias — versão 0.1.9",
+  "description": "Clube das Cafeterias — versão 0.1.7",
   "lang": "pt-BR",
   "start_url": "./index.html",
   "scope": "./",

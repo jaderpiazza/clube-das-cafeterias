@@ -1,4 +1,4 @@
-const CACHE_NAME = 'clube-das-cafeterias-v9';
+const CACHE_NAME = 'clube-das-cafeterias-v7';
 const CORE_ASSETS = [
   './',
   './index.html',
@@ -22,7 +22,6 @@ self.addEventListener('activate', event => {
 
 self.addEventListener('fetch', event => {
   if (event.request.method !== 'GET') return;
-
   const request = event.request;
   const isHTML = request.mode === 'navigate' ||
     request.destination === 'document' ||
@@ -52,7 +51,6 @@ self.addEventListener('fetch', event => {
           return response;
         })
         .catch(() => cached);
-
       return cached || networkUpdate;
     })
   );
