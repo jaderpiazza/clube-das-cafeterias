@@ -416,32 +416,44 @@ h1,h2,h3,h4{font-family:var(--font-body);letter-spacing:-.015em;}
   background:var(--latte-2);color:var(--coffee);white-space:nowrap;
 }
 .rating-compare-grid{
-  display:grid;grid-template-columns:minmax(0,1fr) minmax(120px,180px) minmax(0,1fr);
-  align-items:center;gap:14px;
+  display:grid;
+  grid-template-columns:minmax(0,1fr) minmax(0,1fr);
+  align-items:stretch;
+  gap:0;
 }
 .rating-person{
   min-width:0;
+  padding:8px 14px 4px;
 }
-.rating-person.p1{text-align:left;}
+.rating-person.p1{
+  text-align:left;
+  border-right:1px solid var(--border);
+}
 .rating-person.p2{text-align:right;}
 .rating-person-name{
   font-size:12px;font-weight:800;color:var(--text-muted);
   white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
 }
 .rating-person-score{
-  font-size:32px;font-weight:900;line-height:1;margin-top:4px;
+  font-size:36px;font-weight:900;line-height:1;margin-top:5px;
   font-variant-numeric:tabular-nums;letter-spacing:-.04em;
 }
 .rating-person.p1 .rating-person-score{color:var(--p1);}
 .rating-person.p2 .rating-person-score{color:var(--p2);}
-.rating-meter{
-  height:8px;background:var(--latte);border-radius:999px;overflow:hidden;margin-top:10px;
+.rating-difference{
+  display:inline-flex;align-items:center;
+  margin-bottom:6px;padding:4px 8px;border-radius:999px;
+  background:var(--latte-2);color:var(--coffee);
+  font-size:10px;line-height:1.2;font-weight:850;white-space:nowrap;
 }
-.rating-person.p1 .rating-meter-fill{height:100%;background:var(--p1);border-radius:inherit;}
-.rating-person.p2 .rating-meter-fill{height:100%;background:var(--p2);border-radius:inherit;}
+.rating-person.p2 .rating-difference{margin-left:auto;}
 .rating-verdict{
-  text-align:center;border-left:1px solid var(--border);border-right:1px solid var(--border);
-  padding:6px 12px;min-width:0;
+  grid-column:1 / -1;
+  text-align:center;
+  border-top:1px solid var(--border);
+  margin-top:8px;
+  padding:10px 8px 2px;
+  min-width:0;
 }
 .rating-verdict strong{
   display:block;font-size:13px;font-weight:900;color:var(--text-strong);
@@ -449,6 +461,7 @@ h1,h2,h3,h4{font-family:var(--font-body);letter-spacing:-.015em;}
 .rating-verdict span{
   display:block;font-size:11px;color:var(--text-muted);margin-top:3px;font-weight:700;
 }
+.rating-verdict span:empty{display:none;}
 .rating-verdict.tie strong{color:var(--coffee);}
 .rating-verdict.win-p1 strong{color:var(--p1);}
 .rating-verdict.win-p2 strong{color:var(--p2);}
@@ -726,6 +739,48 @@ body.photo-lightbox-open{overflow:hidden;}
   .app-version-footer{display:none !important;}
 }
 
+
+/* Avaliações mobile: duas votações lado a lado, sem barras de progresso. */
+@media(max-width:620px){
+  .rating-compare-card{
+    padding:13px 10px 12px;
+    border-radius:15px;
+  }
+  .rating-compare-head{
+    align-items:center;
+    gap:8px;
+    margin-bottom:5px;
+  }
+  .rating-compare-title{
+    font-size:14px;
+    line-height:1.2;
+  }
+  .rating-compare-grid{
+    grid-template-columns:minmax(0,1fr) minmax(0,1fr);
+    gap:0;
+  }
+  .rating-person{
+    padding:7px 10px 4px;
+  }
+  .rating-person.p1{border-right:1px solid var(--border);}
+  .rating-person-name{font-size:11px;}
+  .rating-person-score{
+    font-size:34px;
+    margin-top:4px;
+  }
+  .rating-difference{
+    font-size:9px;
+    padding:4px 7px;
+    margin-bottom:5px;
+  }
+  .rating-verdict{
+    margin-top:7px;
+    padding:9px 5px 1px;
+  }
+  .rating-verdict strong{font-size:12px;}
+  .rating-verdict span{font-size:10px;}
+}
+
 </style>
 
 <link rel="manifest" href="manifest.webmanifest">
@@ -965,7 +1020,7 @@ function renderSidebar(){
       <div class="brand-sub">Uma cafeteria por vez.<br>Uma coleção de histórias para sempre.</div>
     </div>
     ${NAV.map(n=>`<a href="${n.r}" class="nav-item ${base===n.r?'active':''}"><span class="ic">${n.ic}</span>${n.label}</a>`).join('')}
-    <div id="sidebar-footer"><div class="sidebar-version"><strong>Versão 0.1.1</strong> · Feito por Jader Piazza</div><div>Clube das Cafeterias · dados salvos localmente neste navegador.</div></div>
+    <div id="sidebar-footer"><div class="sidebar-version"><strong>Versão 0.1.8</strong> · Feito por Jader Piazza</div><div>Clube das Cafeterias · dados salvos localmente neste navegador.</div></div>
   `;
 }
 
@@ -996,7 +1051,7 @@ function ensureMobileVersionFooter(){
   if(!main || main.querySelectorAll('.app-mobile-version').length) return;
   const footer=document.createElement('div');
   footer.className='app-mobile-version';
-  footer.innerHTML='<strong>Versão 0.1.1</strong> · Feito por Jader Piazza';
+  footer.innerHTML='<strong>Versão 0.1.8</strong> · Feito por Jader Piazza';
   main.appendChild(footer);
 }
 const __mobileVersionObserver=new MutationObserver(()=>{
@@ -1545,17 +1600,15 @@ function renderDetalheCafeteria(main, id){
               ${p1GostouMais?`<div class="rating-difference">${diffLabel}</div>`:''}
               <div class="rating-person-name">${p1}</div>
               <div class="rating-person-score">${fmt1(v1)}</div>
-              <div class="rating-meter" aria-label="${p1}: ${fmt1(v1)}"><div class="rating-meter-fill" style="width:${Math.max(0,Math.min(100,v1*10))}%"></div></div>
-            </div>
-            <div class="rating-verdict ${winnerClass}">
-              <strong>${tie?'Empate':winner+' gostou mais'}</strong>
-              <span>${tie?`${fmt1(v1)} x ${fmt1(v2)}`:''}</span>
             </div>
             <div class="rating-person p2">
               ${p2GostouMais?`<div class="rating-difference">${diffLabel}</div>`:''}
               <div class="rating-person-name">${p2}</div>
               <div class="rating-person-score">${fmt1(v2)}</div>
-              <div class="rating-meter" aria-label="${p2}: ${fmt1(v2)}"><div class="rating-meter-fill" style="width:${Math.max(0,Math.min(100,v2*10))}%"></div></div>
+            </div>
+            <div class="rating-verdict ${winnerClass}">
+              <strong>${tie?'Empate':winner+' gostou mais'}</strong>
+              <span>${tie?`${fmt1(v1)} x ${fmt1(v2)}`:''}</span>
             </div>
           </div>
         </article>`;

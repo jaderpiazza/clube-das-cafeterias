@@ -1,7 +1,7 @@
 {
   "name": "Clube das Cafeterias",
   "short_name": "Cafeterias",
-  "description": "Ranking e diário de experiências em cafeterias.",
+  "description": "Clube das Cafeterias — versão 0.1.8",
   "lang": "pt-BR",
   "start_url": "./index.html",
   "scope": "./",
