@@ -606,6 +606,108 @@ body.photo-lightbox-open{overflow:hidden;}
 }
 /* APP FOOTER VERSION END */
 
+
+/* ================= PWA / IPHONE UPDATE 0.1.1 ================= */
+#sidebar-footer{
+  display:flex;
+  flex-direction:column;
+  gap:8px;
+}
+.sidebar-version{
+  padding:10px 10px 0;
+  border-top:1px solid rgba(255,255,255,.12);
+  color:rgba(238,223,195,.78);
+  font-size:11px;
+  line-height:1.35;
+}
+.sidebar-version strong{color:#fff;font-weight:800;}
+
+.rating-difference{
+  display:inline-flex;
+  align-items:center;
+  margin-bottom:5px;
+  padding:4px 8px;
+  border-radius:999px;
+  background:var(--latte-2);
+  color:var(--coffee);
+  font-size:10px;
+  line-height:1.2;
+  font-weight:850;
+  white-space:nowrap;
+}
+.rating-person.p2 .rating-difference{margin-left:auto;}
+.rating-verdict span:empty{display:none;}
+.rating-verdict strong{line-height:1.25;}
+
+.section-title-centered{
+  justify-content:center;
+  gap:12px;
+}
+.section-title-centered::before{
+  content:"";
+  flex:1;
+  height:1px;
+  background:var(--border);
+}
+.section-title-centered h2{white-space:nowrap;}
+.section-title-centered .line{flex:1;}
+
+/* Fotos adicionais: deixam de ser miniaturas estreitas na experiência mobile. */
+.detail-gallery{
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:10px;
+  margin-top:12px;
+}
+.detail-gallery .photo{
+  width:100%!important;
+  height:130px!important;
+  border-radius:12px;
+}
+.detail-gallery .photo:only-child{
+  grid-column:1 / -1;
+  height:190px!important;
+}
+.photo-thumb{
+  width:86px;
+  height:86px;
+}
+.upload-box{
+  width:86px;
+  height:86px;
+  min-height:86px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  touch-action:manipulation;
+}
+
+/* Rodapé próprio do app no iPhone, já que a barra de navegação vira horizontal. */
+.app-mobile-version{
+  margin:28px 0 4px;
+  padding:14px 4px calc(8px + env(safe-area-inset-bottom));
+  border-top:1px solid var(--border);
+  text-align:center;
+  color:var(--coffee-light);
+  font-size:11px;
+  line-height:1.45;
+}
+.app-mobile-version strong{color:var(--coffee);font-weight:850;}
+
+@media(max-width:900px){
+  #sidebar-footer{display:none;}
+}
+@media(max-width:620px){
+  .section-title-centered{gap:8px;}
+  .section-title-centered h2{white-space:normal;text-align:center;}
+  .rating-difference{font-size:10px;padding:4px 8px;}
+  .rating-compare-head{margin-bottom:10px;}
+  .rating-person{padding:1px 0;}
+  .detail-gallery .photo{height:118px!important;}
+  .detail-gallery .photo:only-child{height:180px!important;}
+  .photo-thumb,.upload-box{width:82px;height:82px;min-height:82px;}
+}
+
 </style>
 
 <link rel="manifest" href="manifest.webmanifest">
@@ -852,7 +954,7 @@ function renderSidebar(){
       <div class="brand-sub">Uma cafeteria por vez.<br>Uma coleção de histórias para sempre.</div>
     </div>
     ${NAV.map(n=>`<a href="${n.r}" class="nav-item ${base===n.r?'active':''}"><span class="ic">${n.ic}</span>${n.label}</a>`).join('')}
-    <div id="sidebar-footer">Clube das Cafeterias · dados salvos localmente neste navegador.</div>
+    <div id="sidebar-footer"><div class="sidebar-version"><strong>Versão 0.1.1</strong> · Feito por Jader Piazza</div><div>Clube das Cafeterias · dados salvos localmente neste navegador.</div></div>
   `;
 }
 
@@ -875,6 +977,26 @@ function router(){
   }
 }
 window.addEventListener('hashchange',router);
+
+/* Rodapé de versão para a experiência mobile/PWA */
+function ensureMobileVersionFooter(){
+  if(!window.matchMedia('(max-width:900px)').matches) return;
+  const main=document.getElementById('main');
+  if(!main || main.querySelector('.app-mobile-version')) return;
+  const footer=document.createElement('div');
+  footer.className='app-mobile-version';
+  footer.innerHTML='<strong>Versão 0.1.1</strong> · Feito por Jader Piazza';
+  main.appendChild(footer);
+}
+const __mobileVersionObserver=new MutationObserver(()=>{
+  requestAnimationFrame(ensureMobileVersionFooter);
+});
+window.addEventListener('DOMContentLoaded',()=>{
+  const main=document.getElementById('main');
+  if(main) __mobileVersionObserver.observe(main,{childList:true});
+});
+window.addEventListener('resize',()=>requestAnimationFrame(ensureMobileVersionFooter));
+
 
 
 
@@ -1400,25 +1522,26 @@ function renderDetalheCafeteria(main, id){
         const tie=Math.abs(v1-v2)<0.0001;
         const winner=tie?'':(v1>v2?p1:p2);
         const winnerClass=tie?'tie':(v1>v2?'win-p1':'win-p2');
-        const result=tie
-          ? `Empate — ${fmt1(v1)} x ${fmt1(v2)}`
-          : `${winner} venceu por +${fmt1(diff)}`;
+        const diffLabel=tie?'':`Diferença +${fmt1(diff)}`;
+        const p1GostouMais=!tie && v1>v2;
+        const p2GostouMais=!tie && v2>v1;
         return `<article class="rating-compare-card">
           <div class="rating-compare-head">
             <div class="rating-compare-title">${labels[k]}</div>
-            <div class="rating-compare-result">${tie?'Empate':`Diferença +${fmt1(diff)}`}</div>
           </div>
           <div class="rating-compare-grid">
             <div class="rating-person p1">
+              ${p1GostouMais?`<div class="rating-difference">${diffLabel}</div>`:''}
               <div class="rating-person-name">${p1}</div>
               <div class="rating-person-score">${fmt1(v1)}</div>
               <div class="rating-meter" aria-label="${p1}: ${fmt1(v1)}"><div class="rating-meter-fill" style="width:${Math.max(0,Math.min(100,v1*10))}%"></div></div>
             </div>
             <div class="rating-verdict ${winnerClass}">
-              <strong>${tie?'Empate':winner+' venceu'}</strong>
-              <span>${tie?`${fmt1(v1)} x ${fmt1(v2)}`:`+${fmt1(diff)} de diferença`}</span>
+              <strong>${tie?'Empate':winner+' gostou mais'}</strong>
+              <span>${tie?`${fmt1(v1)} x ${fmt1(v2)}`:''}</span>
             </div>
             <div class="rating-person p2">
+              ${p2GostouMais?`<div class="rating-difference">${diffLabel}</div>`:''}
               <div class="rating-person-name">${p2}</div>
               <div class="rating-person-score">${fmt1(v2)}</div>
               <div class="rating-meter" aria-label="${p2}: ${fmt1(v2)}"><div class="rating-meter-fill" style="width:${Math.max(0,Math.min(100,v2*10))}%"></div></div>
@@ -1429,7 +1552,7 @@ function renderDetalheCafeteria(main, id){
       </div>
     </div>
 
-    <div class="section-title"><h2>Frases da visita</h2><div class="line"></div></div>
+    <div class="section-title section-title-centered"><h2>Frases da visita</h2><div class="line"></div></div>
     <div class="grid cols-2">
       <div class="card"><p class="ticket-quote">"${v.frases.pessoa1||'—'}"</p><div class="hint" style="margin-top:8px;">— ${p1}</div></div>
       <div class="card"><p class="ticket-quote">"${v.frases.pessoa2||'—'}"</p><div class="hint" style="margin-top:8px;">— ${p2}</div></div>

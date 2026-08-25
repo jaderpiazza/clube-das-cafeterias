@@ -1,4 +1,4 @@
-const CACHE_NAME = 'clube-das-cafeterias-v2';
+const CACHE_NAME = 'clube-das-cafeterias-v3';
 const APP_SHELL = [
   './',
   './index.html',
