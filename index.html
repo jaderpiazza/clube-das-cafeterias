@@ -860,7 +860,7 @@ body.photo-lightbox-open{overflow:hidden;}
 
 
 /* =========================================================
-   0.1.9 — AVALIAÇÕES MOBILE: COMPARAÇÃO LADO A LADO
+   0.1.8 — AVALIAÇÕES MOBILE: COMPARAÇÃO LADO A LADO
    ========================================================= */
 @media (max-width: 620px){
   .rating-compare-grid{
@@ -944,7 +944,7 @@ body.photo-lightbox-open{overflow:hidden;}
 }
 
 
-/* 0.1.9 — Diferença abaixo da nota para manter alinhamento */
+/* 0.1.8 — Diferença abaixo da nota para manter alinhamento */
 @media (max-width:620px){
   .rating-compare-grid .rating-person{
     display:flex !important;
@@ -975,6 +975,192 @@ body.photo-lightbox-open{overflow:hidden;}
 
   .rating-compare-grid .rating-person .rating-meter{
     display:none !important;
+  }
+}
+
+
+/* =========================================================
+   0.1.8 — AJUSTE FINAL DE ENQUADRAMENTO / IPHONE
+   ========================================================= */
+@media (max-width:620px){
+  html,
+  body{
+    width:100% !important;
+    max-width:100% !important;
+    min-width:0 !important;
+    overflow-x:hidden !important;
+    overscroll-behavior-x:none !important;
+  }
+
+  #shell{
+    width:100% !important;
+    max-width:100vw !important;
+    min-width:0 !important;
+    overflow-x:hidden !important;
+  }
+
+  #main{
+    width:100% !important;
+    max-width:100vw !important;
+    min-width:0 !important;
+    box-sizing:border-box !important;
+    padding-left:12px !important;
+    padding-right:12px !important;
+    overflow-x:hidden !important;
+  }
+
+  #main > *{
+    width:100% !important;
+    max-width:100% !important;
+    min-width:0 !important;
+    box-sizing:border-box !important;
+  }
+
+  #main .card,
+  #main .rating-compare-card,
+  #main .ratings-comparison,
+  #main .detail-hero,
+  #main .detail-gallery,
+  #main .participants-summary,
+  #main .page-header,
+  #main .section-title{
+    min-width:0 !important;
+    max-width:100% !important;
+    box-sizing:border-box !important;
+  }
+
+  /* Hero da cafeteria: foto inteira dentro da tela, sem empurrar o conteúdo. */
+  .detail-hero{
+    display:flex !important;
+    flex-direction:column !important;
+    width:100% !important;
+    gap:12px !important;
+    overflow:hidden !important;
+  }
+
+  .detail-hero .photo{
+    width:100% !important;
+    max-width:100% !important;
+    height:auto !important;
+    min-height:0 !important;
+    aspect-ratio:16 / 9 !important;
+    object-fit:cover !important;
+    flex:0 0 auto !important;
+  }
+
+  .detail-hero .score-summary{
+    width:100% !important;
+    max-width:100% !important;
+    min-width:0 !important;
+    box-sizing:border-box !important;
+  }
+
+  .participants-summary{
+    width:100% !important;
+    grid-template-columns:minmax(0,1fr) minmax(0,1fr) !important;
+  }
+
+  .participant-mini{
+    min-width:0 !important;
+    box-sizing:border-box !important;
+    overflow:hidden !important;
+  }
+
+  .participant-mini .name{
+    max-width:100% !important;
+  }
+
+  /* Botões da página de visita nunca ultrapassam a largura disponível. */
+  .page-header{
+    width:100% !important;
+    max-width:100% !important;
+    overflow:hidden !important;
+  }
+
+  .page-header > div,
+  .page-header .btn{
+    min-width:0 !important;
+    max-width:100% !important;
+    box-sizing:border-box !important;
+  }
+
+  /* Fotos adicionais: grade contida no card. */
+  .detail-gallery{
+    width:100% !important;
+    max-width:100% !important;
+    grid-template-columns:repeat(2,minmax(0,1fr)) !important;
+    overflow:hidden !important;
+  }
+
+  .detail-gallery .photo{
+    width:100% !important;
+    max-width:100% !important;
+    aspect-ratio:1 / 1 !important;
+    height:auto !important;
+    min-height:0 !important;
+    object-fit:cover !important;
+  }
+
+  .detail-gallery .photo:only-child{
+    aspect-ratio:16 / 10 !important;
+    height:auto !important;
+  }
+
+  /* Avaliações: duas pessoas lado a lado e card contido no viewport. */
+  .rating-compare-card{
+    width:100% !important;
+    max-width:100% !important;
+    min-width:0 !important;
+    box-sizing:border-box !important;
+    overflow:hidden !important;
+  }
+
+  .rating-compare-grid{
+    width:100% !important;
+    max-width:100% !important;
+    min-width:0 !important;
+    box-sizing:border-box !important;
+    grid-template-columns:minmax(0,1fr) minmax(0,1fr) !important;
+  }
+
+  .rating-person{
+    min-width:0 !important;
+    max-width:100% !important;
+    box-sizing:border-box !important;
+    overflow:hidden !important;
+  }
+
+  .rating-person-name{
+    max-width:100% !important;
+    overflow:hidden !important;
+    text-overflow:ellipsis !important;
+  }
+
+  .rating-person-score{
+    font-size:34px !important;
+    max-width:100% !important;
+  }
+
+  .rating-difference{
+    max-width:100% !important;
+    box-sizing:border-box !important;
+  }
+
+  .rating-verdict{
+    min-width:0 !important;
+    max-width:100% !important;
+    box-sizing:border-box !important;
+    overflow:hidden !important;
+  }
+
+  .rating-verdict strong{
+    white-space:normal !important;
+  }
+
+  /* O corpo não deve "balançar" lateralmente no iPhone. */
+  #main,
+  #main *{
+    overscroll-behavior-x:none;
   }
 }
 
@@ -1248,7 +1434,7 @@ function ensureMobileVersionFooter(){
   if(!main || main.querySelectorAll('.app-mobile-version').length) return;
   const footer=document.createElement('div');
   footer.className='app-mobile-version';
-  footer.innerHTML='<strong>Versão 0.1.9</strong> · Feito por Jader Piazza';
+  footer.innerHTML='<strong>Versão 0.1.8</strong> · Feito por Jader Piazza';
   main.appendChild(footer);
 }
 const __mobileVersionObserver=new MutationObserver(()=>{
@@ -1965,7 +2151,7 @@ function renderConfig(main){
           <div class="creator-name">Jader Piazza</div>
         </div>
       </div>
-      <div class="creator-version">✨ Clube das Cafeterias · Versão 0.1.9</div>
+      <div class="creator-version">✨ Clube das Cafeterias · Versão 0.1.8</div>
       <p class="creator-text">Aplicativo criado para compartilhar e recordar bons momentos com uma pessoa especial — MC ❤️</p>
       <div class="creator-signature">É franga na academia mas gosta de bons cafés 🐓</div>
     </div>
