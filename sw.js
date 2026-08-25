@@ -1,4 +1,4 @@
-const CACHE_NAME = 'clube-das-cafeterias-v7';
+const CACHE_NAME = 'clube-das-cafeterias-v8';
 const CORE_ASSETS = [
   './',
   './index.html',
@@ -23,9 +23,10 @@ self.addEventListener('activate', event => {
 self.addEventListener('fetch', event => {
   if (event.request.method !== 'GET') return;
   const request = event.request;
+  const url = new URL(request.url);
   const isHTML = request.mode === 'navigate' ||
     request.destination === 'document' ||
-    new URL(request.url).pathname.endsWith('/index.html');
+    url.pathname.endsWith('/index.html');
 
   if (isHTML) {
     event.respondWith(
@@ -42,16 +43,14 @@ self.addEventListener('fetch', event => {
 
   event.respondWith(
     caches.match(request).then(cached => {
-      const networkUpdate = fetch(request)
-        .then(response => {
-          if (response && response.ok) {
-            const copy = response.clone();
-            caches.open(CACHE_NAME).then(cache => cache.put(request, copy));
-          }
-          return response;
-        })
-        .catch(() => cached);
-      return cached || networkUpdate;
+      const update = fetch(request).then(response => {
+        if (response && response.ok) {
+          const copy = response.clone();
+          caches.open(CACHE_NAME).then(cache => cache.put(request, copy));
+        }
+        return response;
+      }).catch(() => cached);
+      return cached || update;
     })
   );
 });

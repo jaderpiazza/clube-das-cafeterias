@@ -774,6 +774,90 @@ body.photo-lightbox-open{overflow:hidden;}
   .rating-verdict span{font-size:10px;}
 }
 
+
+/* ================= SOBRE O CRIADOR ================= */
+.creator-card{
+  position:relative;
+  overflow:hidden;
+  padding:24px;
+  border:1.5px solid var(--border);
+  background:
+    radial-gradient(circle at 88% 12%, rgba(201,145,72,.14), transparent 34%),
+    linear-gradient(135deg, var(--cream-2), #fffdf8);
+}
+.creator-card::after{
+  content:'☕';
+  position:absolute;
+  right:18px;
+  bottom:10px;
+  font-size:68px;
+  opacity:.06;
+  pointer-events:none;
+}
+.creator-head{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  margin-bottom:14px;
+}
+.creator-mark{
+  width:46px;
+  height:46px;
+  display:grid;
+  place-items:center;
+  border-radius:14px;
+  background:var(--coffee);
+  color:#fff;
+  font-size:23px;
+  box-shadow:0 8px 20px rgba(70,45,28,.16);
+}
+.creator-kicker{
+  font-size:10px;
+  font-weight:850;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+  color:var(--coffee-light);
+  margin-bottom:2px;
+}
+.creator-name{
+  font-size:18px;
+  font-weight:850;
+  color:var(--coffee);
+}
+.creator-version{
+  display:inline-flex;
+  align-items:center;
+  gap:6px;
+  padding:6px 10px;
+  border-radius:999px;
+  background:rgba(180,120,45,.10);
+  color:var(--coffee);
+  font-size:11px;
+  font-weight:850;
+  margin-bottom:12px;
+}
+.creator-text{
+  max-width:620px;
+  font-size:14px;
+  line-height:1.55;
+  color:var(--coffee-light);
+  margin:0;
+}
+.creator-signature{
+  margin-top:16px;
+  padding-top:14px;
+  border-top:1px solid var(--border);
+  font-size:12px;
+  font-weight:750;
+  color:var(--coffee);
+}
+@media (max-width:620px){
+  .creator-card{padding:20px 18px;}
+  .creator-name{font-size:17px;}
+  .creator-text{font-size:13px;line-height:1.5;}
+  .creator-card::after{font-size:54px;right:12px;bottom:8px;}
+}
+
 </style>
 
 <link rel="manifest" href="manifest.webmanifest">
@@ -1751,6 +1835,19 @@ function renderConfig(main){
     <div class="card settings-card">
       <h3>Dados de exemplo</h3><div class="desc">O Clube começou com algumas cafeterias de demonstração. Apague-as quando quiserem começar do zero.</div>
       <button class="btn danger" id="btn-clear">🗑️ Apagar todas as visitas</button>
+    </div>
+
+    <div class="card settings-card creator-card">
+      <div class="creator-head">
+        <div class="creator-mark">☕</div>
+        <div>
+          <div class="creator-kicker">Criado por</div>
+          <div class="creator-name">Jader Piazza</div>
+        </div>
+      </div>
+      <div class="creator-version">✨ Clube das Cafeterias · Versão 0.1.8</div>
+      <p class="creator-text">Aplicativo criado para compartilhar e recordar bons momentos com uma pessoa especial — MC ❤️</p>
+      <div class="creator-signature">Uma coleção de lugares, histórias, risadas e memórias que merecem ficar guardadas.</div>
     </div>
   `;
   document.getElementById('btn-save-names').onclick=()=>{
