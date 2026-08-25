@@ -1580,7 +1580,7 @@ function renderSidebar(){
   const base=ROUTE.split('/').slice(0,2).join('/');
   sb.innerHTML=`
     <div class="brand">
-      <div class="brand-title">☕ Clube das<br>Cafeterias</div>
+      <div class="brand-title">☕ Clube das&nbsp;<span class="brand-cafeterias">Cafeterias</span></div>
       <div class="brand-sub">Uma cafeteria por vez.<br>Uma coleção de histórias para sempre.</div>
     </div>
 
@@ -1594,7 +1594,7 @@ function renderSidebar(){
     <div class="mobile-drawer" id="mobile-drawer" aria-hidden="true">
       <div class="mobile-drawer-head">
         <div>
-          <div class="mobile-drawer-kicker">☕ Clube das Cafeterias</div>
+          <div class="mobile-drawer-kicker">☕ Clube das&nbsp;<span class="brand-cafeterias">Cafeterias</span></div>
           <div class="mobile-drawer-sub">Uma cafeteria por vez. Uma coleção de histórias para sempre.</div>
         </div>
         <button class="mobile-menu-close" id="mobile-menu-close" aria-label="Fechar menu">×</button>
