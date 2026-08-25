@@ -2,7 +2,7 @@
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
 <title>☕ Clube das Cafeterias</title>
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
@@ -1164,6 +1164,29 @@ body.photo-lightbox-open{overflow:hidden;}
   }
 }
 
+
+/* 0.1.8 — Zoom travado na interface; fotos continuam ampliáveis */
+@media (max-width:620px){
+  html, body{
+    touch-action: pan-y !important;
+    -webkit-text-size-adjust:100% !important;
+  }
+
+  #main, #shell, #app, main,
+  .page, .content, .card, button, input, textarea, select{
+    touch-action: pan-y !important;
+  }
+
+  /* O visualizador de imagens é a única exceção: permite gestos de zoom. */
+  .image-lightbox,
+  .lightbox,
+  .photo-modal,
+  .image-modal,
+  [role="dialog"]{
+    touch-action:auto !important;
+  }
+}
+
 </style>
 
 <link rel="manifest" href="manifest.webmanifest">
@@ -2247,6 +2270,70 @@ if ('serviceWorker' in navigator && (location.protocol === 'https:' || location.
     });
   });
 }
+</script>
+
+
+<script>
+(function(){
+  const meta = document.querySelector('meta[name="viewport"]');
+  if (!meta) return;
+
+  const locked = 'width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover';
+  const zoomable = 'width=device-width, initial-scale=1, maximum-scale=5, user-scalable=yes, viewport-fit=cover';
+
+  function setImageZoom(enabled){
+    meta.setAttribute('content', enabled ? zoomable : locked);
+  }
+
+  function isImageViewer(el){
+    if (!el || el.nodeType !== 1) return false;
+    const cls = String(el.className || '').toLowerCase();
+    const role = String(el.getAttribute('role') || '').toLowerCase();
+    return (
+      /lightbox|photo-modal|image-modal|image-viewer|gallery-modal/.test(cls) ||
+      role === 'dialog' && /img|photo|image/.test(String(el.innerHTML || '').toLowerCase())
+    );
+  }
+
+  const observer = new MutationObserver(function(){
+    let open = false;
+    document.querySelectorAll('body *').forEach(function(el){
+      if (isImageViewer(el)) {
+        const style = getComputedStyle(el);
+        const visible = style.display !== 'none' &&
+                        style.visibility !== 'hidden' &&
+                        parseFloat(style.opacity || '1') > 0;
+        if (visible) open = true;
+      }
+    });
+    setImageZoom(open);
+  });
+
+  observer.observe(document.body, {
+    subtree:true,
+    childList:true,
+    attributes:true,
+    attributeFilter:['class','style','aria-hidden']
+  });
+
+  // Também libera quando o usuário toca/clica diretamente em uma imagem
+  // que tenha comportamento de abertura.
+  document.addEventListener('click', function(e){
+    const img = e.target.closest('img');
+    if (!img) return;
+    if (
+      img.closest('.gallery, .detail-gallery, .photos, .photo-grid, ' +
+                 '.image-gallery, .lightbox-trigger, [data-image], [data-full]')
+    ){
+      setTimeout(function(){ setImageZoom(true); }, 100);
+    }
+  }, true);
+
+  // Após qualquer fechamento por Escape, volta a travar.
+  document.addEventListener('keydown', function(e){
+    if (e.key === 'Escape') setTimeout(function(){ setImageZoom(false); }, 100);
+  });
+})();
 </script>
 
 </body>
