@@ -708,6 +708,24 @@ body.photo-lightbox-open{overflow:hidden;}
   .photo-thumb,.upload-box{width:82px;height:82px;min-height:82px;}
 }
 
+
+/* ================= IPHONE SAFE AREA / VERSION CLEANUP ================= */
+@media (display-mode: standalone) and (max-width:900px){
+  #sidebar{
+    padding-top:calc(10px + env(safe-area-inset-top)) !important;
+    min-height:calc(58px + env(safe-area-inset-top));
+  }
+  #main{
+    padding-top:18px;
+  }
+}
+
+/* The iPhone gets exactly one version signature at the bottom of the content. */
+@media(max-width:900px){
+  #sidebar-footer{display:none !important;}
+  .app-version-footer{display:none !important;}
+}
+
 </style>
 
 <link rel="manifest" href="manifest.webmanifest">
@@ -722,13 +740,6 @@ body.photo-lightbox-open{overflow:hidden;}
 <div id="shell">
   <nav id="sidebar"></nav>
   <main id="main"></main>
-
-<!-- APP FOOTER VERSION START -->
-<footer class="app-version-footer">
-  <strong>Versão 0.1.1</strong> · Feito por Jader Piazza
-</footer>
-<!-- APP FOOTER VERSION END -->
-
 </div>
 <script>
 /* =========================================================
@@ -982,7 +993,7 @@ window.addEventListener('hashchange',router);
 function ensureMobileVersionFooter(){
   if(!window.matchMedia('(max-width:900px)').matches) return;
   const main=document.getElementById('main');
-  if(!main || main.querySelector('.app-mobile-version')) return;
+  if(!main || main.querySelectorAll('.app-mobile-version').length) return;
   const footer=document.createElement('div');
   footer.className='app-mobile-version';
   footer.innerHTML='<strong>Versão 0.1.1</strong> · Feito por Jader Piazza';
