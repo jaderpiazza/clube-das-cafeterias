@@ -541,6 +541,164 @@ h1,h2,h3,h4{font-family:var(--font-body);letter-spacing:-.015em;}
 
 
 
+/* =========================================================
+   0.1.9 — CABEÇALHO MOBILE COM MENU LATERAL
+   ========================================================= */
+.mobile-menu-toggle,.mobile-menu-backdrop,.mobile-menu-version,.mobile-drawer-head{display:none;}
+.mobile-drawer{display:contents;}
+
+@media(max-width:620px){
+  body.mobile-menu-open{overflow:hidden !important;touch-action:none;}
+
+  #sidebar{
+    position:sticky !important;
+    top:0 !important;
+    z-index:1000 !important;
+    width:100% !important;
+    height:auto !important;
+    min-height:66px !important;
+    padding:calc(9px + env(safe-area-inset-top)) 14px 10px !important;
+    display:flex !important;
+    flex-direction:row !important;
+    align-items:center !important;
+    justify-content:space-between !important;
+    flex-wrap:nowrap !important;
+    overflow:visible !important;
+    background:linear-gradient(135deg,#3A2A1D,#2A1D13 88%) !important;
+    box-shadow:0 2px 14px rgba(42,29,19,.12);
+  }
+
+  #sidebar .brand{
+    display:block !important;
+    width:auto !important;
+    min-width:0 !important;
+    margin:0 !important;
+    padding:0 !important;
+    border:0 !important;
+    flex:1 1 auto !important;
+  }
+  #sidebar .brand-title{
+    font-family:var(--font-display) !important;
+    font-size:17px !important;
+    line-height:1.02 !important;
+    letter-spacing:.01em !important;
+    white-space:nowrap !important;
+    color:var(--cream-2) !important;
+  }
+  #sidebar .brand-title br{display:none;}
+  #sidebar .brand-sub{display:none !important;}
+
+  .mobile-menu-toggle{
+    display:inline-flex !important;
+    align-items:center !important;
+    justify-content:center !important;
+    gap:8px !important;
+    flex:0 0 auto !important;
+    border:1px solid rgba(238,223,195,.18) !important;
+    border-radius:12px !important;
+    background:rgba(255,255,255,.06) !important;
+    color:var(--cream-2) !important;
+    padding:8px 10px !important;
+    min-height:42px !important;
+    box-shadow:none !important;
+  }
+  .menu-label{font-size:13px !important;font-weight:800 !important;letter-spacing:.01em;}
+  .hamburger{width:18px;height:14px;display:flex;flex-direction:column;justify-content:space-between;}
+  .hamburger i{display:block;width:100%;height:2px;border-radius:99px;background:var(--cream-2);}
+
+  .mobile-menu-backdrop{
+    display:block !important;
+    position:fixed !important;
+    inset:0 !important;
+    z-index:1090 !important;
+    background:rgba(20,12,7,.46) !important;
+    opacity:0 !important;
+    visibility:hidden !important;
+    pointer-events:none !important;
+    transition:opacity .22s ease,visibility .22s ease !important;
+    -webkit-backdrop-filter:blur(2px);
+    backdrop-filter:blur(2px);
+  }
+  #sidebar.menu-open .mobile-menu-backdrop{opacity:1 !important;visibility:visible !important;pointer-events:auto !important;}
+
+  .mobile-drawer{
+    display:flex !important;
+    position:fixed !important;
+    z-index:1100 !important;
+    top:0 !important;
+    right:0 !important;
+    bottom:0 !important;
+    width:min(86vw,340px) !important;
+    padding:calc(18px + env(safe-area-inset-top)) 16px calc(18px + env(safe-area-inset-bottom)) !important;
+    flex-direction:column !important;
+    background:linear-gradient(180deg,#3A2A1D,#2A1D13 88%) !important;
+    box-shadow:-14px 0 34px rgba(0,0,0,.28) !important;
+    transform:translateX(105%) !important;
+    transition:transform .25s cubic-bezier(.22,.8,.28,1) !important;
+    overflow-y:auto !important;
+    overscroll-behavior:contain !important;
+  }
+  #sidebar.menu-open .mobile-drawer{transform:translateX(0) !important;}
+
+  .mobile-drawer-head{
+    display:flex !important;
+    align-items:flex-start !important;
+    justify-content:space-between !important;
+    gap:14px !important;
+    padding:2px 4px 18px !important;
+    border-bottom:1px solid rgba(238,223,195,.14) !important;
+    margin-bottom:12px !important;
+  }
+  .mobile-drawer-kicker{color:var(--cream-2);font-family:var(--font-display);font-size:19px;font-weight:800;line-height:1.15;}
+  .mobile-drawer-sub{margin-top:5px;color:rgba(238,223,195,.62);font-size:11.5px;line-height:1.4;max-width:220px;}
+  .mobile-menu-close{
+    width:38px;height:38px;border-radius:50%;border:1px solid rgba(238,223,195,.18);
+    background:rgba(255,255,255,.05);color:var(--cream-2);font-size:25px;line-height:1;flex:0 0 auto;
+  }
+
+  .mobile-nav-list{display:grid !important;gap:6px !important;}
+  .mobile-drawer .nav-item{
+    display:flex !important;
+    width:100% !important;
+    align-items:center !important;
+    gap:12px !important;
+    padding:13px 14px !important;
+    margin:0 !important;
+    border-radius:14px !important;
+    font-size:15px !important;
+    color:var(--latte-2) !important;
+    background:transparent !important;
+  }
+  .mobile-drawer .nav-item .ic{width:24px !important;font-size:19px !important;text-align:center !important;}
+  .mobile-drawer .nav-item.active{
+    background:var(--caramel) !important;
+    color:#2A1D13 !important;
+    box-shadow:0 8px 18px rgba(0,0,0,.14) !important;
+  }
+  .mobile-menu-spacer{display:block !important;flex:1 1 18px !important;min-height:18px !important;}
+  .mobile-drawer #sidebar-footer{
+    display:block !important;
+    margin:18px 0 10px !important;
+    padding:12px 4px 0 !important;
+    border-top:1px solid rgba(238,223,195,.12) !important;
+    font-size:10.5px !important;
+    line-height:1.4 !important;
+    color:rgba(238,223,195,.48) !important;
+  }
+  .mobile-menu-version{
+    display:flex !important;
+    flex-direction:column !important;
+    gap:2px !important;
+    padding:0 4px !important;
+    color:rgba(238,223,195,.72) !important;
+    font-size:11px !important;
+  }
+  .mobile-menu-version strong{color:var(--latte-2);font-size:11.5px;}
+
+  #main{padding-top:18px !important;}
+}
+
+
 /* ================= VISUALIZADOR DE FOTOS ================= */
 .photo.photo-zoomable{position:relative;cursor:zoom-in;touch-action:manipulation;}
 .photo.photo-zoomable::after{
@@ -1425,9 +1583,45 @@ function renderSidebar(){
       <div class="brand-title">☕ Clube das<br>Cafeterias</div>
       <div class="brand-sub">Uma cafeteria por vez.<br>Uma coleção de histórias para sempre.</div>
     </div>
-    ${NAV.map(n=>`<a href="${n.r}" class="nav-item ${base===n.r?'active':''}"><span class="ic">${n.ic}</span>${n.label}</a>`).join('')}
-    <div id="sidebar-footer">Clube das Cafeterias · dados salvos localmente neste navegador.</div>
+
+    <button class="mobile-menu-toggle" id="mobile-menu-toggle" aria-label="Abrir menu" aria-expanded="false">
+      <span class="hamburger" aria-hidden="true"><i></i><i></i><i></i></span>
+      <span class="menu-label">Menu</span>
+    </button>
+
+    <div class="mobile-menu-backdrop" id="mobile-menu-backdrop"></div>
+
+    <div class="mobile-drawer" id="mobile-drawer" aria-hidden="true">
+      <div class="mobile-drawer-head">
+        <div>
+          <div class="mobile-drawer-kicker">☕ Clube das Cafeterias</div>
+          <div class="mobile-drawer-sub">Uma cafeteria por vez. Uma coleção de histórias para sempre.</div>
+        </div>
+        <button class="mobile-menu-close" id="mobile-menu-close" aria-label="Fechar menu">×</button>
+      </div>
+      <div class="mobile-nav-list">
+        ${NAV.map(n=>`<a href="${n.r}" class="nav-item ${base===n.r?'active':''}"><span class="ic">${n.ic}</span><span>${n.label}</span></a>`).join('')}
+      </div>
+      <div class="mobile-menu-spacer"></div>
+      <div id="sidebar-footer">Clube das Cafeterias · dados salvos localmente neste navegador.</div>
+      <div class="mobile-menu-version"><strong>Versão 0.1.9</strong><span>Feito por Jader Piazza</span></div>
+    </div>
   `;
+
+  const drawer=sb.querySelector('#mobile-drawer');
+  const toggle=sb.querySelector('#mobile-menu-toggle');
+  const backdrop=sb.querySelector('#mobile-menu-backdrop');
+  const close=sb.querySelector('#mobile-menu-close');
+  const setMenu=open=>{
+    sb.classList.toggle('menu-open',open);
+    document.body.classList.toggle('mobile-menu-open',open);
+    if(toggle) toggle.setAttribute('aria-expanded',String(open));
+    if(drawer) drawer.setAttribute('aria-hidden',String(!open));
+  };
+  toggle?.addEventListener('click',()=>setMenu(!sb.classList.contains('menu-open')));
+  backdrop?.addEventListener('click',()=>setMenu(false));
+  close?.addEventListener('click',()=>setMenu(false));
+  drawer?.querySelectorAll('.nav-item').forEach(a=>a.addEventListener('click',()=>setMenu(false)));
 }
 
 function router(){
@@ -1457,7 +1651,7 @@ function ensureMobileVersionFooter(){
   if(!main || main.querySelectorAll('.app-mobile-version').length) return;
   const footer=document.createElement('div');
   footer.className='app-mobile-version';
-  footer.innerHTML='<strong>Versão 0.1.8</strong> · Feito por Jader Piazza';
+  footer.innerHTML='<strong>Versão 0.1.9</strong> · Feito por Jader Piazza';
   main.appendChild(footer);
 }
 const __mobileVersionObserver=new MutationObserver(()=>{
@@ -2174,7 +2368,7 @@ function renderConfig(main){
           <div class="creator-name">Jader Piazza</div>
         </div>
       </div>
-      <div class="creator-version">✨ Clube das Cafeterias · Versão 0.1.8</div>
+      <div class="creator-version">✨ Clube das Cafeterias · Versão 0.1.9</div>
       <p class="creator-text">Aplicativo criado para compartilhar e recordar bons momentos com uma pessoa especial — MC ❤️</p>
       <div class="creator-signature">É franga na academia mas gosta de bons cafés 🐓</div>
     </div>

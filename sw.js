@@ -1,4 +1,4 @@
-const CACHE_NAME = 'clube-das-cafeterias-v8';
+const CACHE_NAME = 'clube-das-cafeterias-v9';
 const CORE_ASSETS = [
   './',
   './index.html',
