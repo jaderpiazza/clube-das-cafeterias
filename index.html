@@ -858,6 +858,91 @@ body.photo-lightbox-open{overflow:hidden;}
   .creator-card::after{font-size:54px;right:12px;bottom:8px;}
 }
 
+
+/* =========================================================
+   0.1.8 — AVALIAÇÕES MOBILE: COMPARAÇÃO LADO A LADO
+   ========================================================= */
+@media (max-width: 620px){
+  .rating-compare-grid{
+    display:grid !important;
+    grid-template-columns:minmax(0,1fr) minmax(0,1fr) !important;
+    grid-template-rows:auto auto !important;
+    column-gap:0 !important;
+    row-gap:0 !important;
+    align-items:stretch !important;
+  }
+
+  .rating-compare-grid .rating-person.p1,
+  .rating-compare-grid .rating-person.p2{
+    grid-row:1 !important;
+    order:initial !important;
+    width:auto !important;
+    text-align:left !important;
+    padding:8px 12px 12px !important;
+    border-bottom:0 !important;
+  }
+
+  .rating-compare-grid .rating-person.p1{
+    grid-column:1 !important;
+    border-right:1px solid var(--border) !important;
+  }
+
+  .rating-compare-grid .rating-person.p2{
+    grid-column:2 !important;
+    text-align:right !important;
+    border-right:0 !important;
+  }
+
+  .rating-compare-grid .rating-verdict{
+    grid-column:1 / -1 !important;
+    grid-row:2 !important;
+    order:initial !important;
+    width:auto !important;
+    margin:4px 0 0 !important;
+    padding:10px 6px 4px !important;
+    border-top:1px solid var(--border) !important;
+    border-bottom:0 !important;
+    text-align:center !important;
+  }
+
+  .rating-compare-card{
+    padding:14px 12px !important;
+  }
+
+  .rating-compare-head{
+    margin-bottom:8px !important;
+  }
+
+  .rating-person-name{
+    font-size:11px !important;
+    line-height:1.2 !important;
+  }
+
+  .rating-person-score{
+    font-size:36px !important;
+    line-height:1 !important;
+    margin-top:5px !important;
+  }
+
+  .rating-difference{
+    font-size:9px !important;
+    padding:4px 7px !important;
+    margin-bottom:5px !important;
+  }
+
+  .rating-person.p2 .rating-difference{
+    margin-left:auto !important;
+  }
+
+  .rating-verdict strong{
+    font-size:12px !important;
+  }
+
+  .rating-verdict span{
+    font-size:10px !important;
+  }
+}
+
 </style>
 
 <link rel="manifest" href="manifest.webmanifest">
@@ -1128,7 +1213,7 @@ function ensureMobileVersionFooter(){
   if(!main || main.querySelectorAll('.app-mobile-version').length) return;
   const footer=document.createElement('div');
   footer.className='app-mobile-version';
-  footer.innerHTML='<strong>Versão 0.1.9</strong> · Feito por Jader Piazza';
+  footer.innerHTML='<strong>Versão 0.1.8</strong> · Feito por Jader Piazza';
   main.appendChild(footer);
 }
 const __mobileVersionObserver=new MutationObserver(()=>{
@@ -1847,7 +1932,7 @@ function renderConfig(main){
       </div>
       <div class="creator-version">✨ Clube das Cafeterias · Versão 0.1.8</div>
       <p class="creator-text">Aplicativo criado para compartilhar e recordar bons momentos com uma pessoa especial — MC ❤️</p>
-      <div class="creator-signature">Uma coleção de lugares, histórias, risadas e memórias que merecem ficar guardadas.</div>
+      <div class="creator-signature">É franga na academia mas gosta de bons cafés 🐓</div>
     </div>
   `;
   document.getElementById('btn-save-names').onclick=()=>{
