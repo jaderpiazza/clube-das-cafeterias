@@ -542,7 +542,7 @@ h1,h2,h3,h4{font-family:var(--font-body);letter-spacing:-.015em;}
 
 
 /* =========================================================
-   0.1.9 — CABEÇALHO MOBILE COM MENU LATERAL
+   0.1.10 — CABEÇALHO MOBILE COM MENU LATERAL
    ========================================================= */
 .mobile-menu-toggle,.mobile-menu-backdrop,.mobile-menu-version,.mobile-drawer-head{display:none;}
 .mobile-drawer{display:contents;}
@@ -1345,6 +1345,127 @@ body.photo-lightbox-open{overflow:hidden;}
   }
 }
 
+
+/* =========================================================
+   0.1.10 — FORMULÁRIOS COMPACTOS PARA IPHONE 17
+   ========================================================= */
+@media (max-width:620px){
+  /* O row de informações passa a respeitar rigorosamente a largura
+     disponível, sem que inputs nativos criem overflow. */
+  .row{
+    display:grid !important;
+    grid-template-columns:minmax(0,1fr) minmax(0,1fr) !important;
+    gap:10px !important;
+    width:100% !important;
+    min-width:0 !important;
+  }
+
+  .row > .field{
+    width:100% !important;
+    min-width:0 !important;
+    max-width:100% !important;
+    flex:none !important;
+  }
+
+  .field{
+    min-width:0 !important;
+    max-width:100% !important;
+    box-sizing:border-box !important;
+  }
+
+  .field input,
+  .field select,
+  .field textarea{
+    width:100% !important;
+    min-width:0 !important;
+    max-width:100% !important;
+    box-sizing:border-box !important;
+  }
+
+  /* Campo de data: reduz a largura intrínseca do controle nativo
+     do Safari e mantém a data inteira dentro do card. */
+  .field input[type="date"]{
+    min-width:0 !important;
+    width:100% !important;
+    max-width:100% !important;
+    padding:10px 9px !important;
+    font-size:13px !important;
+    line-height:1.2 !important;
+    box-sizing:border-box !important;
+    -webkit-appearance:auto !important;
+  }
+
+  .field input[type="date"]::-webkit-date-and-time-value{
+    text-align:left !important;
+    min-width:0 !important;
+  }
+
+  .field input[type="date"]::-webkit-calendar-picker-indicator{
+    margin-left:2px !important;
+    padding:0 !important;
+  }
+
+  /* Linha de cada item pedido:
+     bebida | comida | valor, todos dentro da largura do card. */
+  .item-row{
+    display:grid !important;
+    grid-template-columns:minmax(0,1fr) minmax(0,1fr) 68px !important;
+    gap:6px !important;
+    width:100% !important;
+    min-width:0 !important;
+    max-width:100% !important;
+    box-sizing:border-box !important;
+    align-items:center !important;
+  }
+
+  .item-row input{
+    width:100% !important;
+    min-width:0 !important;
+    max-width:100% !important;
+    box-sizing:border-box !important;
+    padding:9px 8px !important;
+    font-size:13px !important;
+  }
+
+  .item-row input.money{
+    width:68px !important;
+    min-width:0 !important;
+    max-width:68px !important;
+    box-sizing:border-box !important;
+    padding-left:8px !important;
+    padding-right:6px !important;
+  }
+
+  .item-row .remove-x{
+    width:26px !important;
+    min-width:26px !important;
+    justify-self:end !important;
+  }
+
+  /* Observação também fica contida no card. */
+  .item-row + input,
+  .person-block > input{
+    width:100% !important;
+    max-width:100% !important;
+    min-width:0 !important;
+    box-sizing:border-box !important;
+  }
+
+  /* Em telas particularmente estreitas, damos um pouco mais de espaço
+     ao valor sem sacrificar o texto dos itens. */
+  @media (max-width:370px){
+    .item-row{
+      grid-template-columns:minmax(0,1fr) minmax(0,1fr) 64px !important;
+      gap:5px !important;
+    }
+
+    .item-row input.money{
+      width:64px !important;
+      max-width:64px !important;
+    }
+  }
+}
+
 </style>
 
 <link rel="manifest" href="manifest.webmanifest">
@@ -1604,7 +1725,7 @@ function renderSidebar(){
       </div>
       <div class="mobile-menu-spacer"></div>
       <div id="sidebar-footer">Clube das Cafeterias · dados salvos localmente neste navegador.</div>
-      <div class="mobile-menu-version"><strong>Versão 0.1.9</strong><span>Feito por Jader Piazza</span></div>
+      <div class="mobile-menu-version"><strong>Versão 0.1.10</strong><span>Feito por Jader Piazza</span></div>
     </div>
   `;
 
@@ -1651,7 +1772,7 @@ function ensureMobileVersionFooter(){
   if(!main || main.querySelectorAll('.app-mobile-version').length) return;
   const footer=document.createElement('div');
   footer.className='app-mobile-version';
-  footer.innerHTML='<strong>Versão 0.1.9</strong> · Feito por Jader Piazza';
+  footer.innerHTML='<strong>Versão 0.1.10</strong> · Feito por Jader Piazza';
   main.appendChild(footer);
 }
 const __mobileVersionObserver=new MutationObserver(()=>{
@@ -2388,7 +2509,7 @@ function renderConfig(main){
           <div class="creator-name">Jader Piazza</div>
         </div>
       </div>
-      <div class="creator-version">✨ Clube das Cafeterias · Versão 0.1.9</div>
+      <div class="creator-version">✨ Clube das Cafeterias · Versão 0.1.10</div>
       <p class="creator-text">Aplicativo criado para compartilhar e recordar bons momentos com uma pessoa especial — MC ❤️</p>
       <div class="creator-signature">É franga na academia mas gosta de bons cafés 🐓</div>
     </div>
