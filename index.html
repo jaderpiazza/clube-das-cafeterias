@@ -542,7 +542,7 @@ h1,h2,h3,h4{font-family:var(--font-body);letter-spacing:-.015em;}
 
 
 /* =========================================================
-   0.2.1 — CABEÇALHO MOBILE COM MENU LATERAL
+   0.2.2 — CABEÇALHO MOBILE COM MENU LATERAL
    ========================================================= */
 .mobile-menu-toggle,.mobile-menu-backdrop,.mobile-menu-version,.mobile-drawer-head{display:none;}
 .mobile-drawer{display:contents;}
@@ -1347,7 +1347,7 @@ body.photo-lightbox-open{overflow:hidden;}
 
 
 /* =========================================================
-   0.2.1 — FORMULÁRIOS COMPACTOS PARA IPHONE 17
+   0.2.2 — FORMULÁRIOS COMPACTOS PARA IPHONE 17
    ========================================================= */
 @media (max-width:620px){
   /* O row de informações passa a respeitar rigorosamente a largura
@@ -1468,7 +1468,7 @@ body.photo-lightbox-open{overflow:hidden;}
 
 
 /* =========================================================
-   0.2.1 — ROLETA DE CIDADES
+   0.2.2 — ROLETA DE CIDADES
    ========================================================= */
 .roulette-layout{
   display:grid;
@@ -1631,7 +1631,20 @@ body.photo-lightbox-open{overflow:hidden;}
   .roulette-actions .btn{flex:1 1 140px;}
 }
 
-\n/* =========================================================\n   0.2.1 — MAPA DAS CIDADES E ROTAS\n   ========================================================= */\n.route-page-head{display:flex;justify-content:space-between;gap:12px;align-items:flex-start;flex-wrap:wrap;}\n.route-origin{font-size:12px;color:var(--muted);margin-top:5px;line-height:1.45;}\n.route-map-card{overflow:hidden;padding:0;}\n#club-map{height:520px;width:100%;background:#E8DEC9;}\n.route-map-status{padding:12px 15px;border-bottom:1px solid var(--border);background:var(--cream-2);font-size:13px;color:var(--coffee-light);}\n.route-map-status strong{color:var(--coffee);}\n.route-legend{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;}\n.route-item{display:grid;grid-template-columns:10px minmax(0,1fr) auto;gap:10px;align-items:center;}\n.route-color{width:10px;height:38px;border-radius:8px;}\n.route-item-name{font-weight:800;color:var(--coffee);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}\n.route-item-city{font-size:12px;color:var(--muted);margin-top:2px;}\n.route-item-meta{font-size:12px;color:var(--coffee-light);text-align:right;}\n.route-item button{margin-top:5px;}\n.route-actions{display:flex;gap:8px;flex-wrap:wrap;}\n.map-popup-title{font-weight:800;color:#3A2A1D;margin-bottom:4px;}\n.map-popup-meta{font-size:12px;color:#6F4A32;margin-bottom:7px;}\n.map-popup-link{font-size:12px;font-weight:700;color:#6F4A32;}\n.city-route-note{padding:10px 12px;border:1px solid var(--border);border-radius:12px;background:var(--paper);font-size:12px;color:var(--muted);line-height:1.45;}\n.stat-card[data-nav]{cursor:pointer;}\n.stat-card[data-nav]:active{transform:translateY(1px);}\n@media(max-width:760px){\n  #club-map{height:430px;}\n  .route-legend{grid-template-columns:1fr;}\n  .route-page-head .btn{width:100%;}\n}\n@media(max-width:620px){\n  #club-map{height:410px;}\n  .route-origin{font-size:11.5px;}\n}\n
+\n/* =========================================================\n   0.2.2 — MAPA DAS CIDADES E ROTAS\n   ========================================================= */\n.route-page-head{display:flex;justify-content:space-between;gap:12px;align-items:flex-start;flex-wrap:wrap;}\n.route-origin{font-size:12px;color:var(--muted);margin-top:5px;line-height:1.45;}\n.route-map-card{overflow:hidden;padding:0;}\n#club-map{height:520px;width:100%;background:#E8DEC9;}
+.offline-map-wrap{position:relative;height:100%;min-height:410px;background:#efe6d5;overflow:hidden;touch-action:none;}
+#club-route-svg{display:block;width:100%;height:100%;min-height:410px;cursor:grab;touch-action:none;}
+#club-route-svg:active{cursor:grabbing;}
+.route-svg-line{fill:none;stroke-width:0.000035;stroke-linecap:round;stroke-linejoin:round;vector-effect:non-scaling-stroke;}
+.map-point circle{vector-effect:non-scaling-stroke;stroke:rgba(58,42,29,.28);stroke-width:0.000006;}
+.offline-map-toolbar{position:absolute;z-index:3;right:12px;top:12px;display:flex;flex-direction:column;gap:6px;}
+.offline-map-toolbar button{width:42px;height:42px;border:1px solid var(--border);border-radius:12px;background:rgba(255,253,248,.96);color:var(--coffee);font-size:24px;font-weight:800;box-shadow:var(--shadow-sm);line-height:1;}
+.offline-map-toolbar button:last-child{font-size:20px;}
+.offline-map-hint{position:absolute;z-index:2;left:12px;top:12px;padding:8px 10px;border-radius:10px;background:rgba(58,42,29,.82);color:#fff;font-size:11px;font-weight:700;pointer-events:none;}
+.offline-map-key{position:absolute;z-index:2;left:12px;bottom:12px;display:flex;gap:12px;flex-wrap:wrap;padding:9px 11px;border-radius:12px;background:rgba(255,253,248,.96);font-size:11px;font-weight:800;color:var(--coffee);box-shadow:var(--shadow-sm);pointer-events:none;}
+.key-dot{display:inline-block;width:9px;height:9px;border-radius:50%;margin-right:5px;vertical-align:middle;background:var(--coffee);}.key-line{display:inline-block;width:17px;height:4px;border-radius:99px;background:var(--caramel);margin-right:5px;vertical-align:middle;}
+@media(max-width:620px){.offline-map-wrap,#club-route-svg{min-height:390px;}.offline-map-hint{font-size:10px;max-width:220px;}.offline-map-key{font-size:10px;gap:8px;}}
+\n.route-map-status{padding:12px 15px;border-bottom:1px solid var(--border);background:var(--cream-2);font-size:13px;color:var(--coffee-light);}\n.route-map-status strong{color:var(--coffee);}\n.route-legend{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;}\n.route-item{display:grid;grid-template-columns:10px minmax(0,1fr) auto;gap:10px;align-items:center;}\n.route-color{width:10px;height:38px;border-radius:8px;}\n.route-item-name{font-weight:800;color:var(--coffee);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}\n.route-item-city{font-size:12px;color:var(--muted);margin-top:2px;}\n.route-item-meta{font-size:12px;color:var(--coffee-light);text-align:right;}\n.route-item button{margin-top:5px;}\n.route-actions{display:flex;gap:8px;flex-wrap:wrap;}\n.map-popup-title{font-weight:800;color:#3A2A1D;margin-bottom:4px;}\n.map-popup-meta{font-size:12px;color:#6F4A32;margin-bottom:7px;}\n.map-popup-link{font-size:12px;font-weight:700;color:#6F4A32;}\n.city-route-note{padding:10px 12px;border:1px solid var(--border);border-radius:12px;background:var(--paper);font-size:12px;color:var(--muted);line-height:1.45;}\n.stat-card[data-nav]{cursor:pointer;}\n.stat-card[data-nav]:active{transform:translateY(1px);}\n@media(max-width:760px){\n  #club-map{height:430px;}\n  .route-legend{grid-template-columns:1fr;}\n  .route-page-head .btn{width:100%;}\n}\n@media(max-width:620px){\n  #club-map{height:410px;}\n  .route-origin{font-size:11.5px;}\n}\n
 </style>
 
 <link rel="manifest" href="manifest.webmanifest">
@@ -1904,7 +1917,7 @@ function renderSidebar(){
       </div>
       <div class="mobile-menu-spacer"></div>
       <div id="sidebar-footer">Clube das Cafeterias · dados salvos localmente neste navegador.</div>
-      <div class="mobile-menu-version"><strong>Versão 0.2.1</strong><span>Feito por Jader Piazza</span></div>
+      <div class="mobile-menu-version"><strong>Versão 0.2.2</strong><span>Feito por Jader Piazza</span></div>
     </div>
   `;
 
@@ -1953,7 +1966,7 @@ function ensureMobileVersionFooter(){
   if(!main || main.querySelectorAll('.app-mobile-version').length) return;
   const footer=document.createElement('div');
   footer.className='app-mobile-version';
-  footer.innerHTML='<strong>Versão 0.2.1</strong> · Feito por Jader Piazza';
+  footer.innerHTML='<strong>Versão 0.2.2</strong> · Feito por Jader Piazza';
   main.appendChild(footer);
 }
 const __mobileVersionObserver=new MutationObserver(()=>{
@@ -2938,140 +2951,105 @@ async function renderMapaCidades(main){
     <div class="page-header route-page-head">
       <div>
         <h1>🗺️ Cidades exploradas</h1>
-        <div class="sub">O mapa da jornada de vocês — com as rotas registradas para cada cafeteria.</div>
+        <div class="sub">Mapa interativo da jornada de vocês — com os percursos reais já registrados até cada cafeteria.</div>
         <div class="route-origin">📍 Saída padrão: <strong>${ROUTE_ORIGIN_LABEL}</strong></div>
       </div>
       <div class="route-actions">
-        <button class="btn small" id="btn-refresh-routes" type="button">🔄 Atualizar rotas</button>
+        <button class="btn small" id="btn-refresh-routes" type="button">🔄 Recalcular rotas</button>
         <a class="btn ghost small" href="#/inicio">← Voltar</a>
       </div>
     </div>
 
     <div class="card route-map-card">
-      <div class="route-map-status" id="route-map-status">Preparando o mapa...</div>
+      <div class="route-map-status" id="route-map-status">Preparando o mapa interativo...</div>
       <div id="club-map" aria-label="Mapa interativo das cidades exploradas"></div>
     </div>
 
     <div class="section-title"><h2>☕ Percursos registrados</h2><div class="line"></div></div>
     <div class="card">
-      <div class="city-route-note" style="margin-bottom:12px;">As rotas são calculadas a partir do endereço de saída definido no Clube. Quando o nome da cafeteria é encontrado no mapa, usamos o endereço da própria cafeteria; se não for localizado, usamos a localização aproximada da cidade.</div>
+      <div class="city-route-note" style="margin-bottom:12px;">O mapa fica dentro do próprio Clube e mostra os traçados das rotas calculadas entre a saída padrão e as cafeterias. Você pode arrastar e usar + / − para explorar o percurso. As rotas ficam salvas localmente após serem calculadas.</div>
       <div class="route-legend" id="route-legend"></div>
     </div>
   `;
 
   const status=document.getElementById('route-map-status');
   const legend=document.getElementById('route-legend');
+  const mapEl=document.getElementById('club-map');
   const refresh=document.getElementById('btn-refresh-routes');
-  let map=null;
-  let layers=[];
-  let markers=[];
   let cancelled=false;
 
   function setStatus(msg){status.innerHTML=msg;}
-  function clearMap(){
-    layers.forEach(x=>x.remove()); layers=[];
-    markers.forEach(x=>x.remove()); markers=[];
-  }
-
-  function popupFor(v){
-    const source=v.routeGeo?.source==='cidade'?'localização aproximada da cidade':'localização da cafeteria';
-    const distance=v.route?.distance?` · ${routeKm(v.route.distance)} km`:'';
-    return `<div class="map-popup-title">☕ ${routeEsc(v.cafeteria)}</div><div class="map-popup-meta">📍 ${routeEsc(v.cidade)}${v.uf?', '+routeEsc(v.uf):''}${distance}<br>${source}</div><a class="map-popup-link" href="${routeMapsLink(v)}" target="_blank" rel="noopener">Abrir rota no Google Maps ↗</a>`;
-  }
-
-  async function build(){
-    if(typeof L==='undefined'){
-      setStatus('<strong>Mapa indisponível no momento.</strong> Você ainda pode usar os links de rota no Google Maps abaixo.');
-      legend.innerHTML=STATE.visits.map((v,i)=>`<div class="route-item"><span class="route-color" style="background:${ROUTE_COLORS[i%ROUTE_COLORS.length]}"></span><div><div class="route-item-name">${routeEsc(v.cafeteria)}</div><div class="route-item-city">📍 ${routeEsc(v.cidade)}</div></div><div class="route-item-meta"><a href="${routeMapsLink(v)}" target="_blank" rel="noopener">Abrir rota ↗</a></div></div>`).join('');
-      return;
-    }
-
-    if(!map){
-      map=L.map('club-map',{zoomControl:true,scrollWheelZoom:true,dragging:true,touchZoom:true});
-      L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png',{
-        maxZoom:19,
-        attribution:'&copy; OpenStreetMap contributors'
-      }).addTo(map);
-    }
-    clearMap();
-    legend.innerHTML='';
-    setStatus('📍 Localizando o ponto de saída...');
-
-    let origin=null;
-    try{origin=await getOriginGeo();}catch(e){}
-    if(!origin){
-      setStatus('<strong>Não consegui localizar o endereço de saída.</strong> Abra novamente ou use os links de rota abaixo.');
-      renderRouteLegendOnly();
-      return;
-    }
-
-    const originMarker=L.marker([origin.lat,origin.lon],{title:'Saída do Clube'}).addTo(map);
-    originMarker.bindPopup(`<div class="map-popup-title">🏠 Saída do Clube</div><div class="map-popup-meta">${routeEsc(ROUTE_ORIGIN_LABEL)}</div>`);
-    markers.push(originMarker);
-
-    const bounds=L.latLngBounds([[origin.lat,origin.lon]]);
-    const visits=[...STATE.visits];
-    let ready=0;
-
-    for(let i=0;i<visits.length;i++){
-      if(cancelled) return;
-      const v=visits[i];
-      setStatus(`🗺️ Localizando <strong>${routeEsc(v.cafeteria)}</strong> (${i+1}/${visits.length})...`);
-      let geo=null;
-      try{geo=await getVisitGeo(v);}catch(e){}
-      if(!geo){
-        addLegend(v,i,'Não localizada');
-        continue;
-      }
-      const marker=L.marker([geo.lat,geo.lon],{title:v.cafeteria}).addTo(map);
-      marker.bindPopup(popupFor(v));
-      markers.push(marker);
-      bounds.extend([geo.lat,geo.lon]);
-
-      setStatus(`🚗 Traçando <strong>${routeEsc(v.cafeteria)}</strong> (${i+1}/${visits.length})...`);
-      try{
-        if(!v.route || !Array.isArray(v.route.coordinates) || !v.route.coordinates.length){
-          v.route=await fetchRoute(origin,geo);
-          await saveState();
-        }
-        const latlngs=v.route.coordinates.map(c=>[c[1],c[0]]);
-        const line=L.polyline(latlngs,{color:ROUTE_COLORS[i%ROUTE_COLORS.length],weight:5,opacity:.78,lineCap:'round',lineJoin:'round'}).addTo(map);
-        line.bindPopup(popupFor(v));
-        layers.push(line);
-        addLegend(v,i,`${routeKm(v.route.distance)} km · ${routeMinutes(v.route.duration)}`);
-        ready++;
-      }catch(e){
-        addLegend(v,i,'Rota indisponível · abrir no Maps');
-      }
-    }
-
-    if(visits.length){
-      if(bounds.isValid()) map.fitBounds(bounds,{padding:[28,28],maxZoom:13});
-      setTimeout(()=>map.invalidateSize(),100);
-    }
-    setStatus(`<strong>${ready}</strong> rota${ready===1?'':'s'} traçada${ready===1?'':'s'} · ${visits.length} cafeteria${visits.length===1?'':'s'} registrada${visits.length===1?'':'s'}.`);
-  }
-
   function addLegend(v,i,meta){
     const row=document.createElement('div');
     row.className='route-item';
     row.innerHTML=`<span class="route-color" style="background:${ROUTE_COLORS[i%ROUTE_COLORS.length]}"></span><div><div class="route-item-name">${routeEsc(v.cafeteria)}</div><div class="route-item-city">📍 ${routeEsc(v.cidade)}${v.routeGeo?.source==='cidade'?' · localização aproximada':''}</div></div><div class="route-item-meta">${routeEsc(meta)}<br><a href="${routeMapsLink(v)}" target="_blank" rel="noopener">Maps ↗</a></div>`;
     legend.appendChild(row);
   }
-  function renderRouteLegendOnly(){
-    legend.innerHTML='';
-    STATE.visits.forEach((v,i)=>addLegend(v,i,'Abrir no Google Maps'));
+  function renderLegendOnly(){legend.innerHTML='';STATE.visits.forEach((v,i)=>addLegend(v,i,v.route?.distance?`${routeKm(v.route.distance)} km · ${routeMinutes(v.route.duration)}`:'Rota ainda não calculada'));}
+
+  function project(lat,lon){
+    const x=(lon+180)/360;
+    const sin=Math.sin(lat*Math.PI/180);
+    const y=.5-Math.log((1+sin)/(1-sin))/(4*Math.PI);
+    return [x,y];
+  }
+  function renderInteractiveMap(origin,entries){
+    const pts=[[origin.lat,origin.lon],...entries.flatMap(e=>e.route.coordinates.map(c=>[c[1],c[0]]))];
+    const projected=pts.map(p=>project(p[0],p[1]));
+    let minX=Math.min(...projected.map(p=>p[0])),maxX=Math.max(...projected.map(p=>p[0]));
+    let minY=Math.min(...projected.map(p=>p[1])),maxY=Math.max(...projected.map(p=>p[1]));
+    const spanX=Math.max(maxX-minX,0.00035),spanY=Math.max(maxY-minY,0.00035);
+    const pad=.12;
+    minX-=spanX*pad;maxX+=spanX*pad;minY-=spanY*pad;maxY+=spanY*pad;
+    const W=1000,H=620,scale=Math.min(W/(maxX-minX),H/(maxY-minY));
+    const worldW=W/scale,worldH=H/scale;
+    const cx=(minX+maxX)/2,cy=(minY+maxY)/2;
+    let view={x:cx-worldW/2,y:cy-worldH/2,w:worldW,h:worldH};
+    const toLocal=(lat,lon)=>{const [x,y]=project(lat,lon);return [x,y];};
+    const pathFor=coords=>coords.map((c,i)=>{const [x,y]=toLocal(c[1],c[0]);return (i?'L':'M')+x+' '+y}).join(' ');
+    const [ox,oy]=toLocal(origin.lat,origin.lon);
+    const paths=entries.map((e,i)=>`<path d="${pathFor(e.route.coordinates)}" class="route-svg-line" data-i="${i}" stroke="${ROUTE_COLORS[i%ROUTE_COLORS.length]}"/>`).join('');
+    const endMarkers=entries.map((e,i)=>{const last=e.route.coordinates[e.route.coordinates.length-1];const [x,y]=toLocal(last[1],last[0]);return `<g class="map-point" data-i="${i}" transform="translate(${x} ${y})"><circle r="0.000045" fill="${ROUTE_COLORS[i%ROUTE_COLORS.length]}"/><circle r="0.000018" fill="#fff"/><title>${routeEsc(e.visit.cafeteria)} — ${routeEsc(e.visit.cidade)}</title></g>`}).join('');
+    mapEl.innerHTML=`<div class="offline-map-wrap"><div class="offline-map-toolbar"><button type="button" id="map-zoom-in" aria-label="Aproximar">+</button><button type="button" id="map-zoom-out" aria-label="Afastar">−</button><button type="button" id="map-reset" aria-label="Centralizar">⌖</button></div><div class="offline-map-hint">Arraste para mover · use + / − para aproximar</div><svg id="club-route-svg" viewBox="${view.x} ${view.y} ${view.w} ${view.h}" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Mapa das rotas registradas"><defs><pattern id="mapGrid" width="0.00025" height="0.00025" patternUnits="userSpaceOnUse"><path d="M 0 0 L 0.00025 0 M 0 0 L 0 0.00025" fill="none" stroke="rgba(111,74,50,.12)" stroke-width="0.000006"/></pattern><filter id="routeShadow"><feDropShadow dx="0" dy="0.000012" stdDeviation="0.000015" flood-color="#3A2A1D" flood-opacity=".18"/></filter></defs><rect x="-1" y="-1" width="2" height="2" fill="#efe6d5"/><rect x="-1" y="-1" width="2" height="2" fill="url(#mapGrid)" opacity=".75"/><g filter="url(#routeShadow)">${paths}</g><g class="map-point origin-point" transform="translate(${ox} ${oy})"><circle r="0.000052" fill="#3A2A1D"/><circle r="0.000022" fill="#fff"/><title>Saída do Clube</title></g>${endMarkers}</svg><div class="offline-map-key"><span><b class="key-dot origin-dot"></b>Saída</span><span><b class="key-line"></b>Rota registrada</span></div></div>`;
+    const svg=document.getElementById('club-route-svg');
+    const initial={...view};
+    function apply(){svg.setAttribute('viewBox',`${view.x} ${view.y} ${view.w} ${view.h}`);}
+    function zoom(factor){const mx=view.x+view.w/2,my=view.y+view.h/2;view.w*=factor;view.h*=factor;view.x=mx-view.w/2;view.y=my-view.h/2;apply();}
+    document.getElementById('map-zoom-in').onclick=()=>zoom(.72);
+    document.getElementById('map-zoom-out').onclick=()=>zoom(1.38);
+    document.getElementById('map-reset').onclick=()=>{view={...initial};apply();};
+    let drag=null;
+    svg.addEventListener('pointerdown',e=>{drag={x:e.clientX,y:e.clientY,vx:view.x,vy:view.y};svg.setPointerCapture?.(e.pointerId);});
+    svg.addEventListener('pointermove',e=>{if(!drag)return;const rect=svg.getBoundingClientRect();view.x=drag.vx-(e.clientX-drag.x)*view.w/rect.width;view.y=drag.vy-(e.clientY-drag.y)*view.h/rect.height;apply();});
+    svg.addEventListener('pointerup',()=>drag=null);svg.addEventListener('pointercancel',()=>drag=null);
+    svg.addEventListener('wheel',e=>{e.preventDefault();zoom(e.deltaY<0?.84:1.19);},{passive:false});
   }
 
-  refresh.onclick=async()=>{
-    if(refresh.disabled) return;
-    refresh.disabled=true;
-    // força somente a rota/geo das visitas, mantendo a origem já conhecida
-    STATE.visits.forEach(v=>{delete v.route; delete v.routeGeo;});
-    await saveState();
-    try{await build();}finally{refresh.disabled=false;}
-  };
+  async function build(){
+    legend.innerHTML='';
+    if(!STATE.visits.length){mapEl.innerHTML='<div class="empty">Ainda não há cafeterias registradas para desenhar no mapa.</div>';setStatus('☕ Registrem a primeira visita para começar a desenhar a jornada.');return;}
+    setStatus('📍 Localizando o ponto de saída...');
+    let origin=null;try{origin=await getOriginGeo();}catch(e){}
+    if(!origin){setStatus('<strong>Não consegui localizar o endereço de saída.</strong> Tente novamente com internet.');renderLegendOnly();return;}
+    const entries=[];
+    for(let i=0;i<STATE.visits.length;i++){
+      if(cancelled)return;
+      const v=STATE.visits[i];
+      setStatus(`🗺️ Preparando <strong>${routeEsc(v.cafeteria)}</strong> (${i+1}/${STATE.visits.length})...`);
+      let geo=null;try{geo=await getVisitGeo(v);}catch(e){}
+      if(!geo){addLegend(v,i,'Não localizada');continue;}
+      try{
+        if(!v.route || !Array.isArray(v.route.coordinates) || !v.route.coordinates.length){v.route=await fetchRoute(origin,geo);await saveState();}
+        entries.push({visit:v,route:v.route});
+        addLegend(v,i,`${routeKm(v.route.distance)} km · ${routeMinutes(v.route.duration)}`);
+      }catch(e){addLegend(v,i,'Rota indisponível');}
+    }
+    if(!entries.length){mapEl.innerHTML='<div class="empty">Não foi possível calcular as rotas ainda. Toque em “Recalcular rotas” quando estiver conectado.</div>';setStatus('<strong>Nenhuma rota disponível no momento.</strong>');return;}
+    renderInteractiveMap(origin,entries);
+    setStatus(`<strong>${entries.length}</strong> rota${entries.length===1?'':'s'} desenhada${entries.length===1?'':'s'} no mapa interativo · toque e arraste para explorar.`);
+  }
 
+  refresh.onclick=async()=>{if(refresh.disabled)return;refresh.disabled=true;STATE.visits.forEach(v=>{delete v.route;delete v.routeGeo;});await saveState();try{await build();}finally{refresh.disabled=false;}};
   await build();
 }
 
@@ -3134,7 +3112,7 @@ function renderConfig(main){
           <div class="creator-name">Jader Piazza</div>
         </div>
       </div>
-      <div class="creator-version">✨ Clube das Cafeterias · Versão 0.2.1</div>
+      <div class="creator-version">✨ Clube das Cafeterias · Versão 0.2.2</div>
       <p class="creator-text">Aplicativo criado para compartilhar e recordar bons momentos com uma pessoa especial — MC ❤️</p>
       <div class="creator-signature">É franga na academia mas gosta de bons cafés 🐓</div>
     </div>
