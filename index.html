@@ -1635,7 +1635,7 @@ body.photo-lightbox-open{overflow:hidden;}
 .offline-map-wrap{position:relative;height:100%;min-height:410px;background:#efe6d5;overflow:hidden;touch-action:none;}
 #club-route-svg{display:block;width:100%;height:100%;min-height:410px;cursor:grab;touch-action:none;}
 #club-route-svg:active{cursor:grabbing;}
-.route-svg-line{fill:none;stroke-width:0.000035;stroke-linecap:round;stroke-linejoin:round;vector-effect:non-scaling-stroke;}
+.route-svg-line{fill:none;stroke-width:7;stroke-linecap:round;stroke-linejoin:round;vector-effect:non-scaling-stroke;} .route-halo{fill:none;stroke:#fff;stroke-width:13;stroke-linecap:round;stroke-linejoin:round;opacity:.85;} .map-road{fill:none;stroke:#d1c09f;stroke-width:7;stroke-linecap:round;opacity:.65;} .map-road.minor{stroke-width:4;opacity:.5;} .map-label{font:700 15px Arial,sans-serif;fill:#3A2A1D;paint-order:stroke;stroke:#fff;stroke-width:5px;stroke-linejoin:round;} .map-city-label{font:600 12px Arial,sans-serif;fill:#6F4A32;paint-order:stroke;stroke:#eee4d0;stroke-width:4px;stroke-linejoin:round;} .origin-label{font-size:16px;}
 .map-point circle{vector-effect:non-scaling-stroke;stroke:rgba(58,42,29,.28);stroke-width:0.000006;}
 .offline-map-toolbar{position:absolute;z-index:3;right:12px;top:12px;display:flex;flex-direction:column;gap:6px;}
 .offline-map-toolbar button{width:42px;height:42px;border:1px solid var(--border);border-radius:12px;background:rgba(255,253,248,.96);color:var(--coffee);font-size:24px;font-weight:800;box-shadow:var(--shadow-sm);line-height:1;}
@@ -1655,8 +1655,6 @@ body.photo-lightbox-open{overflow:hidden;}
 <link rel="apple-touch-icon" sizes="512x512" href="icon-512.png">
 
 
-<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin="">
-<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>
 </head>
 <body>
 <div id="shell">
@@ -1917,7 +1915,7 @@ function renderSidebar(){
       </div>
       <div class="mobile-menu-spacer"></div>
       <div id="sidebar-footer">Clube das Cafeterias · dados salvos localmente neste navegador.</div>
-      <div class="mobile-menu-version"><strong>Versão 0.2.2</strong><span>Feito por Jader Piazza</span></div>
+      <div class="mobile-menu-version"><strong>Versão 0.2.3</strong><span>Feito por Jader Piazza</span></div>
     </div>
   `;
 
@@ -1966,7 +1964,7 @@ function ensureMobileVersionFooter(){
   if(!main || main.querySelectorAll('.app-mobile-version').length) return;
   const footer=document.createElement('div');
   footer.className='app-mobile-version';
-  footer.innerHTML='<strong>Versão 0.2.2</strong> · Feito por Jader Piazza';
+  footer.innerHTML='<strong>Versão 0.2.3</strong> · Feito por Jader Piazza';
   main.appendChild(footer);
 }
 const __mobileVersionObserver=new MutationObserver(()=>{
@@ -2994,35 +2992,97 @@ async function renderMapaCidades(main){
     return [x,y];
   }
   function renderInteractiveMap(origin,entries){
-    const pts=[[origin.lat,origin.lon],...entries.flatMap(e=>e.route.coordinates.map(c=>[c[1],c[0]]))];
-    const projected=pts.map(p=>project(p[0],p[1]));
-    let minX=Math.min(...projected.map(p=>p[0])),maxX=Math.max(...projected.map(p=>p[0]));
-    let minY=Math.min(...projected.map(p=>p[1])),maxY=Math.max(...projected.map(p=>p[1]));
-    const spanX=Math.max(maxX-minX,0.00035),spanY=Math.max(maxY-minY,0.00035);
-    const pad=.12;
-    minX-=spanX*pad;maxX+=spanX*pad;minY-=spanY*pad;maxY+=spanY*pad;
-    const W=1000,H=620,scale=Math.min(W/(maxX-minX),H/(maxY-minY));
-    const worldW=W/scale,worldH=H/scale;
-    const cx=(minX+maxX)/2,cy=(minY+maxY)/2;
-    let view={x:cx-worldW/2,y:cy-worldH/2,w:worldW,h:worldH};
-    const toLocal=(lat,lon)=>{const [x,y]=project(lat,lon);return [x,y];};
-    const pathFor=coords=>coords.map((c,i)=>{const [x,y]=toLocal(c[1],c[0]);return (i?'L':'M')+x+' '+y}).join(' ');
-    const [ox,oy]=toLocal(origin.lat,origin.lon);
-    const paths=entries.map((e,i)=>`<path d="${pathFor(e.route.coordinates)}" class="route-svg-line" data-i="${i}" stroke="${ROUTE_COLORS[i%ROUTE_COLORS.length]}"/>`).join('');
-    const endMarkers=entries.map((e,i)=>{const last=e.route.coordinates[e.route.coordinates.length-1];const [x,y]=toLocal(last[1],last[0]);return `<g class="map-point" data-i="${i}" transform="translate(${x} ${y})"><circle r="0.000045" fill="${ROUTE_COLORS[i%ROUTE_COLORS.length]}"/><circle r="0.000018" fill="#fff"/><title>${routeEsc(e.visit.cafeteria)} — ${routeEsc(e.visit.cidade)}</title></g>`}).join('');
-    mapEl.innerHTML=`<div class="offline-map-wrap"><div class="offline-map-toolbar"><button type="button" id="map-zoom-in" aria-label="Aproximar">+</button><button type="button" id="map-zoom-out" aria-label="Afastar">−</button><button type="button" id="map-reset" aria-label="Centralizar">⌖</button></div><div class="offline-map-hint">Arraste para mover · use + / − para aproximar</div><svg id="club-route-svg" viewBox="${view.x} ${view.y} ${view.w} ${view.h}" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Mapa das rotas registradas"><defs><pattern id="mapGrid" width="0.00025" height="0.00025" patternUnits="userSpaceOnUse"><path d="M 0 0 L 0.00025 0 M 0 0 L 0 0.00025" fill="none" stroke="rgba(111,74,50,.12)" stroke-width="0.000006"/></pattern><filter id="routeShadow"><feDropShadow dx="0" dy="0.000012" stdDeviation="0.000015" flood-color="#3A2A1D" flood-opacity=".18"/></filter></defs><rect x="-1" y="-1" width="2" height="2" fill="#efe6d5"/><rect x="-1" y="-1" width="2" height="2" fill="url(#mapGrid)" opacity=".75"/><g filter="url(#routeShadow)">${paths}</g><g class="map-point origin-point" transform="translate(${ox} ${oy})"><circle r="0.000052" fill="#3A2A1D"/><circle r="0.000022" fill="#fff"/><title>Saída do Clube</title></g>${endMarkers}</svg><div class="offline-map-key"><span><b class="key-dot origin-dot"></b>Saída</span><span><b class="key-line"></b>Rota registrada</span></div></div>`;
+    // Mapa vetorial offline: não depende de Leaflet, tiles ou bibliotecas externas.
+    // As coordenadas das rotas são projetadas para um canvas 1000x620.
+    const projectPoint=(lat,lon)=>project(lat,lon);
+    const allGeo=[];
+    allGeo.push(projectPoint(origin.lat,origin.lon));
+    entries.forEach(e=>e.route.coordinates.forEach(c=>allGeo.push(projectPoint(c[1],c[0]))));
+
+    let minX=Math.min(...allGeo.map(p=>p[0])), maxX=Math.max(...allGeo.map(p=>p[0]));
+    let minY=Math.min(...allGeo.map(p=>p[1])), maxY=Math.max(...allGeo.map(p=>p[1]));
+    const dx=Math.max(maxX-minX,0.0005), dy=Math.max(maxY-minY,0.0005);
+    minX-=dx*.18; maxX+=dx*.18; minY-=dy*.18; maxY+=dy*.18;
+    const spanX=maxX-minX, spanY=maxY-minY;
+    const W=1000,H=620;
+    const sx=W/spanX, sy=H/spanY, scale=Math.min(sx,sy);
+    const contentW=spanX*scale, contentH=spanY*scale;
+    const offX=(W-contentW)/2, offY=(H-contentH)/2;
+    const toCanvas=(lat,lon)=>{
+      const [x,y]=projectPoint(lat,lon);
+      return [offX+(x-minX)*scale, offY+(y-minY)*scale];
+    };
+    const routePath=coords=>coords.map((c,i)=>{
+      const [x,y]=toCanvas(c[1],c[0]);
+      return (i?'L':'M')+x.toFixed(2)+' '+y.toFixed(2);
+    }).join(' ');
+    const [ox,oy]=toCanvas(origin.lat,origin.lon);
+
+    const paths=entries.map((e,i)=>{
+      const col=ROUTE_COLORS[i%ROUTE_COLORS.length];
+      const d=routePath(e.route.coordinates);
+      return `<path d="${d}" class="route-halo"/><path d="${d}" class="route-svg-line" stroke="${col}"/>`;
+    }).join('');
+
+    const markers=entries.map((e,i)=>{
+      const last=e.route.coordinates[e.route.coordinates.length-1];
+      const [x,y]=toCanvas(last[1],last[0]);
+      const col=ROUTE_COLORS[i%ROUTE_COLORS.length];
+      return `<g class="map-marker" data-i="${i}" transform="translate(${x.toFixed(2)} ${y.toFixed(2)})"><circle r="10" fill="${col}" stroke="#fff" stroke-width="3"/><text y="-16" text-anchor="middle" class="map-label">${routeEsc(e.visit.cafeteria)}</text><text y="27" text-anchor="middle" class="map-city-label">${routeEsc(e.visit.cidade)}</text></g>`;
+    }).join('');
+
+    const routeRoads=[];
+    // Pequenos elementos cartográficos decorativos para dar contexto ao mapa sem depender de mapa online.
+    for(let i=1;i<7;i++) routeRoads.push(`<path d="M ${i*165} 0 Q ${i*125+70} 160 ${i*155} 310 T ${i*130+40} 620" class="map-road"/>`);
+    for(let i=1;i<5;i++) routeRoads.push(`<path d="M 0 ${i*125} Q 260 ${i*125-45} 500 ${i*125+15} T 1000 ${i*125-10}" class="map-road minor"/>`);
+
+    mapEl.innerHTML=`<div class="offline-map-wrap">
+      <div class="offline-map-toolbar"><button type="button" id="map-zoom-in" aria-label="Aproximar">+</button><button type="button" id="map-zoom-out" aria-label="Afastar">−</button><button type="button" id="map-reset" aria-label="Centralizar">⌖</button></div>
+      <div class="offline-map-hint">Arraste para explorar · use + / − para aproximar</div>
+      <svg id="club-route-svg" viewBox="0 0 1000 620" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Mapa offline das rotas registradas">
+        <defs>
+          <pattern id="mapGrid" width="50" height="50" patternUnits="userSpaceOnUse"><path d="M 50 0 L 0 0 0 50" fill="none" stroke="#d8c9aa" stroke-width="1" opacity=".55"/></pattern>
+          <filter id="routeShadow" x="-20%" y="-20%" width="140%" height="140%"><feDropShadow dx="0" dy="3" stdDeviation="3" flood-color="#3A2A1D" flood-opacity=".22"/></filter>
+        </defs>
+        <rect width="1000" height="620" fill="#eee4d0"/>
+        <rect width="1000" height="620" fill="url(#mapGrid)"/>
+        <g opacity=".75">${routeRoads.join('')}</g>
+        <g filter="url(#routeShadow)">${paths}</g>
+        <g class="origin-marker" transform="translate(${ox.toFixed(2)} ${oy.toFixed(2)})"><circle r="13" fill="#3A2A1D" stroke="#fff" stroke-width="4"/><text y="-20" text-anchor="middle" class="map-label origin-label">Saída</text></g>
+        ${markers}
+      </svg>
+      <div class="offline-map-key"><span><b class="key-dot origin-dot"></b>Saída</span><span><b class="key-line"></b>Rota registrada</span><span>☕ Cafeteria</span></div>
+    </div>`;
+
     const svg=document.getElementById('club-route-svg');
+    let view={x:0,y:0,w:1000,h:620};
     const initial={...view};
-    function apply(){svg.setAttribute('viewBox',`${view.x} ${view.y} ${view.w} ${view.h}`);}
-    function zoom(factor){const mx=view.x+view.w/2,my=view.y+view.h/2;view.w*=factor;view.h*=factor;view.x=mx-view.w/2;view.y=my-view.h/2;apply();}
+    const apply=()=>svg.setAttribute('viewBox',`${view.x} ${view.y} ${view.w} ${view.h}`);
+    function zoom(factor){
+      const mx=view.x+view.w/2, my=view.y+view.h/2;
+      view.w=Math.min(1000,Math.max(180,view.w*factor));
+      view.h=Math.min(620,Math.max(110,view.h*factor));
+      view.x=Math.max(0,Math.min(1000-view.w,mx-view.w/2));
+      view.y=Math.max(0,Math.min(620-view.h,my-view.h/2));
+      apply();
+    }
     document.getElementById('map-zoom-in').onclick=()=>zoom(.72);
     document.getElementById('map-zoom-out').onclick=()=>zoom(1.38);
     document.getElementById('map-reset').onclick=()=>{view={...initial};apply();};
+
     let drag=null;
     svg.addEventListener('pointerdown',e=>{drag={x:e.clientX,y:e.clientY,vx:view.x,vy:view.y};svg.setPointerCapture?.(e.pointerId);});
-    svg.addEventListener('pointermove',e=>{if(!drag)return;const rect=svg.getBoundingClientRect();view.x=drag.vx-(e.clientX-drag.x)*view.w/rect.width;view.y=drag.vy-(e.clientY-drag.y)*view.h/rect.height;apply();});
-    svg.addEventListener('pointerup',()=>drag=null);svg.addEventListener('pointercancel',()=>drag=null);
+    svg.addEventListener('pointermove',e=>{
+      if(!drag)return;
+      const rect=svg.getBoundingClientRect();
+      view.x=Math.max(0,Math.min(1000-view.w,drag.vx-(e.clientX-drag.x)*view.w/rect.width));
+      view.y=Math.max(0,Math.min(620-view.h,drag.vy-(e.clientY-drag.y)*view.h/rect.height));
+      apply();
+    });
+    svg.addEventListener('pointerup',()=>drag=null);
+    svg.addEventListener('pointercancel',()=>drag=null);
     svg.addEventListener('wheel',e=>{e.preventDefault();zoom(e.deltaY<0?.84:1.19);},{passive:false});
+    markers && void 0;
   }
 
   async function build(){
@@ -3112,7 +3172,7 @@ function renderConfig(main){
           <div class="creator-name">Jader Piazza</div>
         </div>
       </div>
-      <div class="creator-version">✨ Clube das Cafeterias · Versão 0.2.2</div>
+      <div class="creator-version">✨ Clube das Cafeterias · Versão 0.2.3</div>
       <p class="creator-text">Aplicativo criado para compartilhar e recordar bons momentos com uma pessoa especial — MC ❤️</p>
       <div class="creator-signature">É franga na academia mas gosta de bons cafés 🐓</div>
     </div>
