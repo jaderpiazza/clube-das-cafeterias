@@ -1,4 +1,4 @@
-const CACHE_NAME = 'clube-das-cafeterias-v10-fix2';
+const CACHE_NAME = 'clube-das-cafeterias-v20-fix2';
 const CORE_ASSETS = [
   './',
   './index.html',
