@@ -542,7 +542,7 @@ h1,h2,h3,h4{font-family:var(--font-body);letter-spacing:-.015em;}
 
 
 /* =========================================================
-   0.2.0 — CABEÇALHO MOBILE COM MENU LATERAL
+   0.2.1 — CABEÇALHO MOBILE COM MENU LATERAL
    ========================================================= */
 .mobile-menu-toggle,.mobile-menu-backdrop,.mobile-menu-version,.mobile-drawer-head{display:none;}
 .mobile-drawer{display:contents;}
@@ -1347,7 +1347,7 @@ body.photo-lightbox-open{overflow:hidden;}
 
 
 /* =========================================================
-   0.2.0 — FORMULÁRIOS COMPACTOS PARA IPHONE 17
+   0.2.1 — FORMULÁRIOS COMPACTOS PARA IPHONE 17
    ========================================================= */
 @media (max-width:620px){
   /* O row de informações passa a respeitar rigorosamente a largura
@@ -1468,7 +1468,7 @@ body.photo-lightbox-open{overflow:hidden;}
 
 
 /* =========================================================
-   0.2.0 — ROLETA DE CIDADES
+   0.2.1 — ROLETA DE CIDADES
    ========================================================= */
 .roulette-layout{
   display:grid;
@@ -1631,6 +1631,7 @@ body.photo-lightbox-open{overflow:hidden;}
   .roulette-actions .btn{flex:1 1 140px;}
 }
 
+\n/* =========================================================\n   0.2.1 — MAPA DAS CIDADES E ROTAS\n   ========================================================= */\n.route-page-head{display:flex;justify-content:space-between;gap:12px;align-items:flex-start;flex-wrap:wrap;}\n.route-origin{font-size:12px;color:var(--muted);margin-top:5px;line-height:1.45;}\n.route-map-card{overflow:hidden;padding:0;}\n#club-map{height:520px;width:100%;background:#E8DEC9;}\n.route-map-status{padding:12px 15px;border-bottom:1px solid var(--border);background:var(--cream-2);font-size:13px;color:var(--coffee-light);}\n.route-map-status strong{color:var(--coffee);}\n.route-legend{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;}\n.route-item{display:grid;grid-template-columns:10px minmax(0,1fr) auto;gap:10px;align-items:center;}\n.route-color{width:10px;height:38px;border-radius:8px;}\n.route-item-name{font-weight:800;color:var(--coffee);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}\n.route-item-city{font-size:12px;color:var(--muted);margin-top:2px;}\n.route-item-meta{font-size:12px;color:var(--coffee-light);text-align:right;}\n.route-item button{margin-top:5px;}\n.route-actions{display:flex;gap:8px;flex-wrap:wrap;}\n.map-popup-title{font-weight:800;color:#3A2A1D;margin-bottom:4px;}\n.map-popup-meta{font-size:12px;color:#6F4A32;margin-bottom:7px;}\n.map-popup-link{font-size:12px;font-weight:700;color:#6F4A32;}\n.city-route-note{padding:10px 12px;border:1px solid var(--border);border-radius:12px;background:var(--paper);font-size:12px;color:var(--muted);line-height:1.45;}\n.stat-card[data-nav]{cursor:pointer;}\n.stat-card[data-nav]:active{transform:translateY(1px);}\n@media(max-width:760px){\n  #club-map{height:430px;}\n  .route-legend{grid-template-columns:1fr;}\n  .route-page-head .btn{width:100%;}\n}\n@media(max-width:620px){\n  #club-map{height:410px;}\n  .route-origin{font-size:11.5px;}\n}\n
 </style>
 
 <link rel="manifest" href="manifest.webmanifest">
@@ -1640,6 +1641,9 @@ body.photo-lightbox-open{overflow:hidden;}
 <link rel="apple-touch-icon" sizes="192x192" href="icon-192.png">
 <link rel="apple-touch-icon" sizes="512x512" href="icon-512.png">
 
+
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin="">
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>
 </head>
 <body>
 <div id="shell">
@@ -1900,7 +1904,7 @@ function renderSidebar(){
       </div>
       <div class="mobile-menu-spacer"></div>
       <div id="sidebar-footer">Clube das Cafeterias · dados salvos localmente neste navegador.</div>
-      <div class="mobile-menu-version"><strong>Versão 0.2.0</strong><span>Feito por Jader Piazza</span></div>
+      <div class="mobile-menu-version"><strong>Versão 0.2.1</strong><span>Feito por Jader Piazza</span></div>
     </div>
   `;
 
@@ -1936,6 +1940,7 @@ function router(){
     case '#/conquistas': return renderConquistas(main);
     case '#/config': return renderConfig(main);
     case '#/roletar': return renderRoletar(main);
+    case '#/mapa-cidades': return renderMapaCidades(main);
     default: return renderInicio(main);
   }
 }
@@ -1948,7 +1953,7 @@ function ensureMobileVersionFooter(){
   if(!main || main.querySelectorAll('.app-mobile-version').length) return;
   const footer=document.createElement('div');
   footer.className='app-mobile-version';
-  footer.innerHTML='<strong>Versão 0.2.0</strong> · Feito por Jader Piazza';
+  footer.innerHTML='<strong>Versão 0.2.1</strong> · Feito por Jader Piazza';
   main.appendChild(footer);
 }
 const __mobileVersionObserver=new MutationObserver(()=>{
@@ -1962,6 +1967,19 @@ window.addEventListener('resize',()=>requestAnimationFrame(ensureMobileVersionFo
 
 
 
+
+
+/* Navegação dos cartões-resumo do início */
+document.addEventListener('click',e=>{
+  const card=e.target.closest('[data-nav]');
+  if(card && card.closest('#main')) location.hash=card.dataset.nav;
+});
+document.addEventListener('keydown',e=>{
+  if(e.key==='Enter' || e.key===' '){
+    const card=e.target.closest('[data-nav]');
+    if(card && card.closest('#main')){ e.preventDefault(); location.hash=card.dataset.nav; }
+  }
+});
 
 /* ---------------- Visualizador de fotos ---------------- */
 function openPhotoLightbox(src){
@@ -2055,8 +2073,8 @@ function renderInicio(main){
     </div>
 
     <div class="grid cols-4">
-      <div class="card stat-card"><div class="stat-ic">☕</div><div class="stat-num">${STATE.visits.length}</div><div class="stat-label">Cafeterias visitadas</div></div>
-      <div class="card stat-card"><div class="stat-ic">🗺️</div><div class="stat-num">${cidades.length}</div><div class="stat-label">Cidades exploradas</div></div>
+      <div class="card stat-card" data-nav="#/cafeterias" role="button" tabindex="0" aria-label="Abrir cafeterias visitadas"><div class="stat-ic">☕</div><div class="stat-num">${STATE.visits.length}</div><div class="stat-label">Cafeterias visitadas</div></div>
+      <div class="card stat-card" data-nav="#/mapa-cidades" role="button" tabindex="0" aria-label="Abrir mapa das cidades exploradas"><div class="stat-ic">🗺️</div><div class="stat-num">${cidades.length}</div><div class="stat-label">Cidades exploradas</div></div>
       <div class="card stat-card"><div class="stat-ic">🚗</div><div class="stat-num">${km.toLocaleString('pt-BR')}</div><div class="stat-label">Quilômetros registrados</div></div>
       <div class="card stat-card"><div class="stat-ic">⭐</div><div class="stat-num">${media!=null?fmt1(media):'—'}</div><div class="stat-label">Média geral</div></div>
     </div>
@@ -2839,6 +2857,7 @@ function renderRoletar(main){
   drawWheel();
 }
 
+\n/* ================= MAPA DAS CIDADES / ROTAS ================= */\nconst ROUTE_ORIGIN_ADDRESS='Rua Bueno Brandão, 163, Medicina, Itajubá - MG, Brasil';\nconst ROUTE_ORIGIN_LABEL='Rua Bueno Brandão, 163 · Medicina · Itajubá — MG';\nconst ROUTE_COLORS=['#6F4A32','#C68B4A','#A8703A','#748156','#8B6449','#B15A3E','#C79A3F','#5E7180','#936B4A','#7B5B42'];\n\nfunction routeEsc(s){return String(s??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));}\nfunction routeMapsLink(v){\n  const destination=`${v.cafeteria}, ${v.cidade}${v.uf?`, ${v.uf}`:''}, Brasil`;\n  return 'https://www.google.com/maps/dir/?api=1&origin='+encodeURIComponent(ROUTE_ORIGIN_ADDRESS)+'&destination='+encodeURIComponent(destination)+'&travelmode=driving';\n}\nfunction routeDelay(ms){return new Promise(r=>setTimeout(r,ms));}\n\nasync function geocodePlace(query){\n  const url='https://nominatim.openstreetmap.org/search?format=jsonv2&limit=1&countrycodes=br&q='+encodeURIComponent(query);\n  const res=await fetch(url,{headers:{'Accept':'application/json'}});\n  if(!res.ok) throw new Error('Falha na localização');\n  const data=await res.json();\n  if(!data.length) return null;\n  return {lat:Number(data[0].lat),lon:Number(data[0].lon),display:data[0].display_name||query};\n}\n\nasync function getOriginGeo(){\n  ensureSettingsDefaults();\n  if(STATE.settings.routeOriginGeo && Number.isFinite(Number(STATE.settings.routeOriginGeo.lat))){\n    return STATE.settings.routeOriginGeo;\n  }\n  const geo=await geocodePlace(ROUTE_ORIGIN_ADDRESS);\n  if(geo){\n    STATE.settings.routeOriginGeo=geo;\n    await saveState();\n  }\n  return geo;\n}\n\nasync function getVisitGeo(v){\n  if(v.routeGeo && Number.isFinite(Number(v.routeGeo.lat))){ return v.routeGeo; }\n  const full=`${v.cafeteria}, ${v.cidade}${v.uf?`, ${v.uf}`:''}, Brasil`;\n  let geo=null;\n  try{ geo=await geocodePlace(full); }catch(e){}\n  if(geo){\n    v.routeGeo={...geo,source:'cafeteria'};\n  }else{\n    try{\n      await routeDelay(1100);\n      geo=await geocodePlace(`${v.cidade}${v.uf?`, ${v.uf}`:''}, Brasil`);\n      if(geo) v.routeGeo={...geo,source:'cidade'};\n    }catch(e){}\n  }\n  if(geo) await saveState();\n  return geo;\n}\n\nasync function fetchRoute(origin,destination){\n  const coords=`${origin.lon},${origin.lat};${destination.lon},${destination.lat}`;\n  const url='https://router.project-osrm.org/route/v1/driving/'+coords+'?overview=simplified&geometries=geojson';\n  const res=await fetch(url);\n  if(!res.ok) throw new Error('Falha ao traçar rota');\n  const data=await res.json();\n  if(data.code!=='Ok' || !data.routes?.length) throw new Error('Rota não encontrada');\n  const r=data.routes[0];\n  return {\n    coordinates:r.geometry.coordinates,\n    distance:Number(r.distance)||0,\n    duration:Number(r.duration)||0\n  };\n}\n\nfunction routeKm(m){return (Number(m||0)/1000).toLocaleString('pt-BR',{maximumFractionDigits:1});}\nfunction routeMinutes(sec){\n  const min=Math.round(Number(sec||0)/60);\n  if(min<60) return `${min} min`;\n  const h=Math.floor(min/60), m=min%60;\n  return `${h}h${m?` ${m}min`:''}`;\n}\n\nasync function renderMapaCidades(main){\n  main.innerHTML=`\n    <div class="page-header route-page-head">\n      <div>\n        <h1>🗺️ Cidades exploradas</h1>\n        <div class="sub">O mapa da jornada de vocês — com as rotas registradas para cada cafeteria.</div>\n        <div class="route-origin">📍 Saída padrão: <strong>${ROUTE_ORIGIN_LABEL}</strong></div>\n      </div>\n      <div class="route-actions">\n        <button class="btn small" id="btn-refresh-routes" type="button">🔄 Atualizar rotas</button>\n        <a class="btn ghost small" href="#/inicio">← Voltar</a>\n      </div>\n    </div>\n\n    <div class="card route-map-card">\n      <div class="route-map-status" id="route-map-status">Preparando o mapa...</div>\n      <div id="club-map" aria-label="Mapa interativo das cidades exploradas"></div>\n    </div>\n\n    <div class="section-title"><h2>☕ Percursos registrados</h2><div class="line"></div></div>\n    <div class="card">\n      <div class="city-route-note" style="margin-bottom:12px;">As rotas são calculadas a partir do endereço de saída definido no Clube. Quando o nome da cafeteria é encontrado no mapa, usamos o endereço da própria cafeteria; se não for localizado, usamos a localização aproximada da cidade.</div>\n      <div class="route-legend" id="route-legend"></div>\n    </div>\n  `;\n\n  const status=document.getElementById('route-map-status');\n  const legend=document.getElementById('route-legend');\n  const refresh=document.getElementById('btn-refresh-routes');\n  let map=null;\n  let layers=[];\n  let markers=[];\n  let cancelled=false;\n\n  function setStatus(msg){status.innerHTML=msg;}\n  function clearMap(){\n    layers.forEach(x=>x.remove()); layers=[];\n    markers.forEach(x=>x.remove()); markers=[];\n  }\n\n  function popupFor(v){\n    const source=v.routeGeo?.source==='cidade'?'localização aproximada da cidade':'localização da cafeteria';\n    const distance=v.route?.distance?` · ${routeKm(v.route.distance)} km`:'';\n    return `<div class="map-popup-title">☕ ${routeEsc(v.cafeteria)}</div><div class="map-popup-meta">📍 ${routeEsc(v.cidade)}${v.uf?', '+routeEsc(v.uf):''}${distance}<br>${source}</div><a class="map-popup-link" href="${routeMapsLink(v)}" target="_blank" rel="noopener">Abrir rota no Google Maps ↗</a>`;\n  }\n\n  async function build(){\n    if(typeof L==='undefined'){\n      setStatus('<strong>Mapa indisponível no momento.</strong> Você ainda pode usar os links de rota no Google Maps abaixo.');\n      legend.innerHTML=STATE.visits.map((v,i)=>`<div class="route-item"><span class="route-color" style="background:${ROUTE_COLORS[i%ROUTE_COLORS.length]}"></span><div><div class="route-item-name">${routeEsc(v.cafeteria)}</div><div class="route-item-city">📍 ${routeEsc(v.cidade)}</div></div><div class="route-item-meta"><a href="${routeMapsLink(v)}" target="_blank" rel="noopener">Abrir rota ↗</a></div></div>`).join('');\n      return;\n    }\n\n    if(!map){\n      map=L.map('club-map',{zoomControl:true,scrollWheelZoom:true,dragging:true,touchZoom:true});\n      L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png',{\n        maxZoom:19,\n        attribution:'&copy; OpenStreetMap contributors'\n      }).addTo(map);\n    }\n    clearMap();\n    legend.innerHTML='';\n    setStatus('📍 Localizando o ponto de saída...');\n\n    let origin=null;\n    try{origin=await getOriginGeo();}catch(e){}\n    if(!origin){\n      setStatus('<strong>Não consegui localizar o endereço de saída.</strong> Abra novamente ou use os links de rota abaixo.');\n      renderRouteLegendOnly();\n      return;\n    }\n\n    const originMarker=L.marker([origin.lat,origin.lon],{title:'Saída do Clube'}).addTo(map);\n    originMarker.bindPopup(`<div class="map-popup-title">🏠 Saída do Clube</div><div class="map-popup-meta">${routeEsc(ROUTE_ORIGIN_LABEL)}</div>`);\n    markers.push(originMarker);\n\n    const bounds=L.latLngBounds([[origin.lat,origin.lon]]);\n    const visits=[...STATE.visits];\n    let ready=0;\n\n    for(let i=0;i<visits.length;i++){\n      if(cancelled) return;\n      const v=visits[i];\n      setStatus(`🗺️ Localizando <strong>${routeEsc(v.cafeteria)}</strong> (${i+1}/${visits.length})...`);\n      let geo=null;\n      try{geo=await getVisitGeo(v);}catch(e){}\n      if(!geo){\n        addLegend(v,i,'Não localizada');\n        continue;\n      }\n      const marker=L.marker([geo.lat,geo.lon],{title:v.cafeteria}).addTo(map);\n      marker.bindPopup(popupFor(v));\n      markers.push(marker);\n      bounds.extend([geo.lat,geo.lon]);\n\n      setStatus(`🚗 Traçando <strong>${routeEsc(v.cafeteria)}</strong> (${i+1}/${visits.length})...`);\n      try{\n        if(!v.route || !Array.isArray(v.route.coordinates) || !v.route.coordinates.length){\n          v.route=await fetchRoute(origin,geo);\n          await saveState();\n        }\n        const latlngs=v.route.coordinates.map(c=>[c[1],c[0]]);\n        const line=L.polyline(latlngs,{color:ROUTE_COLORS[i%ROUTE_COLORS.length],weight:5,opacity:.78,lineCap:'round',lineJoin:'round'}).addTo(map);\n        line.bindPopup(popupFor(v));\n        layers.push(line);\n        addLegend(v,i,`${routeKm(v.route.distance)} km · ${routeMinutes(v.route.duration)}`);\n        ready++;\n      }catch(e){\n        addLegend(v,i,'Rota indisponível · abrir no Maps');\n      }\n    }\n\n    if(visits.length){\n      if(bounds.isValid()) map.fitBounds(bounds,{padding:[28,28],maxZoom:13});\n      setTimeout(()=>map.invalidateSize(),100);\n    }\n    setStatus(`<strong>${ready}</strong> rota${ready===1?'':'s'} traçada${ready===1?'':'s'} · ${visits.length} cafeteria${visits.length===1?'':'s'} registrada${visits.length===1?'':'s'}.`);\n  }\n\n  function addLegend(v,i,meta){\n    const row=document.createElement('div');\n    row.className='route-item';\n    row.innerHTML=`<span class="route-color" style="background:${ROUTE_COLORS[i%ROUTE_COLORS.length]}"></span><div><div class="route-item-name">${routeEsc(v.cafeteria)}</div><div class="route-item-city">📍 ${routeEsc(v.cidade)}${v.routeGeo?.source==='cidade'?' · localização aproximada':''}</div></div><div class="route-item-meta">${routeEsc(meta)}<br><a href="${routeMapsLink(v)}" target="_blank" rel="noopener">Maps ↗</a></div>`;\n    legend.appendChild(row);\n  }\n  function renderRouteLegendOnly(){\n    legend.innerHTML='';\n    STATE.visits.forEach((v,i)=>addLegend(v,i,'Abrir no Google Maps'));\n  }\n\n  refresh.onclick=async()=>{\n    if(refresh.disabled) return;\n    refresh.disabled=true;\n    // força somente a rota/geo das visitas, mantendo a origem já conhecida\n    STATE.visits.forEach(v=>{delete v.route; delete v.routeGeo;});\n    await saveState();\n    try{await build();}finally{refresh.disabled=false;}\n  };\n\n  await build();\n}\n
 /* ================= CONQUISTAS ================= */
 function renderConquistas(main){
   const list=ACHIEVEMENTS_DEF();
@@ -2898,7 +2917,7 @@ function renderConfig(main){
           <div class="creator-name">Jader Piazza</div>
         </div>
       </div>
-      <div class="creator-version">✨ Clube das Cafeterias · Versão 0.2.0</div>
+      <div class="creator-version">✨ Clube das Cafeterias · Versão 0.2.1</div>
       <p class="creator-text">Aplicativo criado para compartilhar e recordar bons momentos com uma pessoa especial — MC ❤️</p>
       <div class="creator-signature">É franga na academia mas gosta de bons cafés 🐓</div>
     </div>
@@ -2930,7 +2949,7 @@ function renderConfig(main){
         const data=JSON.parse(reader.result);
         if(!data.settings||!Array.isArray(data.visits)) throw new Error('formato inválido');
         confirmModal('Importar este backup vai substituir todos os dados atuais. Continuar?',()=>{
-          STATE=data; saveState().then(()=>{ toast('Backup importado com sucesso!','✅'); router(); });
+          STATE=data; ensureSettingsDefaults(); saveState().then(()=>{ toast('Backup importado com sucesso!','✅'); router(); });
         });
       }catch(err){ toast('Arquivo de backup inválido.','⚠️'); }
     };
