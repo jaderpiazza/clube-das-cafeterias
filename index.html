@@ -2857,7 +2857,224 @@ function renderRoletar(main){
   drawWheel();
 }
 
-\n/* ================= MAPA DAS CIDADES / ROTAS ================= */\nconst ROUTE_ORIGIN_ADDRESS='Rua Bueno Brandão, 163, Medicina, Itajubá - MG, Brasil';\nconst ROUTE_ORIGIN_LABEL='Rua Bueno Brandão, 163 · Medicina · Itajubá — MG';\nconst ROUTE_COLORS=['#6F4A32','#C68B4A','#A8703A','#748156','#8B6449','#B15A3E','#C79A3F','#5E7180','#936B4A','#7B5B42'];\n\nfunction routeEsc(s){return String(s??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));}\nfunction routeMapsLink(v){\n  const destination=`${v.cafeteria}, ${v.cidade}${v.uf?`, ${v.uf}`:''}, Brasil`;\n  return 'https://www.google.com/maps/dir/?api=1&origin='+encodeURIComponent(ROUTE_ORIGIN_ADDRESS)+'&destination='+encodeURIComponent(destination)+'&travelmode=driving';\n}\nfunction routeDelay(ms){return new Promise(r=>setTimeout(r,ms));}\n\nasync function geocodePlace(query){\n  const url='https://nominatim.openstreetmap.org/search?format=jsonv2&limit=1&countrycodes=br&q='+encodeURIComponent(query);\n  const res=await fetch(url,{headers:{'Accept':'application/json'}});\n  if(!res.ok) throw new Error('Falha na localização');\n  const data=await res.json();\n  if(!data.length) return null;\n  return {lat:Number(data[0].lat),lon:Number(data[0].lon),display:data[0].display_name||query};\n}\n\nasync function getOriginGeo(){\n  ensureSettingsDefaults();\n  if(STATE.settings.routeOriginGeo && Number.isFinite(Number(STATE.settings.routeOriginGeo.lat))){\n    return STATE.settings.routeOriginGeo;\n  }\n  const geo=await geocodePlace(ROUTE_ORIGIN_ADDRESS);\n  if(geo){\n    STATE.settings.routeOriginGeo=geo;\n    await saveState();\n  }\n  return geo;\n}\n\nasync function getVisitGeo(v){\n  if(v.routeGeo && Number.isFinite(Number(v.routeGeo.lat))){ return v.routeGeo; }\n  const full=`${v.cafeteria}, ${v.cidade}${v.uf?`, ${v.uf}`:''}, Brasil`;\n  let geo=null;\n  try{ geo=await geocodePlace(full); }catch(e){}\n  if(geo){\n    v.routeGeo={...geo,source:'cafeteria'};\n  }else{\n    try{\n      await routeDelay(1100);\n      geo=await geocodePlace(`${v.cidade}${v.uf?`, ${v.uf}`:''}, Brasil`);\n      if(geo) v.routeGeo={...geo,source:'cidade'};\n    }catch(e){}\n  }\n  if(geo) await saveState();\n  return geo;\n}\n\nasync function fetchRoute(origin,destination){\n  const coords=`${origin.lon},${origin.lat};${destination.lon},${destination.lat}`;\n  const url='https://router.project-osrm.org/route/v1/driving/'+coords+'?overview=simplified&geometries=geojson';\n  const res=await fetch(url);\n  if(!res.ok) throw new Error('Falha ao traçar rota');\n  const data=await res.json();\n  if(data.code!=='Ok' || !data.routes?.length) throw new Error('Rota não encontrada');\n  const r=data.routes[0];\n  return {\n    coordinates:r.geometry.coordinates,\n    distance:Number(r.distance)||0,\n    duration:Number(r.duration)||0\n  };\n}\n\nfunction routeKm(m){return (Number(m||0)/1000).toLocaleString('pt-BR',{maximumFractionDigits:1});}\nfunction routeMinutes(sec){\n  const min=Math.round(Number(sec||0)/60);\n  if(min<60) return `${min} min`;\n  const h=Math.floor(min/60), m=min%60;\n  return `${h}h${m?` ${m}min`:''}`;\n}\n\nasync function renderMapaCidades(main){\n  main.innerHTML=`\n    <div class="page-header route-page-head">\n      <div>\n        <h1>🗺️ Cidades exploradas</h1>\n        <div class="sub">O mapa da jornada de vocês — com as rotas registradas para cada cafeteria.</div>\n        <div class="route-origin">📍 Saída padrão: <strong>${ROUTE_ORIGIN_LABEL}</strong></div>\n      </div>\n      <div class="route-actions">\n        <button class="btn small" id="btn-refresh-routes" type="button">🔄 Atualizar rotas</button>\n        <a class="btn ghost small" href="#/inicio">← Voltar</a>\n      </div>\n    </div>\n\n    <div class="card route-map-card">\n      <div class="route-map-status" id="route-map-status">Preparando o mapa...</div>\n      <div id="club-map" aria-label="Mapa interativo das cidades exploradas"></div>\n    </div>\n\n    <div class="section-title"><h2>☕ Percursos registrados</h2><div class="line"></div></div>\n    <div class="card">\n      <div class="city-route-note" style="margin-bottom:12px;">As rotas são calculadas a partir do endereço de saída definido no Clube. Quando o nome da cafeteria é encontrado no mapa, usamos o endereço da própria cafeteria; se não for localizado, usamos a localização aproximada da cidade.</div>\n      <div class="route-legend" id="route-legend"></div>\n    </div>\n  `;\n\n  const status=document.getElementById('route-map-status');\n  const legend=document.getElementById('route-legend');\n  const refresh=document.getElementById('btn-refresh-routes');\n  let map=null;\n  let layers=[];\n  let markers=[];\n  let cancelled=false;\n\n  function setStatus(msg){status.innerHTML=msg;}\n  function clearMap(){\n    layers.forEach(x=>x.remove()); layers=[];\n    markers.forEach(x=>x.remove()); markers=[];\n  }\n\n  function popupFor(v){\n    const source=v.routeGeo?.source==='cidade'?'localização aproximada da cidade':'localização da cafeteria';\n    const distance=v.route?.distance?` · ${routeKm(v.route.distance)} km`:'';\n    return `<div class="map-popup-title">☕ ${routeEsc(v.cafeteria)}</div><div class="map-popup-meta">📍 ${routeEsc(v.cidade)}${v.uf?', '+routeEsc(v.uf):''}${distance}<br>${source}</div><a class="map-popup-link" href="${routeMapsLink(v)}" target="_blank" rel="noopener">Abrir rota no Google Maps ↗</a>`;\n  }\n\n  async function build(){\n    if(typeof L==='undefined'){\n      setStatus('<strong>Mapa indisponível no momento.</strong> Você ainda pode usar os links de rota no Google Maps abaixo.');\n      legend.innerHTML=STATE.visits.map((v,i)=>`<div class="route-item"><span class="route-color" style="background:${ROUTE_COLORS[i%ROUTE_COLORS.length]}"></span><div><div class="route-item-name">${routeEsc(v.cafeteria)}</div><div class="route-item-city">📍 ${routeEsc(v.cidade)}</div></div><div class="route-item-meta"><a href="${routeMapsLink(v)}" target="_blank" rel="noopener">Abrir rota ↗</a></div></div>`).join('');\n      return;\n    }\n\n    if(!map){\n      map=L.map('club-map',{zoomControl:true,scrollWheelZoom:true,dragging:true,touchZoom:true});\n      L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png',{\n        maxZoom:19,\n        attribution:'&copy; OpenStreetMap contributors'\n      }).addTo(map);\n    }\n    clearMap();\n    legend.innerHTML='';\n    setStatus('📍 Localizando o ponto de saída...');\n\n    let origin=null;\n    try{origin=await getOriginGeo();}catch(e){}\n    if(!origin){\n      setStatus('<strong>Não consegui localizar o endereço de saída.</strong> Abra novamente ou use os links de rota abaixo.');\n      renderRouteLegendOnly();\n      return;\n    }\n\n    const originMarker=L.marker([origin.lat,origin.lon],{title:'Saída do Clube'}).addTo(map);\n    originMarker.bindPopup(`<div class="map-popup-title">🏠 Saída do Clube</div><div class="map-popup-meta">${routeEsc(ROUTE_ORIGIN_LABEL)}</div>`);\n    markers.push(originMarker);\n\n    const bounds=L.latLngBounds([[origin.lat,origin.lon]]);\n    const visits=[...STATE.visits];\n    let ready=0;\n\n    for(let i=0;i<visits.length;i++){\n      if(cancelled) return;\n      const v=visits[i];\n      setStatus(`🗺️ Localizando <strong>${routeEsc(v.cafeteria)}</strong> (${i+1}/${visits.length})...`);\n      let geo=null;\n      try{geo=await getVisitGeo(v);}catch(e){}\n      if(!geo){\n        addLegend(v,i,'Não localizada');\n        continue;\n      }\n      const marker=L.marker([geo.lat,geo.lon],{title:v.cafeteria}).addTo(map);\n      marker.bindPopup(popupFor(v));\n      markers.push(marker);\n      bounds.extend([geo.lat,geo.lon]);\n\n      setStatus(`🚗 Traçando <strong>${routeEsc(v.cafeteria)}</strong> (${i+1}/${visits.length})...`);\n      try{\n        if(!v.route || !Array.isArray(v.route.coordinates) || !v.route.coordinates.length){\n          v.route=await fetchRoute(origin,geo);\n          await saveState();\n        }\n        const latlngs=v.route.coordinates.map(c=>[c[1],c[0]]);\n        const line=L.polyline(latlngs,{color:ROUTE_COLORS[i%ROUTE_COLORS.length],weight:5,opacity:.78,lineCap:'round',lineJoin:'round'}).addTo(map);\n        line.bindPopup(popupFor(v));\n        layers.push(line);\n        addLegend(v,i,`${routeKm(v.route.distance)} km · ${routeMinutes(v.route.duration)}`);\n        ready++;\n      }catch(e){\n        addLegend(v,i,'Rota indisponível · abrir no Maps');\n      }\n    }\n\n    if(visits.length){\n      if(bounds.isValid()) map.fitBounds(bounds,{padding:[28,28],maxZoom:13});\n      setTimeout(()=>map.invalidateSize(),100);\n    }\n    setStatus(`<strong>${ready}</strong> rota${ready===1?'':'s'} traçada${ready===1?'':'s'} · ${visits.length} cafeteria${visits.length===1?'':'s'} registrada${visits.length===1?'':'s'}.`);\n  }\n\n  function addLegend(v,i,meta){\n    const row=document.createElement('div');\n    row.className='route-item';\n    row.innerHTML=`<span class="route-color" style="background:${ROUTE_COLORS[i%ROUTE_COLORS.length]}"></span><div><div class="route-item-name">${routeEsc(v.cafeteria)}</div><div class="route-item-city">📍 ${routeEsc(v.cidade)}${v.routeGeo?.source==='cidade'?' · localização aproximada':''}</div></div><div class="route-item-meta">${routeEsc(meta)}<br><a href="${routeMapsLink(v)}" target="_blank" rel="noopener">Maps ↗</a></div>`;\n    legend.appendChild(row);\n  }\n  function renderRouteLegendOnly(){\n    legend.innerHTML='';\n    STATE.visits.forEach((v,i)=>addLegend(v,i,'Abrir no Google Maps'));\n  }\n\n  refresh.onclick=async()=>{\n    if(refresh.disabled) return;\n    refresh.disabled=true;\n    // força somente a rota/geo das visitas, mantendo a origem já conhecida\n    STATE.visits.forEach(v=>{delete v.route; delete v.routeGeo;});\n    await saveState();\n    try{await build();}finally{refresh.disabled=false;}\n  };\n\n  await build();\n}\n
+
+/* ================= MAPA DAS CIDADES / ROTAS ================= */
+const ROUTE_ORIGIN_ADDRESS='Rua Bueno Brandão, 163, Medicina, Itajubá - MG, Brasil';
+const ROUTE_ORIGIN_LABEL='Rua Bueno Brandão, 163 · Medicina · Itajubá — MG';
+const ROUTE_COLORS=['#6F4A32','#C68B4A','#A8703A','#748156','#8B6449','#B15A3E','#C79A3F','#5E7180','#936B4A','#7B5B42'];
+
+function routeEsc(s){return String(s??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));}
+function routeMapsLink(v){
+  const destination=`${v.cafeteria}, ${v.cidade}${v.uf?`, ${v.uf}`:''}, Brasil`;
+  return 'https://www.google.com/maps/dir/?api=1&origin='+encodeURIComponent(ROUTE_ORIGIN_ADDRESS)+'&destination='+encodeURIComponent(destination)+'&travelmode=driving';
+}
+function routeDelay(ms){return new Promise(r=>setTimeout(r,ms));}
+
+async function geocodePlace(query){
+  const url='https://nominatim.openstreetmap.org/search?format=jsonv2&limit=1&countrycodes=br&q='+encodeURIComponent(query);
+  const res=await fetch(url,{headers:{'Accept':'application/json'}});
+  if(!res.ok) throw new Error('Falha na localização');
+  const data=await res.json();
+  if(!data.length) return null;
+  return {lat:Number(data[0].lat),lon:Number(data[0].lon),display:data[0].display_name||query};
+}
+
+async function getOriginGeo(){
+  ensureSettingsDefaults();
+  if(STATE.settings.routeOriginGeo && Number.isFinite(Number(STATE.settings.routeOriginGeo.lat))){
+    return STATE.settings.routeOriginGeo;
+  }
+  const geo=await geocodePlace(ROUTE_ORIGIN_ADDRESS);
+  if(geo){
+    STATE.settings.routeOriginGeo=geo;
+    await saveState();
+  }
+  return geo;
+}
+
+async function getVisitGeo(v){
+  if(v.routeGeo && Number.isFinite(Number(v.routeGeo.lat))){ return v.routeGeo; }
+  const full=`${v.cafeteria}, ${v.cidade}${v.uf?`, ${v.uf}`:''}, Brasil`;
+  let geo=null;
+  try{ geo=await geocodePlace(full); }catch(e){}
+  if(geo){
+    v.routeGeo={...geo,source:'cafeteria'};
+  }else{
+    try{
+      await routeDelay(1100);
+      geo=await geocodePlace(`${v.cidade}${v.uf?`, ${v.uf}`:''}, Brasil`);
+      if(geo) v.routeGeo={...geo,source:'cidade'};
+    }catch(e){}
+  }
+  if(geo) await saveState();
+  return geo;
+}
+
+async function fetchRoute(origin,destination){
+  const coords=`${origin.lon},${origin.lat};${destination.lon},${destination.lat}`;
+  const url='https://router.project-osrm.org/route/v1/driving/'+coords+'?overview=simplified&geometries=geojson';
+  const res=await fetch(url);
+  if(!res.ok) throw new Error('Falha ao traçar rota');
+  const data=await res.json();
+  if(data.code!=='Ok' || !data.routes?.length) throw new Error('Rota não encontrada');
+  const r=data.routes[0];
+  return {
+    coordinates:r.geometry.coordinates,
+    distance:Number(r.distance)||0,
+    duration:Number(r.duration)||0
+  };
+}
+
+function routeKm(m){return (Number(m||0)/1000).toLocaleString('pt-BR',{maximumFractionDigits:1});}
+function routeMinutes(sec){
+  const min=Math.round(Number(sec||0)/60);
+  if(min<60) return `${min} min`;
+  const h=Math.floor(min/60), m=min%60;
+  return `${h}h${m?` ${m}min`:''}`;
+}
+
+async function renderMapaCidades(main){
+  main.innerHTML=`
+    <div class="page-header route-page-head">
+      <div>
+        <h1>🗺️ Cidades exploradas</h1>
+        <div class="sub">O mapa da jornada de vocês — com as rotas registradas para cada cafeteria.</div>
+        <div class="route-origin">📍 Saída padrão: <strong>${ROUTE_ORIGIN_LABEL}</strong></div>
+      </div>
+      <div class="route-actions">
+        <button class="btn small" id="btn-refresh-routes" type="button">🔄 Atualizar rotas</button>
+        <a class="btn ghost small" href="#/inicio">← Voltar</a>
+      </div>
+    </div>
+
+    <div class="card route-map-card">
+      <div class="route-map-status" id="route-map-status">Preparando o mapa...</div>
+      <div id="club-map" aria-label="Mapa interativo das cidades exploradas"></div>
+    </div>
+
+    <div class="section-title"><h2>☕ Percursos registrados</h2><div class="line"></div></div>
+    <div class="card">
+      <div class="city-route-note" style="margin-bottom:12px;">As rotas são calculadas a partir do endereço de saída definido no Clube. Quando o nome da cafeteria é encontrado no mapa, usamos o endereço da própria cafeteria; se não for localizado, usamos a localização aproximada da cidade.</div>
+      <div class="route-legend" id="route-legend"></div>
+    </div>
+  `;
+
+  const status=document.getElementById('route-map-status');
+  const legend=document.getElementById('route-legend');
+  const refresh=document.getElementById('btn-refresh-routes');
+  let map=null;
+  let layers=[];
+  let markers=[];
+  let cancelled=false;
+
+  function setStatus(msg){status.innerHTML=msg;}
+  function clearMap(){
+    layers.forEach(x=>x.remove()); layers=[];
+    markers.forEach(x=>x.remove()); markers=[];
+  }
+
+  function popupFor(v){
+    const source=v.routeGeo?.source==='cidade'?'localização aproximada da cidade':'localização da cafeteria';
+    const distance=v.route?.distance?` · ${routeKm(v.route.distance)} km`:'';
+    return `<div class="map-popup-title">☕ ${routeEsc(v.cafeteria)}</div><div class="map-popup-meta">📍 ${routeEsc(v.cidade)}${v.uf?', '+routeEsc(v.uf):''}${distance}<br>${source}</div><a class="map-popup-link" href="${routeMapsLink(v)}" target="_blank" rel="noopener">Abrir rota no Google Maps ↗</a>`;
+  }
+
+  async function build(){
+    if(typeof L==='undefined'){
+      setStatus('<strong>Mapa indisponível no momento.</strong> Você ainda pode usar os links de rota no Google Maps abaixo.');
+      legend.innerHTML=STATE.visits.map((v,i)=>`<div class="route-item"><span class="route-color" style="background:${ROUTE_COLORS[i%ROUTE_COLORS.length]}"></span><div><div class="route-item-name">${routeEsc(v.cafeteria)}</div><div class="route-item-city">📍 ${routeEsc(v.cidade)}</div></div><div class="route-item-meta"><a href="${routeMapsLink(v)}" target="_blank" rel="noopener">Abrir rota ↗</a></div></div>`).join('');
+      return;
+    }
+
+    if(!map){
+      map=L.map('club-map',{zoomControl:true,scrollWheelZoom:true,dragging:true,touchZoom:true});
+      L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png',{
+        maxZoom:19,
+        attribution:'&copy; OpenStreetMap contributors'
+      }).addTo(map);
+    }
+    clearMap();
+    legend.innerHTML='';
+    setStatus('📍 Localizando o ponto de saída...');
+
+    let origin=null;
+    try{origin=await getOriginGeo();}catch(e){}
+    if(!origin){
+      setStatus('<strong>Não consegui localizar o endereço de saída.</strong> Abra novamente ou use os links de rota abaixo.');
+      renderRouteLegendOnly();
+      return;
+    }
+
+    const originMarker=L.marker([origin.lat,origin.lon],{title:'Saída do Clube'}).addTo(map);
+    originMarker.bindPopup(`<div class="map-popup-title">🏠 Saída do Clube</div><div class="map-popup-meta">${routeEsc(ROUTE_ORIGIN_LABEL)}</div>`);
+    markers.push(originMarker);
+
+    const bounds=L.latLngBounds([[origin.lat,origin.lon]]);
+    const visits=[...STATE.visits];
+    let ready=0;
+
+    for(let i=0;i<visits.length;i++){
+      if(cancelled) return;
+      const v=visits[i];
+      setStatus(`🗺️ Localizando <strong>${routeEsc(v.cafeteria)}</strong> (${i+1}/${visits.length})...`);
+      let geo=null;
+      try{geo=await getVisitGeo(v);}catch(e){}
+      if(!geo){
+        addLegend(v,i,'Não localizada');
+        continue;
+      }
+      const marker=L.marker([geo.lat,geo.lon],{title:v.cafeteria}).addTo(map);
+      marker.bindPopup(popupFor(v));
+      markers.push(marker);
+      bounds.extend([geo.lat,geo.lon]);
+
+      setStatus(`🚗 Traçando <strong>${routeEsc(v.cafeteria)}</strong> (${i+1}/${visits.length})...`);
+      try{
+        if(!v.route || !Array.isArray(v.route.coordinates) || !v.route.coordinates.length){
+          v.route=await fetchRoute(origin,geo);
+          await saveState();
+        }
+        const latlngs=v.route.coordinates.map(c=>[c[1],c[0]]);
+        const line=L.polyline(latlngs,{color:ROUTE_COLORS[i%ROUTE_COLORS.length],weight:5,opacity:.78,lineCap:'round',lineJoin:'round'}).addTo(map);
+        line.bindPopup(popupFor(v));
+        layers.push(line);
+        addLegend(v,i,`${routeKm(v.route.distance)} km · ${routeMinutes(v.route.duration)}`);
+        ready++;
+      }catch(e){
+        addLegend(v,i,'Rota indisponível · abrir no Maps');
+      }
+    }
+
+    if(visits.length){
+      if(bounds.isValid()) map.fitBounds(bounds,{padding:[28,28],maxZoom:13});
+      setTimeout(()=>map.invalidateSize(),100);
+    }
+    setStatus(`<strong>${ready}</strong> rota${ready===1?'':'s'} traçada${ready===1?'':'s'} · ${visits.length} cafeteria${visits.length===1?'':'s'} registrada${visits.length===1?'':'s'}.`);
+  }
+
+  function addLegend(v,i,meta){
+    const row=document.createElement('div');
+    row.className='route-item';
+    row.innerHTML=`<span class="route-color" style="background:${ROUTE_COLORS[i%ROUTE_COLORS.length]}"></span><div><div class="route-item-name">${routeEsc(v.cafeteria)}</div><div class="route-item-city">📍 ${routeEsc(v.cidade)}${v.routeGeo?.source==='cidade'?' · localização aproximada':''}</div></div><div class="route-item-meta">${routeEsc(meta)}<br><a href="${routeMapsLink(v)}" target="_blank" rel="noopener">Maps ↗</a></div>`;
+    legend.appendChild(row);
+  }
+  function renderRouteLegendOnly(){
+    legend.innerHTML='';
+    STATE.visits.forEach((v,i)=>addLegend(v,i,'Abrir no Google Maps'));
+  }
+
+  refresh.onclick=async()=>{
+    if(refresh.disabled) return;
+    refresh.disabled=true;
+    // força somente a rota/geo das visitas, mantendo a origem já conhecida
+    STATE.visits.forEach(v=>{delete v.route; delete v.routeGeo;});
+    await saveState();
+    try{await build();}finally{refresh.disabled=false;}
+  };
+
+  await build();
+}
+
 /* ================= CONQUISTAS ================= */
 function renderConquistas(main){
   const list=ACHIEVEMENTS_DEF();
