@@ -1,4 +1,4 @@
-const CACHE_NAME = 'clube-das-cafeterias-v23-offline-vector-map';
+const CACHE_NAME = 'clube-das-cafeterias-v24-offline-vector-map';
 const CORE_ASSETS = [
   './',
   './index.html',
